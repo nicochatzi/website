@@ -1,8 +1,9 @@
 .cache
-.env
+.env*
 .DS_Store
 node_modules
 build
 .vscode
 public
 package-lock.json
+graphql-types.ts

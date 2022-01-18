@@ -1,0 +1,84 @@
+// https://styled-system.com/theme-specification/
+
+export default {
+  colors: {
+    white: '#BBBBBB',
+    darkBlack: '#21252B',
+    black: '#282C34',
+    darkGrey: '#495162',
+    grey: '#676F7D',
+    blue: '#56B6C2',
+    deepBlue: '#61AFEF',
+    red: '#E06C75',
+    pink: '#C678DD',
+    yellow: '#E5C07B',
+    green: '#98C379',
+    transparent: 'rgba(0,0,0,0)',
+  },
+
+  fonts: {
+    head: `Roboto, sans-serif`,
+    body: `Merriweather, serif`,
+    code: `JetBrainsMono`,
+  },
+
+  /* 1.200 Minor Third Type Scale */
+  fontSizes: [
+    '0.833rem',
+    '1rem',
+    '1.2rem',
+    '1.44rem',
+    '1.728rem',
+    '2.074rem',
+    '2.488rem',
+    '2.986rem',
+  ],
+
+  fontWeights: {
+    normal: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+    extrabold: 800,
+    black: 900,
+  },
+
+  lineHeights: {
+    none: 1,
+    tight: 1.1,
+    normal: 1.5,
+    relaxed: 1.625,
+  },
+
+  breakpoints: ['40em', '52em', '64em'],
+
+  sizes: {
+    none: 'none',
+    xs: '20rem',
+    sm: '24rem',
+    md: '28rem',
+    lg: '32rem',
+    xl: '36rem',
+    '2xl': '42rem',
+    '3xl': '48rem',
+    '4xl': '56rem',
+    full: '100%',
+  },
+
+  spaces: [
+    '0',
+    '0.25rem',
+    '0.5rem',
+    '0.75rem',
+    '1rem',
+    '1.25rem',
+    '1.5rem',
+    '2rem',
+    '2.5rem',
+    '3rem',
+    '4rem',
+    '5rem',
+    '6rem',
+    '8rem',
+  ],
+};

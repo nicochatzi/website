@@ -1,39 +1,33 @@
 import * as React from 'react';
 import { Link, graphql } from 'gatsby';
+import { MDXProvider } from '@mdx-js/react';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import PrismWrapper from '../components/prism-wrapper';
 
 import Bio from '../components/bio';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
 
+const shortcodes = { Link, pre: PrismWrapper };
+
 const BlogPostTemplate = ({ data, location }) => {
-  const post = data.markdownRemark;
-  const siteTitle = data.site.siteMetadata?.title || `Title`;
-  const { previous, next } = data;
+  const { post, previous, next } = data;
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout
+      location={location}
+      title={data.site.siteMetadata?.title || `Title`}
+    >
       <Seo
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
       />
-      <article
-        className="blog-post"
-        itemScope
-        itemType="http://schema.org/Article"
-      >
-        <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
-        </header>
-        <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
-          itemProp="articleBody"
-        />
-        <hr />
-        <footer>
-          <Bio />
-        </footer>
-      </article>
+      <MDXProvider components={shortcodes}>
+        <MDXRenderer frontmatter={post.frontmatter}>{post.body}</MDXRenderer>
+      </MDXProvider>
+      <footer>
+        <Bio />
+      </footer>
       <nav className="blog-post-nav">
         <ul
           style={{
@@ -46,14 +40,14 @@ const BlogPostTemplate = ({ data, location }) => {
         >
           <li>
             {previous && (
-              <Link to={previous.fields.slug} rel="prev">
+              <Link to={`/blog/${previous.slug}`} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={next.fields.slug} rel="next">
+              <Link to={`/blog/${next.slug}`} rel="next">
                 {next.frontmatter.title} →
               </Link>
             )}
@@ -77,28 +71,27 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(id: { eq: $id }) {
+    post: mdx(id: { eq: $id }) {
       id
-      excerpt(pruneLength: 160)
-      html
+      slug
+      timeToRead
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "DD/MM/YY")
         description
+        published
       }
+      excerpt(pruneLength: 50)
+      body
     }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
-      fields {
-        slug
-      }
+    previous: mdx(id: { eq: $previousPostId }) {
+      slug
       frontmatter {
         title
       }
     }
-    next: markdownRemark(id: { eq: $nextPostId }) {
-      fields {
-        slug
-      }
+    next: mdx(id: { eq: $nextPostId }) {
+      slug
       frontmatter {
         title
       }

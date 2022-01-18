@@ -1,0 +1,167 @@
+  code[class*='language-'],
+  pre[class*='language-'] {
+    color: #BBBBBB;
+    background: none;
+    /* text-shadow: 0 1px white; */
+    font-family: 'JetBrainsMono';
+    font-size: 1em;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  pre[class*='language-']::-moz-selection,
+  pre[class*='language-'] ::-moz-selection,
+  code[class*='language-']::-moz-selection,
+  code[class*='language-'] ::-moz-selection pre[class*='language-']::selection,
+  pre[class*='language-'] ::selection,
+  code[class*='language-']::selection,
+  code[class*='language-'] ::selection {
+    text-shadow: none;
+    background: #495162;
+  }
+
+  @media print {
+    code[class*='language-'],
+    pre[class*='language-'] {
+      text-shadow: none;
+    }
+  }
+
+  /* Code blocks */
+  pre[class*='language-'] {
+    padding: 1em;
+    margin: 0.5em 0;
+    overflow: auto;
+  }
+
+  :not(pre) > code[class*='language-'],
+  pre[class*='language-'] {
+    background: #21252B;
+  }
+
+  /* Inline code */
+  :not(pre) > code[class*='language-'] {
+    padding: 0.1em;
+    border-radius: 0.3em;
+    white-space: normal;
+  }
+
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: #676F7D;
+  }
+
+  .token.punctuation {
+    color: #BBBBBB;
+  }
+
+  .token.namespace {
+    opacity: 0.7;
+  }
+
+  .token.boolean,
+  .token.number {
+    color: #C678DD;
+  }
+
+  .token.keyword,
+  .token.constant {
+    color: #56B6C2;
+  }
+
+  .token.function,
+  .token.inserted,
+  .token.property,
+  .token.tag,
+  .token.symbol {
+    color: #98C379;
+  }
+
+  .token.function-definition.function > keyword,
+  .token.deleted,
+  .token.operator {
+    color: #E06C75;
+  }
+
+  .token.regex,
+  .token.placeholder,
+  .token.important,
+  .token.variable,
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string {
+    color: #E5C07B;
+  }
+
+  .token.lifetime-annotation.symbol,
+  .token.atrule,
+  .token.attr-value,
+  .token.type-definition.class-name,
+  .token.class-name {
+    color: #61AFEF;
+  }
+
+  .token.important,
+  .token.bold {
+    font-weight: bold;
+  }
+  .token.italic {
+    font-style: italic;
+  }
+
+  .token.entity {
+    cursor: help;
+  }
+
+  /* Plugins */
+  .line-highlight.line-highlight {
+    padding: 0;
+    background: #495162;
+  }
+
+  .gatsby-highlight pre[class*='language-'].line-numbers {
+    padding: 0;
+    padding-left: 2.4em;
+    overflow: initial;
+  }
+
+  .gatsby-highlight
+    pre[class*='language-'].line-numbers.line-numbers
+    .line-numbers-rows {
+    border-right-color: #495162;
+  }
+
+  .gatsby-highlight
+    pre[class*='language-'].line-numbers
+    .line-numbers-rows
+    > span:before {
+    color: #495162;
+  }
+
+  /* Rust overrides */
+  .language-rust .token.closure-punctuation.punctuation,
+  .language-rust .token.arrow,
+  .language-rust .token.punctop {
+    color: #E06C75;
+  }

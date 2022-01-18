@@ -1,12 +1,5 @@
-// custom typefaces
-import 'typeface-montserrat';
 import 'typeface-merriweather';
-// normalize CSS across browsers
+import 'typeface-roboto';
 import './src/normalize.css';
-// custom CSS styles
-import './src/style.css';
-
-// Highlighting for code blocks
-// import './src/theme/prism-one-monokai.css';
+// import './src/theme/prism-monokai.css'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
-import 'prismjs/themes/prism.css';

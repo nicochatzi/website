@@ -1,17 +1,117 @@
-module.exports = {
-  pathPrefix: `/public`,
-  siteMetadata: {
-    title: `Gatsby Starter Blog`,
-    author: {
-      name: `Nico Chatzigianis`,
-      summary: `who lives and works in San Francisco building useful things.`,
-    },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://htz.dev/`,
-    social: {
-      github: `nicochatzi`,
-    },
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
+// =================================================================================================
+const siteMetadata = {
+  title: `Gatsby Starter Blog`,
+  author: {
+    name: `Nico Chatzigianis`,
+    summary: `who lives and works in San Francisco building useful things.`,
   },
+  description: `A starter blog demonstrating what Gatsby can do.`,
+  siteUrl: `https://htz.dev/`,
+  social: {
+    github: `nicochatzi`,
+  },
+};
+
+// =================================================================================================
+const remarkOptions = {
+  plugins: [
+    {
+      resolve: `gatsby-remark-images`,
+      options: {
+        maxWidth: 630,
+      },
+    },
+    {
+      resolve: `gatsby-remark-responsive-iframe`,
+      options: {
+        wrapperStyle: `margin-bottom: 1.0725rem`,
+      },
+    },
+    // {
+    //   resolve: `gatsby-remark-prismjs`,
+    //   options: {
+    //     languageExtensions: [
+    //       {
+    //         extend: 'rust',
+    //         definition: {
+    //           punctop: /:/,
+    //           arrow: /(->)/,
+    //         },
+    //         insertBefore: {
+    //           function: {
+    //             punctop: /:/,
+    //             arrow: /(->)/,
+    //           },
+    //         },
+    //       },
+    //     ],
+    //   },
+    // },
+    `gatsby-remark-copy-linked-files`,
+    `gatsby-remark-smartypants`,
+  ],
+};
+
+// =================================================================================================
+const feedOptions = {
+  query: `
+    {
+      site {
+        siteMetadata {
+          title
+          description
+          siteUrl
+          site_url: siteUrl
+        }
+      }
+    }
+  `,
+  feeds: [
+    {
+      title: 'htz.dev blog',
+      match: '^/blog/',
+      output: '/rss.xml',
+      serialize: ({ query: { site, allMdx } }) => {
+        return allMdx.edges.map((edge) => {
+          return Object.assign({}, edge.node.frontmatter, {
+            description: edge.node.excerpt,
+            date: edge.node.frontmatter.date,
+            url: site.siteMetadata.siteUrl + '/blog' + edge.node.fields.slug,
+            guid: site.siteMetadata.siteUrl + '/blog' + edge.node.fields.slug,
+            custom_elements: [{ 'content:encoded': edge.node.html }],
+          });
+        });
+      },
+      query: `
+        {
+          allMdx(
+            sort: { order: DESC, fields: [frontmatter___date] },
+          ) {
+            edges {
+              node {
+                excerpt
+                html
+                fields { slug }
+                frontmatter {
+                  title
+                  date
+                }
+              }
+            }
+          }
+        }
+      `,
+    },
+  ],
+};
+
+// =================================================================================================
+module.exports = {
+  siteMetadata,
   plugins: [
     `gatsby-plugin-image`,
     `gatsby-plugin-sitemap`,
@@ -27,115 +127,63 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content/blog`,
-        name: `blog`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 630,
-            },
-          },
-          {
-            resolve: `gatsby-remark-responsive-iframe`,
-            options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
-            },
-          },
-          `gatsby-remark-prismjs`,
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
-        ],
+        name: `posts`,
+        path: `${__dirname}/src/posts`,
       },
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+        defaultLayouts: {
+          default: require.resolve('./src/templates/blog-post.tsx'),
+        },
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: remarkOptions,
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: `ADD YOUR TRACKING ID HERE`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        displayName: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GOOGLE_ANALYTICS_ID,
+        allowAdFeatures: false,
+        head: true,
+        anonymize: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-feed`,
-      options: {
-        query: `
-          {
-            site {
-              siteMetadata {
-                title
-                description
-                siteUrl
-                site_url: siteUrl
-              }
-            }
-          }
-        `,
-        feeds: [
-          {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.nodes.map((node) => {
-                return Object.assign({}, node.frontmatter, {
-                  description: node.excerpt,
-                  date: node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + node.fields.slug,
-                  custom_elements: [{ 'content:encoded': node.html }],
-                });
-              });
-            },
-            query: `
-              {
-                allMarkdownRemark(
-                  sort: { order: DESC, fields: [frontmatter___date] },
-                ) {
-                  nodes {
-                    excerpt
-                    html
-                    fields {
-                      slug
-                    }
-                    frontmatter {
-                      title
-                      date
-                    }
-                  }
-                }
-              }
-            `,
-            output: '/rss.xml',
-          },
-        ],
-      },
+      options: feedOptions,
     },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `nicochatzi`,
+        short_name: `htz`,
         start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#663399`,
+        background_color: `#21252B`,
+        theme_color: `#282C34`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/manifest-icon.png`,
       },
     },
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-gatsby-cloud`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 };
