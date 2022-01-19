@@ -1,30 +1,25 @@
 import * as React from 'react';
-import { Link, graphql } from 'gatsby';
-import { MDXProvider } from '@mdx-js/react';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
-import PrismWrapper from '../components/prism-wrapper';
+import { graphql, Link, PageProps } from 'gatsby';
 
 import Bio from '../components/bio';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
+import Mdx from '../components/mdx';
+import { BlogPostBySlugQuery } from '../types/queries';
 
-const shortcodes = { Link, pre: PrismWrapper };
-
-const BlogPostTemplate = ({ data, location }) => {
-  const { post, previous, next } = data;
+const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
+  data,
+  location,
+}) => {
+  const { site, post, previous, next } = data;
 
   return (
-    <Layout
-      location={location}
-      title={data.site.siteMetadata?.title || `Title`}
-    >
+    <Layout location={location} title={site?.siteMetadata?.title || `Title`}>
       <Seo
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
+        title={post?.frontmatter?.title || `Post`}
+        description={post?.frontmatter?.description || post?.excerpt}
       />
-      <MDXProvider components={shortcodes}>
-        <MDXRenderer frontmatter={post.frontmatter}>{post.body}</MDXRenderer>
-      </MDXProvider>
+      <Mdx>{post}</Mdx>
       <footer>
         <Bio />
       </footer>
@@ -41,14 +36,14 @@ const BlogPostTemplate = ({ data, location }) => {
           <li>
             {previous && (
               <Link to={`/blog/${previous.slug}`} rel="prev">
-                ← {previous.frontmatter.title}
+                ← {previous?.frontmatter?.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
               <Link to={`/blog/${next.slug}`} rel="next">
-                {next.frontmatter.title} →
+                {next?.frontmatter?.title} →
               </Link>
             )}
           </li>

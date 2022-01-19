@@ -4,7 +4,7 @@ require('dotenv').config({
 
 // =================================================================================================
 const siteMetadata = {
-  title: `Gatsby Starter Blog`,
+  title: `htz`,
   author: {
     name: `Nico Chatzigianis`,
     summary: `who lives and works in San Francisco building useful things.`,
@@ -135,7 +135,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: `${__dirname}/src/posts`,
+        path: `${__dirname}/posts`,
       },
     },
     {

@@ -1,18 +1,19 @@
 import * as React from 'react';
-import { Link, graphql } from 'gatsby';
+import { Link, graphql, PageProps } from 'gatsby';
 
 import Bio from '../components/bio';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
+import { IndexPageQuery } from '../../graphql-types';
 
-const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`;
+const BlogIndex: React.FC<PageProps<IndexPageQuery>> = ({ data, location }) => {
+  const site = data.site?.siteMetadata;
   const { edges: posts } = data.allMdx;
 
   if (posts.length === 0) {
     return (
-      <Layout location={location} title={siteTitle}>
-        <Seo title="All posts" />
+      <Layout location={location} title={site?.title}>
+        <Seo title="home" />
         <Bio />
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the
@@ -24,8 +25,8 @@ const BlogIndex = ({ data, location }) => {
   }
 
   return (
-    <Layout location={location} title={siteTitle}>
-      <Seo title="All posts" />
+    <Layout location={location} title={site?.title}>
+      <Seo title="home" description={site?.description || 'htz'} />
       <Bio />
       <ol style={{ listStyle: `none` }}>
         {posts.map(({ node: post }) => (
@@ -39,16 +40,16 @@ const BlogIndex = ({ data, location }) => {
                 <h2>
                   <Link to={`/blog/${post.slug}`} itemProp="url">
                     <span itemProp="headline">
-                      {post.frontmatter.title || post.slug}
+                      {post.frontmatter?.title || post.slug}
                     </span>
                   </Link>
                 </h2>
-                <small>{post.frontmatter.date}</small>
+                <small>{post.frontmatter?.date}</small>
               </header>
               <section>
                 <p
                   dangerouslySetInnerHTML={{
-                    __html: post.frontmatter.description || post.excerpt,
+                    __html: post.frontmatter?.description || post.excerpt,
                   }}
                   itemProp="description"
                 />
@@ -64,10 +65,11 @@ const BlogIndex = ({ data, location }) => {
 export default BlogIndex;
 
 export const pageQuery = graphql`
-  query {
+  query IndexPage {
     site {
       siteMetadata {
         title
+        description
       }
     }
     allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {

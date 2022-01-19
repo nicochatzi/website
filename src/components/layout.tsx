@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, withPrefix } from 'gatsby';
+import { Link, PageProps, withPrefix } from 'gatsby';
 import { GlobalStyle } from '../theme/global-style';
 
 const Layout = ({ location, title, children }) => {

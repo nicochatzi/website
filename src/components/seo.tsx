@@ -8,6 +8,7 @@
 import React, { FunctionComponent } from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
+import { SeoQuery } from '../../graphql-types';
 
 interface MetaTag {
   property: string;
@@ -27,9 +28,9 @@ const Seo: FunctionComponent<SeoProps> = ({
   meta,
   title,
 }) => {
-  const { site } = useStaticQuery(
+  const { site }: SeoQuery = useStaticQuery(
     graphql`
-      query {
+      query Seo {
         site {
           siteMetadata {
             title
@@ -43,8 +44,8 @@ const Seo: FunctionComponent<SeoProps> = ({
     `
   );
 
-  const metaDescription = description || site.siteMetadata.description;
-  const defaultTitle = site.siteMetadata?.title;
+  const metaDescription = description || site?.siteMetadata?.description;
+  const defaultTitle = site?.siteMetadata?.title;
 
   return (
     <Helmet
@@ -76,7 +77,7 @@ const Seo: FunctionComponent<SeoProps> = ({
         },
         {
           name: `github:creator`,
-          content: site.siteMetadata?.social?.github || ``,
+          content: site?.siteMetadata?.social?.github || ``,
         },
         {
           name: `github:title`,

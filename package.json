@@ -15,7 +15,7 @@
     "url": "git+https://github.com/nicochatzi/website.git"
   },
   "scripts": {
-    "ts": "tsc --noEmit",
+    "type-check": "tsc --noEmit",
     "build": "gatsby build --prefix-paths",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
