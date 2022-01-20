@@ -6,7 +6,9 @@ export default {
     darkBlack: '#21252B',
     black: '#282C34',
     darkGrey: '#495162',
+    brown: '#4D4D4D',
     grey: '#676F7D',
+    lightGrey: '#808491',
     blue: '#56B6C2',
     deepBlue: '#61AFEF',
     red: '#E06C75',
@@ -17,21 +19,26 @@ export default {
   },
 
   fonts: {
-    head: `Roboto, sans-serif`,
-    body: `Merriweather, serif`,
+    sans: `Overpass`,
     code: `JetBrainsMono`,
   },
 
-  /* 1.200 Minor Third Type Scale */
+  /* https://type-scale.com/
+    1.200 Minor Third Type Scale */
   fontSizes: [
+    '0.579rem',
+    '0.694rem',
     '0.833rem',
-    '1rem',
+    '1rem',     // 3
     '1.2rem',
     '1.44rem',
     '1.728rem',
     '2.074rem',
     '2.488rem',
     '2.986rem',
+    '3.583rem',
+    '4.3rem',
+    '5.16rem',
   ],
 
   fontWeights: {
@@ -48,6 +55,7 @@ export default {
     tight: 1.1,
     normal: 1.5,
     relaxed: 1.625,
+    loose: 2,
   },
 
   breakpoints: ['40em', '52em', '64em'],

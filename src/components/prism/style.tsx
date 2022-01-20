@@ -1,10 +1,16 @@
+import styled from 'styled-components';
+import Theme from '../../theme/theme';
+
+const { colors, fonts, fontSizes } = Theme;
+
+export const StyledPre = styled.pre`
   code[class*='language-'],
   pre[class*='language-'] {
-    color: #BBBBBB;
+    color: ${colors.white};
     background: none;
     /* text-shadow: 0 1px white; */
-    font-family: 'JetBrainsMono';
-    font-size: 1em;
+    font-family: ${fonts.code};
+    font-size: ${fontSizes[1]};
     text-align: left;
     white-space: pre;
     word-spacing: normal;
@@ -30,7 +36,7 @@
   code[class*='language-']::selection,
   code[class*='language-'] ::selection {
     text-shadow: none;
-    background: #495162;
+    background: ${colors.darkGrey};
   }
 
   @media print {
@@ -49,7 +55,7 @@
 
   :not(pre) > code[class*='language-'],
   pre[class*='language-'] {
-    background: #21252B;
+    background: ${colors.black};
   }
 
   /* Inline code */
@@ -63,11 +69,11 @@
   .token.prolog,
   .token.doctype,
   .token.cdata {
-    color: #676F7D;
+    color: ${colors.grey};
   }
 
   .token.punctuation {
-    color: #BBBBBB;
+    color: ${colors.white};
   }
 
   .token.namespace {
@@ -76,12 +82,12 @@
 
   .token.boolean,
   .token.number {
-    color: #C678DD;
+    color: ${colors.pink};
   }
 
   .token.keyword,
   .token.constant {
-    color: #56B6C2;
+    color: ${colors.blue};
   }
 
   .token.function,
@@ -89,13 +95,13 @@
   .token.property,
   .token.tag,
   .token.symbol {
-    color: #98C379;
+    color: ${colors.green};
   }
 
   .token.function-definition.function > keyword,
   .token.deleted,
   .token.operator {
-    color: #E06C75;
+    color: ${colors.red};
   }
 
   .token.regex,
@@ -111,7 +117,7 @@
   .token.url,
   .language-css .token.string,
   .style .token.string {
-    color: #E5C07B;
+    color: ${colors.yellow};
   }
 
   .token.lifetime-annotation.symbol,
@@ -119,7 +125,7 @@
   .token.attr-value,
   .token.type-definition.class-name,
   .token.class-name {
-    color: #61AFEF;
+    color: ${colors.deepBlue};
   }
 
   .token.important,
@@ -134,34 +140,13 @@
     cursor: help;
   }
 
-  /* Plugins */
-  .line-highlight.line-highlight {
-    padding: 0;
-    background: #495162;
-  }
-
-  .gatsby-highlight pre[class*='language-'].line-numbers {
-    padding: 0;
-    padding-left: 2.4em;
-    overflow: initial;
-  }
-
-  .gatsby-highlight
-    pre[class*='language-'].line-numbers.line-numbers
-    .line-numbers-rows {
-    border-right-color: #495162;
-  }
-
-  .gatsby-highlight
-    pre[class*='language-'].line-numbers
-    .line-numbers-rows
-    > span:before {
-    color: #495162;
-  }
-
   /* Rust overrides */
-  .language-rust .token.closure-punctuation.punctuation,
+  .language-rust closure-punctuation punctuation {
+    color: ${colors.red};
+  }
+
   .language-rust .token.arrow,
   .language-rust .token.punctop {
-    color: #E06C75;
+    color: ${colors.red};
   }
+`;

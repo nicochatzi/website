@@ -1,10 +1,20 @@
 import * as React from 'react';
 import { Link, graphql, PageProps } from 'gatsby';
-
 import Bio from '../components/bio';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
 import { IndexPageQuery } from '../../graphql-types';
+import Theme from '../theme/theme';
+
+const {
+  colors,
+  fonts,
+  fontSizes,
+  fontWeights,
+  lineHeights,
+  sizes,
+  spaces,
+} = Theme;
 
 const BlogIndex: React.FC<PageProps<IndexPageQuery>> = ({ data, location }) => {
   const site = data.site?.siteMetadata;
@@ -39,12 +49,17 @@ const BlogIndex: React.FC<PageProps<IndexPageQuery>> = ({ data, location }) => {
               <header>
                 <h2>
                   <Link to={`/blog/${post.slug}`} itemProp="url">
-                    <span itemProp="headline">
+                    <span
+                      itemProp="headline"
+                      style={{ fontSize: fontSizes[6] }}
+                    >
                       {post.frontmatter?.title || post.slug}
                     </span>
                   </Link>
                 </h2>
-                <small>{post.frontmatter?.date}</small>
+                <small style={{ color: colors.grey }}>
+                  {post.frontmatter?.date}
+                </small>
               </header>
               <section>
                 <p

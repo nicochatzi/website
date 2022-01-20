@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { graphql, Link, PageProps } from 'gatsby';
-
 import Bio from '../components/bio';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
-import Mdx from '../components/mdx';
 import { BlogPostBySlugQuery } from '../types/queries';
+import Mdx from '../components/mdx';
 
 const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
   data,
@@ -19,7 +18,7 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
         title={post?.frontmatter?.title || `Post`}
         description={post?.frontmatter?.description || post?.excerpt}
       />
-      <Mdx>{post}</Mdx>
+      <Mdx >{post}</Mdx>
       <footer>
         <Bio />
       </footer>

@@ -13,11 +13,6 @@ const {
 
 export const GlobalStyle = createGlobalStyle`
 
-@font-face {
-  font-family: "JetBrainsMono";
-  src: url("/fonts/JetBrainsMono/JetBrainsMono-Regular.woff2");
-}
-
 :root {
   --color-primary: ${colors.blue};
   --color-text: ${colors.white};
@@ -25,8 +20,6 @@ export const GlobalStyle = createGlobalStyle`
   --color-heading: ${colors.red};
   --color-heading-black: ${colors.red};
   --color-accent: ${colors.black};
-
-  --fontSize-root: 16px;
 }
 
 /* HTML elements */
@@ -39,16 +32,17 @@ export const GlobalStyle = createGlobalStyle`
 
 html {
   line-height: ${lineHeights.normal};
-  font-size: var(--fontSize-root);
+  font-size: ${fontSizes[3]};
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: ${fonts.body};
-  font-size: ${fontSizes[1]};
+  font-family: ${fonts.sans};
+  font-size: ${fontSizes[4]};
   color: var(--color-text);
   background-color: ${colors.black};
+  /* letter-spacing: 0.025em; */
 }
 
 footer {
@@ -69,11 +63,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: ${fonts.head};
+  font-family: ${fonts.sans};
   margin-top: ${spaces[9]};
   margin-bottom: ${spaces[6]};
   line-height: ${lineHeights.tight};
-  letter-spacing: -0.025em;
+  /* letter-spacing: -0.025em; */
 }
 
 h2,
@@ -87,28 +81,28 @@ h6 {
 
 h1 {
   font-weight: ${fontWeights.black};
-  font-size: ${fontSizes[6]};
+  font-size: ${fontSizes[8]};
   color: var(--color-heading-black);
 }
 
 h2 {
-  font-size: ${fontSizes[5]};
+  font-size: ${fontSizes[7]};
 }
 
 h3 {
-  font-size: ${fontSizes[4]};
+  font-size: ${fontSizes[6]};
 }
 
 h4 {
-  font-size: ${fontSizes[3]};
+  font-size: ${fontSizes[5]};
 }
 
 h5 {
-  font-size: ${fontSizes[2]};
+  font-size: ${fontSizes[4]};
 }
 
 h6 {
-  font-size: ${fontSizes[1]};
+  font-size: ${fontSizes[3]};
 }
 
 h1 > a {
@@ -206,6 +200,10 @@ a:focus {
   text-decoration: none;
 }
 
+a.anchor {
+  fill: ${colors.white};
+}
+
 /* Custom classes */
 
 .global-wrapper {
@@ -249,7 +247,7 @@ a:focus {
 
 .header-link-home {
   font-weight: ${fontWeights.bold};
-  font-family: ${fonts.head};
+  font-family: ${fonts.sans};
   text-decoration: none;
   font-size: ${fontSizes[2]};
 }
@@ -276,7 +274,7 @@ a:focus {
 
 .blog-post header p {
   font-size: ${fontSizes[2]};
-  font-family: ${fonts.head};
+  font-family: ${fonts.sans};
 }
 
 .blog-post-nav ul {
