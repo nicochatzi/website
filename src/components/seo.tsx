@@ -16,18 +16,13 @@ interface MetaTag {
 }
 
 interface SeoProps {
-  description?: string;
+  title: string;
   lang?: string;
   meta?: MetaTag[];
-  title: string;
+  description?: string;
 }
 
-const Seo: FunctionComponent<SeoProps> = ({
-  description,
-  lang,
-  meta,
-  title,
-}) => {
+const Seo: React.FC<SeoProps> = ({ title, lang, meta, description }) => {
   const { site }: SeoQuery = useStaticQuery(
     graphql`
       query Seo {

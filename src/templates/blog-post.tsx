@@ -5,6 +5,9 @@ import Layout from '../components/layout';
 import Seo from '../components/seo';
 import { BlogPostBySlugQuery } from '../types/queries';
 import Mdx from '../components/mdx';
+import Theme from '../theme/theme';
+
+const { colors } = Theme;
 
 const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
   data,
@@ -13,12 +16,16 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
   const { site, post, previous, next } = data;
 
   return (
-    <Layout location={location} title={site?.siteMetadata?.title || `Title`}>
+    <Layout
+      location={location}
+      title={site?.siteMetadata?.title || `Title`}
+      color={colors.blue}
+    >
       <Seo
         title={post?.frontmatter?.title || `Post`}
         description={post?.frontmatter?.description || post?.excerpt}
       />
-      <Mdx >{post}</Mdx>
+      <Mdx>{post}</Mdx>
       <footer>
         <Bio />
       </footer>

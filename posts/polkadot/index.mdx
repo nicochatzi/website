@@ -1,5 +1,5 @@
 ---
-title: My Second Post!
+title: Polkadot
 date: '2015-05-06T23:46:37.121Z'
 published: true
 category: blockchain
@@ -16,15 +16,6 @@ egg yolk will be less rich."?
 
 Yeah, I didn't either.
 
-```cpp
-class Dumb {
-public:
-    Dumb() noexcept;
-private:
-    int x;
-};
-```
-
 ```rust
 trait DummyTrait {
     type Type;
@@ -40,10 +31,11 @@ struct DummyStruct {
 impl DummyTrait for DummyStruct {}
 
 pub fn main() {
-    let dummy: DummyStruct;
+    let dummy: DummyStruct::<T>;
+    let s = std::fs::remove(dummy);
     let string: &'a str = "yo"; print!(string);
     let num: i32 = 12;          print!("{}", num);
-    let closure = |s: &str, x| loop {print!(s)?;};
+    let closure = |s: &str, x| loop { print!(s)?; };
     let x = 1 + 2;
 }
 ```
@@ -56,4 +48,13 @@ interface MyType {
 }
 function func() { const x = "yo"; }
 const func = () => { "ret" }
+```
+
+```cpp
+class Dumb {
+public:
+    Dumb() noexcept;
+private:
+    int x;
+};
 ```

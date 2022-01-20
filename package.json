@@ -16,14 +16,16 @@
   },
   "scripts": {
     "type-check": "tsc --noEmit",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "clean": "gatsby clean",
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
-    "deploy": "gh-pages -d public",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "cy:open-ct": "cypress open-ct",
+    "cy:run-ct": "cypress run-ct",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "husky": {
     "hooks": {
@@ -38,12 +40,11 @@
     "@mdx-js/react": "^1.6.22",
     "gatsby": "^4.5.3",
     "gatsby-plugin-feed": "^4.5.0",
-    "gatsby-plugin-gatsby-cloud": "^4.5.2",
     "gatsby-plugin-google-analytics": "^4.5.0",
+    "gatsby-plugin-google-gtag": "^4.5.0",
     "gatsby-plugin-image": "^2.5.2",
     "gatsby-plugin-manifest": "^4.5.2",
     "gatsby-plugin-mdx": "^3.5.2",
-    "gatsby-plugin-offline": "^5.5.2",
     "gatsby-plugin-react-helmet": "^5.5.0",
     "gatsby-plugin-sharp": "^4.5.2",
     "gatsby-plugin-sitemap": "^5.5.0",
@@ -63,16 +64,13 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^4.3.1",
     "styled-components": "^5.3.3",
-    "typeface-alata": "^1.1.13",
-    "typeface-hanuman": "^1.1.13",
     "typeface-jetbrains-mono": "^2.0.1",
-    "typeface-merriweather": "0.0.72",
-    "typeface-overpass": "^1.1.13",
-    "typeface-roboto": "1.1.13",
-    "typeface-suwannaphum": "^1.1.13",
-    "typeface-yrsa": "^1.1.13"
+    "typeface-overpass": "^1.1.13"
   },
   "devDependencies": {
+    "@cypress/react": "^5.12.1",
+    "@cypress/webpack-dev-server": "^1.8.0",
+    "cypress": "^9.3.1",
     "gatsby-plugin-ts": "^3.1.0",
     "gh-pages": "^3.2.3",
     "husky": "^7.0.4",

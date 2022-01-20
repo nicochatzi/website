@@ -19,8 +19,8 @@ export default {
   },
 
   fonts: {
-    sans: `Overpass`,
-    code: `JetBrainsMono`,
+    sans: `Overpass, sans-serif`,
+    code: `JetBrainsMono-Regular, monospace`,
   },
 
   /* https://type-scale.com/
@@ -29,7 +29,7 @@ export default {
     '0.579rem',
     '0.694rem',
     '0.833rem',
-    '1rem',     // 3
+    '1rem', // 3
     '1.2rem',
     '1.44rem',
     '1.728rem',

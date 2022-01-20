@@ -22,6 +22,17 @@ export const GlobalStyle = createGlobalStyle`
   --color-accent: ${colors.black};
 }
 
+::-moz-selection,
+::-moz-selection,
+::-moz-selection,
+::-moz-selection,
+::selection,
+::selection,
+::selection,
+::selection {
+  background: ${colors.darkGrey};
+}
+
 /* HTML elements */
 
 *,
@@ -198,6 +209,7 @@ a {
 a:hover,
 a:focus {
   text-decoration: none;
+  color: ${colors.deepBlue}
 }
 
 a.anchor {

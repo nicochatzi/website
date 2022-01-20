@@ -8,7 +8,7 @@ const { colors, fontSizes } = Theme;
 const Footer: React.FC = () => (
   <StyledFooter>
     <OutboundLink href={`https://www.github.com/nicochatzi/website`}>
-      © {new Date().getFullYear()}, built by 👽 with ️❤
+      © {new Date().getFullYear()}, built by 👽 with 🎛
     </OutboundLink>
   </StyledFooter>
 );
@@ -19,7 +19,7 @@ const StyledFooter = styled.footer`
 
   a {
     text-decoration: none;
-    color: ${colors.lightGrey}
+    color: ${colors.lightGrey};
   }
 `;
 

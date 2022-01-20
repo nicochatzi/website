@@ -5,79 +5,72 @@ import Layout from '../components/layout';
 import Seo from '../components/seo';
 import { IndexPageQuery } from '../../graphql-types';
 import Theme from '../theme/theme';
+import { TreeList, TreeListItem } from '../components/list';
 
-const {
-  colors,
-  fonts,
-  fontSizes,
-  fontWeights,
-  lineHeights,
-  sizes,
-  spaces,
-} = Theme;
+const { colors, fonts, fontSizes, lineHeights } = Theme;
 
-const BlogIndex: React.FC<PageProps<IndexPageQuery>> = ({ data, location }) => {
+interface StyledLinkProps {
+  url: string;
+}
+
+const StyledLink: React.FC<StyledLinkProps> = ({ children, url }) => (
+  <Link
+    to={url}
+    itemProp="url"
+    style={{
+      textDecoration: 'none',
+      fontFamily: fonts.code,
+      fontSize: fontSizes[6],
+      color: colors.yellow,
+      lineHeight: lineHeights.tight,
+    }}
+  >
+    {children}
+  </Link>
+);
+
+const Index: React.FC<PageProps<IndexPageQuery>> = ({ data, location }) => {
   const site = data.site?.siteMetadata;
   const { edges: posts } = data.allMdx;
 
-  if (posts.length === 0) {
-    return (
-      <Layout location={location} title={site?.title}>
-        <Seo title="home" />
-        <Bio />
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
-      </Layout>
-    );
-  }
-
   return (
-    <Layout location={location} title={site?.title}>
+    <Layout location={location} title={site?.title} color={colors.red}>
       <Seo title="home" description={site?.description || 'htz'} />
-      <Bio />
-      <ol style={{ listStyle: `none` }}>
-        {posts.map(({ node: post }) => (
-          <li key={post.slug}>
-            <article
-              className="post-list-item"
-              itemScope
-              itemType="http://schema.org/Article"
-            >
-              <header>
-                <h2>
-                  <Link to={`/blog/${post.slug}`} itemProp="url">
-                    <span
-                      itemProp="headline"
-                      style={{ fontSize: fontSizes[6] }}
-                    >
-                      {post.frontmatter?.title || post.slug}
-                    </span>
-                  </Link>
-                </h2>
-                <small style={{ color: colors.grey }}>
-                  {post.frontmatter?.date}
-                </small>
-              </header>
-              <section>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: post.frontmatter?.description || post.excerpt,
-                  }}
-                  itemProp="description"
-                />
-              </section>
-            </article>
-          </li>
-        ))}
-      </ol>
+      <span>
+        <TreeList>
+          <TreeListItem depth={0} isRoot></TreeListItem>
+          <TreeListItem depth={0}>
+            <StyledLink url={'/about'}>{'about'}</StyledLink>
+          </TreeListItem>
+          <TreeListItem depth={0}>
+            <StyledLink url={'/apps'}>{'apps'}</StyledLink>
+          </TreeListItem>
+          <TreeListItem depth={1} withTrunk isLast>
+            <StyledLink url={'/apps/dummy'}>{'fm_synth'}</StyledLink>
+          </TreeListItem>
+          <TreeListItem depth={0} isLast>
+            <StyledLink url={'/blog'}>{'blog'}</StyledLink>
+          </TreeListItem>
+          <>
+            {posts.map(({ node: post }, index) => (
+              <TreeListItem
+                key={post.slug}
+                isLast={index == posts.length - 1}
+                depth={1}
+              >
+                <StyledLink url={`/blog/${post.slug}`}>
+                  {(post.frontmatter?.title || post.slug)?.toLowerCase()}
+                </StyledLink>
+              </TreeListItem>
+            ))}
+          </>
+        </TreeList>
+      </span>
     </Layout>
   );
 };
 
-export default BlogIndex;
+export default Index;
 
 export const pageQuery = graphql`
   query IndexPage {

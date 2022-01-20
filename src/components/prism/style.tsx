@@ -3,66 +3,34 @@ import Theme from '../../theme/theme';
 
 const { colors, fonts, fontSizes } = Theme;
 
-export const StyledPre = styled.pre`
-  code[class*='language-'],
-  pre[class*='language-'] {
-    color: ${colors.white};
-    background: none;
-    /* text-shadow: 0 1px white; */
-    font-family: ${fonts.code};
-    font-size: ${fontSizes[1]};
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    line-height: 1.5;
+export default styled.pre`
+  font-family: ${fonts.code};
+  background-color: ${colors.darkBlack};
+  border-radius: 0.5rem;
+  border-width: 10rem;
+  font-size: ${fontSizes[3]};
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
 
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
+  padding: 1.5em;
+  margin: 1.25em 0;
+  overflow: auto;
 
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-  }
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
 
-  pre[class*='language-']::-moz-selection,
-  pre[class*='language-'] ::-moz-selection,
-  code[class*='language-']::-moz-selection,
-  code[class*='language-'] ::-moz-selection pre[class*='language-']::selection,
-  pre[class*='language-'] ::selection,
-  code[class*='language-']::selection,
-  code[class*='language-'] ::selection {
-    text-shadow: none;
-    background: ${colors.darkGrey};
-  }
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
 
   @media print {
-    code[class*='language-'],
-    pre[class*='language-'] {
-      text-shadow: none;
-    }
-  }
-
-  /* Code blocks */
-  pre[class*='language-'] {
-    padding: 1em;
-    margin: 0.5em 0;
-    overflow: auto;
-  }
-
-  :not(pre) > code[class*='language-'],
-  pre[class*='language-'] {
-    background: ${colors.black};
-  }
-
-  /* Inline code */
-  :not(pre) > code[class*='language-'] {
-    padding: 0.1em;
-    border-radius: 0.3em;
-    white-space: normal;
+    text-shadow: none;
   }
 
   .token.comment,
@@ -72,12 +40,8 @@ export const StyledPre = styled.pre`
     color: ${colors.grey};
   }
 
-  .token.punctuation {
+  .token.braces {
     color: ${colors.white};
-  }
-
-  .token.namespace {
-    opacity: 0.7;
   }
 
   .token.boolean,
@@ -124,6 +88,7 @@ export const StyledPre = styled.pre`
   .token.atrule,
   .token.attr-value,
   .token.type-definition.class-name,
+  .token.primitives,
   .token.class-name {
     color: ${colors.deepBlue};
   }
@@ -141,12 +106,24 @@ export const StyledPre = styled.pre`
   }
 
   /* Rust overrides */
-  .language-rust closure-punctuation punctuation {
+  .token.closure-punctuation.punctuation {
     color: ${colors.red};
   }
 
-  .language-rust .token.arrow,
-  .language-rust .token.punctop {
+  .token.literals {
+    color: ${colors.blue};
+  }
+  .token.braces {
+    color: ${colors.white};
+  }
+
+  .token.punctuation,
+  .token.namespace.punctuation {
+    color: ${colors.lightGrey};
+  }
+
+  .token.module-declaration,
+  .token.decl-keyword {
     color: ${colors.red};
   }
 `;
