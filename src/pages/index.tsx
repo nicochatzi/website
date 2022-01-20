@@ -6,6 +6,7 @@ import Seo from '../components/seo';
 import { IndexPageQuery } from '../../graphql-types';
 import Theme from '../theme/theme';
 import { TreeList, TreeListItem } from '../components/list';
+import styled from 'styled-components';
 
 const { colors, fonts, fontSizes, lineHeights } = Theme;
 
@@ -13,25 +14,37 @@ interface StyledLinkProps {
   url: string;
 }
 
+const LinkStyleWrapper = styled.a`
+  a {
+    color: ${colors.yellow};
+    text-decoration: none;
+    font-family: ${fonts.code};
+    font-size: ${fontSizes[6]};
+    line-height: ${lineHeights.tight};
+  }
+
+  a:hover,
+  a:focus {
+    text-decoration: none;
+    color: ${colors.pink};
+  }
+`;
+
 const StyledLink: React.FC<StyledLinkProps> = ({ children, url }) => (
-  <Link
-    to={url}
-    itemProp="url"
-    style={{
-      textDecoration: 'none',
-      fontFamily: fonts.code,
-      fontSize: fontSizes[6],
-      color: colors.yellow,
-      lineHeight: lineHeights.tight,
-    }}
-  >
-    {children}
-  </Link>
+  <LinkStyleWrapper>
+    <Link to={url} itemProp="url">
+      {children}
+    </Link>
+  </LinkStyleWrapper>
 );
 
 const Index: React.FC<PageProps<IndexPageQuery>> = ({ data, location }) => {
   const site = data.site?.siteMetadata;
-  const { edges: posts } = data.allMdx;
+  const { edges } = data.allMdx;
+  const posts = edges.filter(
+    (edge) =>
+      edge.node.frontmatter?.published || process.env.NODE_ENV === 'development'
+  );
 
   return (
     <Layout location={location} title={site?.title} color={colors.red}>
@@ -42,12 +55,12 @@ const Index: React.FC<PageProps<IndexPageQuery>> = ({ data, location }) => {
           <TreeListItem depth={0}>
             <StyledLink url={'/about'}>{'about'}</StyledLink>
           </TreeListItem>
-          <TreeListItem depth={0}>
+          {/* <TreeListItem depth={0}>
             <StyledLink url={'/apps'}>{'apps'}</StyledLink>
           </TreeListItem>
           <TreeListItem depth={1} withTrunk isLast>
             <StyledLink url={'/apps/dummy'}>{'fm_synth'}</StyledLink>
-          </TreeListItem>
+          </TreeListItem> */}
           <TreeListItem depth={0} isLast>
             <StyledLink url={'/blog'}>{'blog'}</StyledLink>
           </TreeListItem>
@@ -89,6 +102,7 @@ export const pageQuery = graphql`
             date(formatString: "DD/MM/YY")
             title
             description
+            published
           }
         }
       }

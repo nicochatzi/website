@@ -2,19 +2,20 @@
 
 export default {
   colors: {
-    white: '#BBBBBB',
-    darkBlack: '#21252B',
-    black: '#282C34',
-    darkGrey: '#495162',
-    brown: '#4D4D4D',
-    grey: '#676F7D',
-    lightGrey: '#808491',
-    blue: '#56B6C2',
-    deepBlue: '#61AFEF',
-    red: '#E06C75',
-    pink: '#C678DD',
-    yellow: '#E5C07B',
-    green: '#98C379',
+    white: 'rgb(187,187,187)', // #BBBBBB
+    darkest: 'rgb(29,33,38)', // #1D2126
+    darkBlack: 'rgb(33,37,43)', // #21252B
+    black: 'rgb(40,44,52)', // #282C34
+    darkGrey: 'rgb(73,81,98)', // #495162
+    brown: 'rgb(77,77,77)', // #4D4D4D
+    grey: 'rgb(103,111,125)', // #676F7D
+    lightGrey: 'rgb(128,132,145)', // #808491
+    blue: 'rgb(86,182,194)', // #56B6C2
+    deepBlue: 'rgb(97,175,239)', // #61AFEF
+    red: 'rgb(224,108,117)', // #E06C75
+    pink: 'rgb(198,120,221)', // #C678DD
+    yellow: 'rgb(229,192,123)', // #E5C07B
+    green: 'rgb(152,195,121)', // #98C379
     transparent: 'rgba(0,0,0,0)',
   },
 

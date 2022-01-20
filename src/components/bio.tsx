@@ -8,8 +8,8 @@
 import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
-import { OutboundLink } from 'gatsby-plugin-google-analytics';
 import { BioQuery } from '../types/queries';
+import { css } from 'styled-components';
 
 const Bio: React.FC = () => {
   const data: BioQuery = useStaticQuery(graphql`
@@ -20,39 +20,32 @@ const Bio: React.FC = () => {
             name
             summary
           }
-          social {
-            github
-          }
         }
       }
     }
   `);
 
-  // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site?.siteMetadata?.author;
-  const social = data.site?.siteMetadata?.social;
 
   return (
     <div className="bio">
       <StaticImage
         className="bio-avatar"
-        layout="fixed"
         formats={['auto', 'webp', 'avif']}
         src="../images/profile-pic.jpeg"
-        width={50}
-        height={50}
-        quality={95}
+        layout={'fixed'}
+        width={150}
+        height={140}
+        quality={100}
         alt="Profile picture"
       />
-      {author?.name && (
-        <p>
-          Written by <strong>{author.name}</strong> {author?.summary || null}
-          {` `}
-          <OutboundLink href={`https://www.github.com/${social?.github}/`}>
-            github
-          </OutboundLink>
-        </p>
-      )}
+      <div style={{ margin: '2rem' }}>
+        {author?.name && (
+          <p>
+            Written by <strong>{author.name}</strong> {author?.summary || null}
+          </p>
+        )}
+      </div>
     </div>
   );
 };

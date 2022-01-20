@@ -209,7 +209,7 @@ a {
 a:hover,
 a:focus {
   text-decoration: none;
-  color: ${colors.deepBlue}
+  color: ${colors.pink}
 }
 
 a.anchor {
@@ -276,8 +276,7 @@ a.anchor {
 .bio-avatar {
   margin-right: ${spaces[4]};
   margin-bottom: ${spaces[0]};
-  min-width: 50px;
-  border-radius: 100%;
+  border-radius: 10%;
 }
 
 .blog-post header h1 {

@@ -7,9 +7,9 @@ const siteMetadata = {
   title: `htz`,
   author: {
     name: `Nico Chatzigianis`,
-    summary: `who lives and works in San Francisco building useful things.`,
+    summary: `who lives and works in London and France.`,
   },
-  description: `A starter blog demonstrating what Gatsby can do.`,
+  description: `blogs and apps`,
   siteUrl: `https://htz.dev/`,
   social: {
     github: `nicochatzi`,

@@ -26,9 +26,6 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
         description={post?.frontmatter?.description || post?.excerpt}
       />
       <Mdx>{post}</Mdx>
-      <footer>
-        <Bio />
-      </footer>
       <nav className="blog-post-nav">
         <ul
           style={{
@@ -41,14 +38,22 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
         >
           <li>
             {previous && (
-              <Link to={`/blog/${previous.slug}`} rel="prev">
+              <Link
+                style={{ textDecoration: 'none' }}
+                to={`/blog/${previous.slug}`}
+                rel="prev"
+              >
                 ← {previous?.frontmatter?.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={`/blog/${next.slug}`} rel="next">
+              <Link
+                style={{ textDecoration: 'none' }}
+                to={`/blog/${next.slug}`}
+                rel="next"
+              >
                 {next?.frontmatter?.title} →
               </Link>
             )}
