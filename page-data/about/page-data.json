@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-about-tsx",
+    "path": "/about/",
+    "result": {"data":{"site":{"siteMetadata":{"title":"htz","description":"A starter blog demonstrating what Gatsby can do."}}},"pageContext":{}},
+    "staticQueryHashes": ["183588616","4287153579"]}
