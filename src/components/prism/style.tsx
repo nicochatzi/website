@@ -6,7 +6,7 @@ const { colors, fonts, fontSizes } = Theme;
 export default styled.pre`
   font-family: ${fonts.code};
   background-color: ${colors.darkBlack};
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   border-width: 10rem;
   font-size: ${fontSizes[3]};
   text-align: left;

@@ -39,8 +39,7 @@ const StyledLink: React.FC<StyledLinkProps> = ({ children, url }) => (
 
 const Index: React.FC<PageProps<IndexPageQuery>> = ({ data, location }) => {
   const site = data.site?.siteMetadata;
-  const { edges } = data.allMdx;
-  const posts = edges.filter(
+  const posts = data.allMdx.edges.filter(
     (edge) =>
       edge.node.frontmatter?.published || process.env.NODE_ENV === 'development'
   );

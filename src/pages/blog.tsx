@@ -22,8 +22,7 @@ const LinkStyleWrapper = styled.a`
 
 const BlogPage: React.FC<PageProps<BlogPageQuery>> = ({ data, location }) => {
   const site = data.site?.siteMetadata;
-  const { edges } = data.allMdx;
-  const posts = edges.filter(
+  const posts = data.allMdx.edges.filter(
     (edge) =>
       edge.node.frontmatter?.published || process.env.NODE_ENV === 'development'
   );
