@@ -1,3 +1,6 @@
+import { Prism } from 'prism-react-renderer';
+(typeof global !== 'undefined' ? global : window).Prism = Prism;
+
 // support 4 levels of nested comments
 const generateMultilineCommentPattern = () => {
   var multilineComment = /\/\*(?:[^*/]|\*(?!\/)|\/(?!\*)|<self>)*\*\//.source;
@@ -140,4 +143,4 @@ const syntax = {
 syntax['closure-params'].inside.rest = syntax;
 syntax['attribute'].inside['string'] = syntax['string'];
 
-export default syntax;
+Prism.languages['rust'] = syntax;

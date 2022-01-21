@@ -22,7 +22,11 @@ const LinkStyleWrapper = styled.a`
 
 const BlogPage: React.FC<PageProps<BlogPageQuery>> = ({ data, location }) => {
   const site = data.site?.siteMetadata;
-  const { edges: posts } = data.allMdx;
+  const { edges } = data.allMdx;
+  const posts = edges.filter(
+    (edge) =>
+      edge.node.frontmatter?.published || process.env.NODE_ENV === 'development'
+  );
 
   return (
     <Layout
@@ -91,6 +95,7 @@ export const pageQuery = graphql`
             date(formatString: "DD/MM/YY")
             title
             description
+            published
           }
         }
       }

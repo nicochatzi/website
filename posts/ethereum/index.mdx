@@ -30,6 +30,28 @@ contract SimpleStorage {
 }
 ```
 
+```rust
+pub fn main() {
+    let print = |s| pritnln!("{s}");
+    const STR: &str = "yo";
+    print(STR);
+}
+```
+
+```ts
+const print = (s) => console.log(s);
+const str: string = "yo";
+print(str);
+```
+
+```cpp
+int main(int argc, char * argv[]) {
+    auto print = [](auto& s) { std::cout << s << std::endl; };
+    const std::string str = "yo";
+    print(str);
+}
+```
+
 ### Graph it!
 
 <Graph

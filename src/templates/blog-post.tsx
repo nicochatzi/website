@@ -22,6 +22,7 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
         title={post?.frontmatter?.title || `Post`}
         description={post?.frontmatter?.description || post?.excerpt}
       />
+      <Spacer />
       <Mdx>{post}</Mdx>
       <Spacer />
       <Spacer />
@@ -47,15 +48,17 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
             )}
           </li>
           <li>
-            {next && (
-              <Link
-                style={{ textDecoration: 'none' }}
-                to={`/blog/${next.slug}`}
-                rel="next"
-              >
-                {next?.frontmatter?.title} →
-              </Link>
-            )}
+            {next &&
+              (next.frontmatter?.published ||
+                process.env.NODE_ENV === 'development') && (
+                <Link
+                  style={{ textDecoration: 'none' }}
+                  to={`/blog/${next.slug}`}
+                  rel="next"
+                >
+                  {next?.frontmatter?.title} →
+                </Link>
+              )}
           </li>
         </ul>
       </nav>
@@ -99,6 +102,7 @@ export const pageQuery = graphql`
       slug
       frontmatter {
         title
+        published
       }
     }
   }

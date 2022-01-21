@@ -3,7 +3,7 @@ import Highlight, { defaultProps } from 'prism-react-renderer';
 import StyledPre from './style';
 import Prism from './prism';
 
-const Highlighter: React.FC = (props: any) => (
+export default (props: any) => (
   <Highlight
     {...defaultProps}
     Prism={Prism}
@@ -24,5 +24,3 @@ const Highlighter: React.FC = (props: any) => (
     )}
   </Highlight>
 );
-
-export default Highlighter;

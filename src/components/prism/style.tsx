@@ -40,16 +40,15 @@ export default styled.pre`
     color: ${colors.grey};
   }
 
-  .token.braces {
-    color: ${colors.white};
-  }
-
   .token.boolean,
   .token.number {
     color: ${colors.pink};
   }
 
-  .token.keyword,
+  .token.keyword {
+    color: ${colors.blue};
+  }
+
   .token.constant {
     color: ${colors.blue};
   }
@@ -118,6 +117,7 @@ export default styled.pre`
   }
 
   .token.punctuation,
+  .token.braces,
   .token.namespace.punctuation {
     color: ${colors.lightGrey};
   }
