@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[htz.dev blog]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://htz.dev</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 20 Jan 2022 21:12:35 GMT</lastBuildDate><item><title><![CDATA[Rume]]></title><description><![CDATA[Far far away, behind the word mountains, far from the countries Vokalia and
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[htz.dev blog]]></title><description><![CDATA[blogs and apps]]></description><link>https://htz.dev</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 21 Jan 2022 19:48:14 GMT</lastBuildDate><item><title><![CDATA[Rume]]></title><description><![CDATA[Far far away, behind the word mountains, far from the countries Vokalia and
 Consonantia, there live the blind texts. Separated they live in…]]></description><link>https://htz.dev/blogrume/</link><guid isPermaLink="false">https://htz.dev/blogrume/</guid><pubDate>Thu, 28 May 2015 22:40:32 GMT</pubDate><content:encoded>&lt;p&gt;Far far away, behind the word mountains, far from the countries Vokalia and
 Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
 right at the coast of the Semantics, a large language ocean. A small river named
@@ -34,7 +34,7 @@ few insidious Copy Writers ambushed her, made her drunk with Longe and Parole
 and dragged her into their agency, where they abused her for their projects
 again and again. And if she hasn’t been rewritten, then they are still using
 her. Far far away, behind the word mountains, far from the countries Vokalia and
-Consonantia, there live the blind texts.&lt;/p&gt;&lt;h4&gt;Silent delightfully including because before one up barring chameleon&lt;/h4&gt;&lt;p&gt;Separated they live in Bookmarksgrove right at the coast of the Semantics, a
+Consonantia, there live the blind texts.&lt;/p&gt;&lt;h4 id=&quot;silent-delightfully-including-because-before-one-up-barring-chameleon&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#silent-delightfully-including-because-before-one-up-barring-chameleon&quot; aria-label=&quot;silent delightfully including because before one up barring chameleon permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Silent delightfully including because before one up barring chameleon&lt;/h4&gt;&lt;p&gt;Separated they live in Bookmarksgrove right at the coast of the Semantics, a
 large language ocean. A small river named Duden flows by their place and
 supplies it with the necessary regelialia. It is a paradisematic country, in
 which roasted parts of sentences fly into your mouth.&lt;/p&gt;&lt;p&gt;Even the all-powerful Pointing has no control about the blind texts it is an
@@ -90,91 +90,18 @@ public:
 private:
     int x;
 };
-&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title><![CDATA[Ethereum]]></title><description><![CDATA[This is my first post on my new fake blog! How exciting! I'm sure I'll write a lot more interesting things in the future. Oh, and here's a…]]></description><link>https://htz.dev/blogethereum/</link><guid isPermaLink="false">https://htz.dev/blogethereum/</guid><pubDate>Fri, 01 May 2015 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;This is my first post on my new fake blog! How exciting!&lt;/p&gt;&lt;p&gt;I&amp;#x27;m sure I&amp;#x27;ll write a lot more interesting things in the future.&lt;/p&gt;&lt;p&gt;Oh, and here&amp;#x27;s a great quote from this Wikipedia on
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Salted_duck_egg&quot;&gt;salted duck eggs&lt;/a&gt;.&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;A salted duck egg is a Chinese preserved food product made by soaking duck
-eggs in brine, or packing each egg in damp, salted charcoal. In Asian
-supermarkets, these eggs are sometimes sold covered in a thick layer of salted
-charcoal paste. The eggs may also be sold with the salted paste removed,
-wrapped in plastic, and vacuum packed. From the salt curing process, the
-salted duck eggs have a briny aroma, a gelatin-like egg white and a
-firm-textured, round yolk that is bright orange-red in color.&lt;/p&gt;&lt;/blockquote&gt;&lt;p&gt;&lt;span class=&quot;gatsby-resp-image-wrapper&quot; style=&quot;position:relative;display:block;margin-left:auto;margin-right:auto;max-width:590px&quot;&gt;
-      &lt;a class=&quot;gatsby-resp-image-link&quot; href=&quot;/static/8058f3f26913fea3b6a89a73344fe94a/e1596/salty_egg.jpg&quot; style=&quot;display:block&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;
-    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom:75%;position:relative;bottom:0;left:0;background-image:url(&amp;#x27;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAMB/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAEEBf/aAAwDAQACEAMQAAABgik0dWC//8QAGRABAAMBAQAAAAAAAAAAAAAAAQACERJC/9oACAEBAAEFAkqW7B5Zovtvk//EABcRAQADAAAAAAAAAAAAAAAAAAAREkH/2gAIAQMBAT8B1WX/xAAWEQEBAQAAAAAAAAAAAAAAAAAAESL/2gAIAQIBAT8BjT//xAAbEAABBAMAAAAAAAAAAAAAAAAAAQIRISIxMv/aAAgBAQAGPwK9GNocyS8hCj//xAAaEAADAQEBAQAAAAAAAAAAAAAAAREhQYGx/9oACAEBAAE/IXOrA43oOyg9wgU86OZMfwZKypT/2gAMAwEAAgADAAAAEMjv/8QAFxEBAQEBAAAAAAAAAAAAAAAAAQARIf/aAAgBAwEBPxARwyusv//EABcRAQEBAQAAAAAAAAAAAAAAAAEAIVH/2gAIAQIBAT8QOoVoX//EAB0QAQEAAgIDAQAAAAAAAAAAAAERADFhgSFB0eH/2gAIAQEAAT8QSpwaGjrBSrtHyF9iY8RpUnGRBGqtOcsiDE6fM3AgiXf5M//Z&amp;#x27;);background-size:cover;display:block&quot;&gt;&lt;/span&gt;
-  &lt;img class=&quot;gatsby-resp-image-image&quot; alt=&quot;Chinese Salty Egg&quot; title=&quot;Chinese Salty Egg&quot; src=&quot;/static/8058f3f26913fea3b6a89a73344fe94a/1c72d/salty_egg.jpg&quot; srcSet=&quot;/static/8058f3f26913fea3b6a89a73344fe94a/a80bd/salty_egg.jpg 148w,/static/8058f3f26913fea3b6a89a73344fe94a/1c91a/salty_egg.jpg 295w,/static/8058f3f26913fea3b6a89a73344fe94a/1c72d/salty_egg.jpg 590w,/static/8058f3f26913fea3b6a89a73344fe94a/a8a14/salty_egg.jpg 885w,/static/8058f3f26913fea3b6a89a73344fe94a/fbd2c/salty_egg.jpg 1180w,/static/8058f3f26913fea3b6a89a73344fe94a/e1596/salty_egg.jpg 2048w&quot; sizes=&quot;(max-width: 590px) 100vw, 590px&quot; style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot;/&gt;
-  &lt;/a&gt;
-    &lt;/span&gt;&lt;/p&gt;&lt;p&gt;You can also write code blocks here!&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot;&gt;const saltyDuckEgg = &amp;#x27;chinese preserved food product&amp;#x27;;
-&lt;/code&gt;&lt;/pre&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th align=&quot;left&quot;&gt;Number&lt;/th&gt;&lt;th align=&quot;left&quot;&gt;Title&lt;/th&gt;&lt;th align=&quot;right&quot;&gt;Year&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td align=&quot;left&quot;&gt;1&lt;/td&gt;&lt;td align=&quot;left&quot;&gt;Harry Potter and the Philosopher’s Stone&lt;/td&gt;&lt;td align=&quot;right&quot;&gt;2001&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td align=&quot;left&quot;&gt;2&lt;/td&gt;&lt;td align=&quot;left&quot;&gt;Harry Potter and the Chamber of Secrets&lt;/td&gt;&lt;td align=&quot;right&quot;&gt;2002&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td align=&quot;left&quot;&gt;3&lt;/td&gt;&lt;td align=&quot;left&quot;&gt;Harry Potter and the Prisoner of Azkaban&lt;/td&gt;&lt;td align=&quot;right&quot;&gt;2004&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;a href=&quot;https://raw.github.com/adamschwartz/github-markdown-kitchen-sink/master/README.md&quot;&gt;View raw (TEST.md)&lt;/a&gt;&lt;/p&gt;&lt;p&gt;This is a paragraph.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;This is a paragraph.
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;header-1&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#header-1&quot; aria-label=&quot;header 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Header 1&lt;/h1&gt;&lt;h2 id=&quot;header-2&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#header-2&quot; aria-label=&quot;header 2 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Header 2&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;Header 1
-========
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title><![CDATA[Ethereum]]></title><description><![CDATA[Let's dip into the world of Etherem Smart Contracts. Solidity Demo Graph it!]]></description><link>https://htz.dev/blogethereum/</link><guid isPermaLink="false">https://htz.dev/blogethereum/</guid><pubDate>Fri, 01 May 2015 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;Let&amp;#x27;s dip into the world of Etherem Smart Contracts.&lt;/p&gt;&lt;h2 id=&quot;solidity-demo&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#solidity-demo&quot; aria-label=&quot;solidity demo permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Solidity Demo&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;language-solidity&quot;&gt;// SPDX-License-Identifier: GPL-3.0
+pragma solidity &amp;gt;= 0.4.16 &amp;lt; 0.9.0;
 
-Header 2
---------
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;header-1-1&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#header-1-1&quot; aria-label=&quot;header 1 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Header 1&lt;/h1&gt;&lt;h2 id=&quot;header-2-1&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#header-2-1&quot; aria-label=&quot;header 2 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Header 2&lt;/h2&gt;&lt;h3 id=&quot;header-3&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#header-3&quot; aria-label=&quot;header 3 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Header 3&lt;/h3&gt;&lt;h4&gt;Header 4&lt;/h4&gt;&lt;h5&gt;Header 5&lt;/h5&gt;&lt;h6&gt;Header 6&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;# Header 1
-## Header 2
-### Header 3
-#### Header 4
-##### Header 5
-###### Header 6
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;header-1-2&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#header-1-2&quot; aria-label=&quot;header 1 2 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Header 1&lt;/h1&gt;&lt;h2 id=&quot;header-2-2&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#header-2-2&quot; aria-label=&quot;header 2 2 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Header 2&lt;/h2&gt;&lt;h3 id=&quot;header-3-1&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#header-3-1&quot; aria-label=&quot;header 3 1 permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Header 3&lt;/h3&gt;&lt;h4&gt;Header 4&lt;/h4&gt;&lt;h5&gt;Header 5&lt;/h5&gt;&lt;h6&gt;Header 6&lt;/h6&gt;&lt;pre&gt;&lt;code&gt;# Header 1 #
-## Header 2 ##
-### Header 3 ###
-#### Header 4 ####
-##### Header 5 #####
-###### Header 6 ######
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.&lt;/p&gt;&lt;/blockquote&gt;&lt;pre&gt;&lt;code&gt;&amp;gt; Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;&lt;h2 id=&quot;this-is-a-header&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#this-is-a-header&quot; aria-label=&quot;this is a header permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;This is a header.&lt;/h2&gt;&lt;ol&gt;&lt;li&gt;This is the first list item.&lt;/li&gt;&lt;li&gt;This is the second list item.&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;Here&amp;#x27;s some example code:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;Markdown.generate();
-&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;&lt;pre&gt;&lt;code&gt;&amp;gt; ## This is a header.
-&amp;gt; 1. This is the first list item.
-&amp;gt; 2. This is the second list item.
-&amp;gt;
-&amp;gt; Here&amp;#x27;s some example code:
-&amp;gt;
-&amp;gt;     Markdown.generate();
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;&lt;li&gt;Red&lt;/li&gt;&lt;li&gt;Green&lt;/li&gt;&lt;li&gt;Blue&lt;/li&gt;&lt;/ul&gt;&lt;ul&gt;&lt;li&gt;Red&lt;/li&gt;&lt;li&gt;Green&lt;/li&gt;&lt;li&gt;Blue&lt;/li&gt;&lt;/ul&gt;&lt;ul&gt;&lt;li&gt;Red&lt;/li&gt;&lt;li&gt;Green&lt;/li&gt;&lt;li&gt;Blue&lt;/li&gt;&lt;/ul&gt;&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;- Red
-- Green
-- Blue
+contract SimpleStorage {
+    uint storedData;
 
-* Red
-* Green
-* Blue
+    function set(uint x) public {
+        storedData = x;
+    }
 
-- Red
-- Green
-- Blue
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;&lt;li&gt;&lt;code&gt;code goes&lt;/code&gt; here in this line&lt;/li&gt;&lt;li&gt;&lt;strong&gt;bold&lt;/strong&gt; goes here&lt;/li&gt;&lt;/ul&gt;&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;- `code goes` here in this line
-- **bold** goes here
-&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;&lt;li&gt;Buy flour and salt&lt;/li&gt;&lt;li&gt;Mix together with water&lt;/li&gt;&lt;li&gt;Bake&lt;/li&gt;&lt;/ol&gt;&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;1. Buy flour and salt
-1. Mix together with water
-1. Bake
-&lt;/code&gt;&lt;/pre&gt;&lt;ol&gt;&lt;li&gt;&lt;code&gt;code goes&lt;/code&gt; here in this line&lt;/li&gt;&lt;li&gt;&lt;strong&gt;bold&lt;/strong&gt; goes here&lt;/li&gt;&lt;/ol&gt;&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;1. `code goes` here in this line
-1. **bold** goes here
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Paragraph:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;Code
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;Paragraph:
-
-    Code
-&lt;/code&gt;&lt;/pre&gt;&lt;hr/&gt;&lt;hr/&gt;&lt;hr/&gt;&lt;hr/&gt;&lt;hr/&gt;&lt;pre&gt;&lt;code&gt;* * *
-
-***
-
-*****
-
-- - -
-
----------------------------------------
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This is &lt;a href=&quot;http://example.com&quot; title=&quot;Example&quot;&gt;an example&lt;/a&gt; link.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://example.com&quot;&gt;This link&lt;/a&gt; has no title attr.&lt;/p&gt;&lt;p&gt;This is &lt;a href=&quot;http://example.com&quot; title=&quot;Optional Title&quot;&gt;an example&lt;/a&gt; reference-style link.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;This is [an example](http://example.com &amp;quot;Example&amp;quot;) link.
-
-[This link](http://example.com) has no title attr.
-
-This is [an example] [id] reference-style link.
-
-[id]: http://example.com &amp;quot;Optional Title&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;single asterisks&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;single underscores&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;double asterisks&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;double underscores&lt;/strong&gt;&lt;/p&gt;&lt;pre&gt;&lt;code&gt;*single asterisks*
-
-_single underscores_
-
-**double asterisks**
-
-__double underscores__
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This paragraph has some &lt;code&gt;code&lt;/code&gt; in it.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;This paragraph has some `code` in it.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&quot;https://placehold.it/200x50&quot; alt=&quot;Alt Text&quot; title=&quot;Image Title&quot;/&gt;&lt;/p&gt;&lt;pre&gt;&lt;code&gt;![Alt Text](https://placehold.it/200x50 &amp;quot;Image Title&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;</content:encoded></item></channel></rss>
+    function get() public view returns (uint) {
+        return storedData;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;graph-it&quot; style=&quot;position:relative&quot;&gt;&lt;a href=&quot;#graph-it&quot; aria-label=&quot;graph it permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Graph it!&lt;/h3&gt;&lt;span class=&quot;sc-1c63spn-0 flluIc&quot;&gt;&lt;svg width=&quot;4rem&quot; height=&quot;4rem&quot; viewBox=&quot;0 0 496 512&quot;&gt;&lt;path fill=&quot;rgb(73,81,98)&quot; d=&quot;M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zM88 256H56c0-105.9 86.1-192 192-192v32c-88.2 0-160 71.8-160 160zm160 96c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96zm0-128c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32z&quot; class=&quot;sc-mtkgfz-0 bGQTgP&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;</content:encoded></item></channel></rss>
