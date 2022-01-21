@@ -1,27 +1,35 @@
-import * as React from 'react';
+import React from 'react';
 import { Link, graphql, PageProps } from 'gatsby';
-import Bio from '../components/bio';
-import Layout from '../components/layout';
+import Layout, { HeaderVariant } from '../layout';
 import Seo from '../components/seo';
 import { BlogPageQuery } from '../../graphql-types';
-import Theme from '../theme/theme';
+import Theme from '../theme';
+import styled from 'styled-components';
 
-const {
-  colors,
-  fonts,
-  fontSizes,
-  fontWeights,
-  lineHeights,
-  sizes,
-  spaces,
-} = Theme;
+const { colors, fontSizes } = Theme;
+
+const LinkStyleWrapper = styled.a`
+  a {
+    color: ${colors.yellow};
+    text-decoration: none;
+    font-size: ${fontSizes[6]};
+
+  a:hover,
+  a:focus {
+    color: ${colors.blue};
+  }
+`;
 
 const BlogPage: React.FC<PageProps<BlogPageQuery>> = ({ data, location }) => {
   const site = data.site?.siteMetadata;
   const { edges: posts } = data.allMdx;
 
   return (
-    <Layout location={location} title={site?.title} color={colors.blue}>
+    <Layout
+      location={location}
+      title={site?.title}
+      headerVariant={HeaderVariant.BLUE}
+    >
       <Seo title="home" description={site?.description || 'htz'} />
       <ol style={{ listStyle: `none` }}>
         {posts.map(({ node: post }) => (
@@ -33,14 +41,16 @@ const BlogPage: React.FC<PageProps<BlogPageQuery>> = ({ data, location }) => {
             >
               <header>
                 <h2>
-                  <Link to={`/blog/${post.slug}`} itemProp="url">
-                    <span
-                      itemProp="headline"
-                      style={{ fontSize: fontSizes[6] }}
-                    >
-                      {post.frontmatter?.title || post.slug}
-                    </span>
-                  </Link>
+                  <LinkStyleWrapper>
+                    <Link to={`/blog/${post.slug}`} itemProp="url">
+                      <span
+                        itemProp="headline"
+                        style={{ fontSize: fontSizes[6] }}
+                      >
+                        {post.frontmatter?.title || post.slug}
+                      </span>
+                    </Link>
+                  </LinkStyleWrapper>
                 </h2>
                 <small style={{ color: colors.grey }}>
                   {post.frontmatter?.date}

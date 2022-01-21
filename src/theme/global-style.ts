@@ -209,11 +209,15 @@ a {
 a:hover,
 a:focus {
   text-decoration: none;
-  color: ${colors.pink}
+  color: ${colors.yellow}
 }
 
 a.anchor {
   fill: ${colors.white};
+}
+
+a.anchor > svg {
+  margin-right: 1rem;
 }
 
 /* Custom classes */

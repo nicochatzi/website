@@ -1,13 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { graphql, Link, PageProps } from 'gatsby';
-import Bio from '../components/bio';
-import Layout from '../components/layout';
+import Layout, { HeaderVariant } from '../layout';
 import Seo from '../components/seo';
 import { BlogPostBySlugQuery } from '../types/queries';
 import Mdx from '../components/mdx';
-import Theme from '../theme/theme';
-
-const { colors } = Theme;
+import Spacer from '../components/spacer';
 
 const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
   data,
@@ -19,13 +16,15 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
     <Layout
       location={location}
       title={site?.siteMetadata?.title || `Title`}
-      color={colors.blue}
+      headerVariant={HeaderVariant.BLUE}
     >
       <Seo
         title={post?.frontmatter?.title || `Post`}
         description={post?.frontmatter?.description || post?.excerpt}
       />
       <Mdx>{post}</Mdx>
+      <Spacer />
+      <Spacer />
       <nav className="blog-post-nav">
         <ul
           style={{

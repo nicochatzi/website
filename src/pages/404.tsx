@@ -1,9 +1,10 @@
 import React from 'react';
 import { graphql, PageProps, useStaticQuery } from 'gatsby';
 import { NotFoundQuery } from '../types/queries';
-import Layout from '../components/layout';
+import Layout, { HeaderVariant } from '../layout';
 import Seo from '../components/seo';
-import Theme from '../theme/theme';
+import Theme from '../theme';
+import Spacer from '../components/spacer';
 
 const { colors } = Theme;
 
@@ -22,10 +23,11 @@ const NotFoundPage: React.FC<PageProps> = ({ location }) => {
     <Layout
       location={location}
       title={site?.siteMetadata?.title}
-      color={colors.pink}
+      headerVariant={HeaderVariant.PINK}
     >
       <Seo title="404: Not Found" />
       <h1>404: Not Found</h1>
+      <Spacer />
       <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
     </Layout>
   );

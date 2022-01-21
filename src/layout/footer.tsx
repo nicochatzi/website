@@ -1,10 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Theme from '../../theme/theme';
+import Theme from '../theme';
 import { OutboundLink } from 'gatsby-plugin-google-analytics';
 import { FaGithubSquare, FaLinkedin, FaRssSquare } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
-import { wrap } from 'cypress/types/lodash';
 
 const { colors, fontSizes } = Theme;
 
@@ -15,6 +14,10 @@ const Footer: React.FC = () => (
         style={{
           display: 'flex',
           flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-around',
+          width: '5.8rem',
+          marginLeft: '0.2rem',
         }}
       >
         <div>
@@ -45,7 +48,10 @@ const StyledFooter = styled.footer`
 
   a {
     text-decoration: none;
-    color: ${colors.blue};
+  }
+
+  a:hover {
+    color: ${colors.yellow};
   }
 `;
 

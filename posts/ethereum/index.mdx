@@ -7,27 +7,46 @@ published: true
 ---
 
 import Graph from '../../src/components/charts/graph';
-import theme from '../../src/theme/theme';
+import theme from '../../src/theme';
 
 Let's dip into the world of Etherem Smart Contracts.
 
+## Solidity Demo
+
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >= 0.4.16 < 0.9.0;
+
+contract SimpleStorage {
+    uint storedData;
+
+    function set(uint x) public {
+        storedData = x;
+    }
+
+    function get() public view returns (uint) {
+        return storedData;
+    }
+}
+```
+
+### Graph it!
+
 <Graph
-    title={'Title'} width={600} height={400}
-    data={[
-        {
+    title={'Title'}
+    data={[{
             name: 'lines',
-            x: [1, 2, 3],
-            y: [2, 6, 3],
             type: 'scatter',
             mode: 'lines+markers',
             marker: {color: theme.colors.red},
+            x: [1, 2, 3],
+            y: [2, 6, 3],
         },
         {
             name: 'bars',
             type: 'bar',
-            x: [1, 2, 3], y: [2, 5, 3],
             marker: {color: theme.colors.blue},
-        },
-    ]}
+            x: [1, 2, 3],
+            y: [2, 5, 3],
+        }]}
 />
-

@@ -1,10 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import { Link, graphql, PageProps } from 'gatsby';
-import Bio from '../components/bio';
-import Layout from '../components/layout';
+import Layout, { HeaderVariant } from '../layout';
 import Seo from '../components/seo';
 import { IndexPageQuery } from '../../graphql-types';
-import Theme from '../theme/theme';
+import Theme from '../theme';
 import { TreeList, TreeListItem } from '../components/list';
 import styled from 'styled-components';
 
@@ -26,7 +25,7 @@ const LinkStyleWrapper = styled.a`
   a:hover,
   a:focus {
     text-decoration: none;
-    color: ${colors.pink};
+    color: ${colors.blue};
   }
 `;
 
@@ -47,7 +46,12 @@ const Index: React.FC<PageProps<IndexPageQuery>> = ({ data, location }) => {
   );
 
   return (
-    <Layout location={location} title={site?.title} color={colors.red}>
+    <Layout
+      location={location}
+      title={site?.title}
+      headerVariant={HeaderVariant.RED}
+      solidHeader
+    >
       <Seo title="home" description={site?.description || 'htz'} />
       <span>
         <TreeList>
@@ -55,12 +59,6 @@ const Index: React.FC<PageProps<IndexPageQuery>> = ({ data, location }) => {
           <TreeListItem depth={0}>
             <StyledLink url={'/about'}>{'about'}</StyledLink>
           </TreeListItem>
-          {/* <TreeListItem depth={0}>
-            <StyledLink url={'/apps'}>{'apps'}</StyledLink>
-          </TreeListItem>
-          <TreeListItem depth={1} withTrunk isLast>
-            <StyledLink url={'/apps/dummy'}>{'fm_synth'}</StyledLink>
-          </TreeListItem> */}
           <TreeListItem depth={0} isLast>
             <StyledLink url={'/blog'}>{'blog'}</StyledLink>
           </TreeListItem>
