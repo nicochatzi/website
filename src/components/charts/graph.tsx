@@ -3,6 +3,7 @@ import Theme from '../../theme';
 import Loadable from 'react-loadable';
 import styled from 'styled-components';
 import { CdSpinner } from '../spinner';
+import { window } from 'browser-monads';
 
 const { colors, fonts } = Theme;
 

@@ -12,10 +12,11 @@ export default {
     lightGrey: 'rgb(128,132,145)', // #808491
     blue: 'rgb(86,182,194)', // #56B6C2
     deepBlue: 'rgb(97,175,239)', // #61AFEF
-    red: 'rgb(224,108,117)', // #E06C75
-    pink: 'rgb(198,120,221)', // #C678DD
-    yellow: 'rgb(229,192,123)', // #E5C07B
     green: 'rgb(152,195,121)', // #98C379
+    yellow: 'rgb(229,192,123)', // #E5C07B
+    orange: 'rgb(203,150,99)', // #CB9663
+    pink: 'rgb(198,120,221)', // #C678DD
+    red: 'rgb(224,108,117)', // #E06C75
     transparent: 'rgba(0,0,0,0)',
   },
 

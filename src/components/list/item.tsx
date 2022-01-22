@@ -21,10 +21,16 @@ export interface TreeListItemProps {
   text: string;
 }
 
-const getBulletContent = (props: TreeListItemProps): string => {
+interface TreeListItemExtendedProps extends TreeListItemProps {
+  isTyping: boolean;
+}
+
+const getBulletContent = (props: TreeListItemExtendedProps): string => {
   let prefix = props.isRoot
     ? symbols.root
     : props.isLast
+    ? symbols.leaf
+    : props.isTyping
     ? symbols.leaf
     : symbols.branch;
 
@@ -35,7 +41,7 @@ const getBulletContent = (props: TreeListItemProps): string => {
   return prefix;
 };
 
-const ItemStyle = styled.li<TreeListItemProps>`
+const ItemStyle = styled.li<TreeListItemExtendedProps>`
   margin: 0.5rem;
 
   ::before {
@@ -76,6 +82,7 @@ const TreeListItem: React.FC<TreeListItemProps & TreeListCallback> = ({
 }) => {
   const index = useRef(0);
   const [visibleText, setVisibleText] = useState<string>('');
+  const [isTyping, setIsTyping] = useState<boolean>(true);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -84,26 +91,25 @@ const TreeListItem: React.FC<TreeListItemProps & TreeListCallback> = ({
         setVisibleText(text.slice(0, index.current + 1) + cursor);
         index.current += 1;
       } else {
+        setIsTyping(false);
         onReady();
       }
-    }, 25);
+    }, 50);
 
     return () => clearTimeout(timeout);
   }, [visibleText]);
 
-  const textOrLink = (() => {
-    if (url) {
-      return (
+  return (
+    <ItemStyle isTyping={isTyping} {...props}>
+      {url ? (
         <Link to={url} itemProp="url">
           {visibleText}
         </Link>
-      );
-    } else {
-      return <>{visibleText}</>;
-    }
-  })();
-
-  return <ItemStyle {...props}>{textOrLink}</ItemStyle>;
+      ) : (
+        <>{visibleText}</>
+      )}
+    </ItemStyle>
+  );
 };
 
 export default TreeListItem;

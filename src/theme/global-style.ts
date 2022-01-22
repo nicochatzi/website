@@ -23,14 +23,11 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 ::-moz-selection,
-::-moz-selection,
-::-moz-selection,
-::-moz-selection,
-::selection,
-::selection,
-::selection,
+::-ms-selection,
+::-o-selection,
+::-webkit-selection,
 ::selection {
-  background: ${colors.darkGrey};
+  background: ${colors.darkBlack};
 }
 
 /* HTML elements */
@@ -217,7 +214,7 @@ a.anchor {
 }
 
 a.anchor > svg {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 /* Custom classes */
