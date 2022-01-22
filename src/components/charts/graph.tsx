@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Theme from '../../theme';
 import Loadable from 'react-loadable';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { CdSpinner } from '../spinner';
 import { window } from 'browser-monads';
 
-const { colors, fonts } = Theme;
+const { fonts } = Theme;
 
 export interface GraphProps {
   title: string;
@@ -41,6 +41,8 @@ const GraphStyleWrapper = styled.span`
 `;
 
 const Graph: React.FC<GraphProps> = (props: GraphProps) => {
+  const theme = useContext(ThemeContext) ?? Theme.dark;
+
   const findWidth = () => {
     const maxWidth = 632;
     const newWidth = window.innerWidth * 0.92;
@@ -55,26 +57,37 @@ const Graph: React.FC<GraphProps> = (props: GraphProps) => {
     return () => window.removeEventListener('resize', updateWidth);
   }, [window.innerWidth]);
 
+  const colors = [
+    theme.heading_light,
+    theme.primary_light,
+    theme.text_light,
+    theme.sub,
+    theme.valid,
+  ];
+
   return (
     <GraphStyleWrapper>
       <Plotly
-        data={props.data}
+        data={props.data.map((data: any, index) => ({
+          marker: { color: colors[index % colors.length] },
+          ...data,
+        }))}
         layout={{
           width,
           height: props.height ?? 400,
           title: props.title,
-          paper_bgcolor: colors.darkBlack,
-          plot_bgcolor: colors.darkBlack,
+          paper_bgcolor: theme.background_deep,
+          plot_bgcolor: theme.background_deep,
           font: {
-            color: colors.white,
+            color: theme.text,
             family: fonts.code,
             size: 10,
           },
           yaxis: {
-            gridcolor: colors.black,
+            gridcolor: theme.background,
           },
           xaxis: {
-            gridcolor: colors.black,
+            gridcolor: theme.background,
           },
           showlegend: false,
           margin: {

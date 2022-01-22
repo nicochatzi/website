@@ -13,7 +13,7 @@ const AboutPage: React.FC<PageProps<AboutPageQuery>> = ({ data, location }) => {
     <Layout
       location={location}
       title={site?.title}
-      headerVariant={HeaderVariant.YELLOW}
+      headerVariant={HeaderVariant.INFO}
     >
       <Seo title="home" description={site?.description || 'htz'} />
       <Bio />

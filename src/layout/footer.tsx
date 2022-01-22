@@ -5,7 +5,7 @@ import { OutboundLink } from 'gatsby-plugin-google-analytics';
 import { FaGithubSquare, FaLinkedin, FaRssSquare } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 
-const { colors, fontSizes } = Theme;
+const { fontSizes } = Theme;
 
 const Footer: React.FC = () => (
   <StyledFooter>
@@ -43,7 +43,7 @@ const Footer: React.FC = () => (
 );
 
 const StyledFooter = styled.footer`
-  color: ${colors.blue};
+  color: ${Theme.global.primary_light};
   font-size: ${fontSizes[1]};
 
   a {
@@ -51,7 +51,7 @@ const StyledFooter = styled.footer`
   }
 
   a:hover {
-    color: ${colors.yellow};
+    color: ${Theme.global.text_light};
   }
 `;
 

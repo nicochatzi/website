@@ -1,24 +1,13 @@
 // https://styled-system.com/theme-specification/
+import { monokai, github, darkTheme, lightTheme, ThemeDef } from './themes';
 
 export default {
   colors: {
-    white: 'rgb(187,187,187)', // #BBBBBB
-    darkest: 'rgb(29,33,38)', // #1D2126
-    darkBlack: 'rgb(33,37,43)', // #21252B
-    black: 'rgb(40,44,52)', // #282C34
-    darkGrey: 'rgb(73,81,98)', // #495162
-    brown: 'rgb(77,77,77)', // #4D4D4D
-    grey: 'rgb(103,111,125)', // #676F7D
-    lightGrey: 'rgb(128,132,145)', // #808491
-    blue: 'rgb(86,182,194)', // #56B6C2
-    deepBlue: 'rgb(97,175,239)', // #61AFEF
-    green: 'rgb(152,195,121)', // #98C379
-    yellow: 'rgb(229,192,123)', // #E5C07B
-    orange: 'rgb(203,150,99)', // #CB9663
-    pink: 'rgb(198,120,221)', // #C678DD
-    red: 'rgb(224,108,117)', // #E06C75
-    transparent: 'rgba(0,0,0,0)',
+    monokai,
+    github,
   },
+  light: lightTheme,
+  dark: darkTheme,
 
   fonts: {
     sans: `Overpass, sans-serif`,
@@ -26,7 +15,7 @@ export default {
   },
 
   /* https://type-scale.com/
-    1.200 Minor Third Type Scale */
+  1.200 Minor Third Type Scale */
   fontSizes: [
     '0.579rem',
     '0.694rem',
@@ -91,4 +80,21 @@ export default {
     '6rem',
     '8rem',
   ],
+
+  // short-hard to use in styled components
+  // to grab the current global theme value
+  global: {
+    background: (props: any) => props.theme.background,
+    background_deep: (props: any) => props.theme.background_deep,
+    background_light: (props: any) => props.theme.background_light,
+    highlight: (props: any) => props.theme.highlight,
+    text: (props: any) => props.theme.text,
+    text_light: (props: any) => props.theme.text_light,
+    primary: (props: any) => props.theme.primary,
+    primary_light: (props: any) => props.theme.primary_light,
+    heading: (props: any) => props.theme.heading,
+    heading_light: (props: any) => props.theme.heading_light,
+    sub: (props: any) => props.theme.sub,
+    valid: (props: any) => props.theme.valid,
+  },
 };

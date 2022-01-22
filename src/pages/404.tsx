@@ -23,7 +23,7 @@ const NotFoundPage: React.FC<PageProps> = ({ location }) => {
     <Layout
       location={location}
       title={site?.siteMetadata?.title}
-      headerVariant={HeaderVariant.PINK}
+      headerVariant={HeaderVariant.ALT}
     >
       <Seo title="404: Not Found" />
       <h1>404: Not Found</h1>

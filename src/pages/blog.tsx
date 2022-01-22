@@ -6,18 +6,23 @@ import { BlogPageQuery } from '../../graphql-types';
 import Theme from '../theme';
 import styled from 'styled-components';
 
-const { colors, fontSizes } = Theme;
+const { fontSizes } = Theme;
 
 const LinkStyleWrapper = styled.a`
   a {
-    color: ${colors.yellow};
+    color: ${Theme.global.text_light};
     text-decoration: none;
     font-size: ${fontSizes[6]};
+  }
 
   a:hover,
   a:focus {
-    color: ${colors.blue};
+    color: ${Theme.global.primary_light};
   }
+`;
+
+const StyledSmall = styled.small`
+  color: ${Theme.global.background_light};
 `;
 
 const BlogPage: React.FC<PageProps<BlogPageQuery>> = ({ data, location }) => {
@@ -31,7 +36,7 @@ const BlogPage: React.FC<PageProps<BlogPageQuery>> = ({ data, location }) => {
     <Layout
       location={location}
       title={site?.title}
-      headerVariant={HeaderVariant.BLUE}
+      headerVariant={HeaderVariant.BLOG}
     >
       <Seo title="home" description={site?.description || 'htz'} />
       <ol style={{ listStyle: `none` }}>
@@ -55,9 +60,7 @@ const BlogPage: React.FC<PageProps<BlogPageQuery>> = ({ data, location }) => {
                     </Link>
                   </LinkStyleWrapper>
                 </h2>
-                <small style={{ color: colors.grey }}>
-                  {post.frontmatter?.date}
-                </small>
+                <StyledSmall>{post.frontmatter?.date}</StyledSmall>
               </header>
               <section>
                 <p

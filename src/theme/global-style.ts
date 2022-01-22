@@ -1,33 +1,16 @@
 import Theme from './theme';
 import { createGlobalStyle } from 'styled-components';
 
-const {
-  colors,
-  fonts,
-  fontSizes,
-  fontWeights,
-  lineHeights,
-  sizes,
-  spaces,
-} = Theme;
+const { fonts, fontSizes, fontWeights, lineHeights, sizes, spaces } = Theme;
 
 export const GlobalStyle = createGlobalStyle`
-
-:root {
-  --color-primary: ${colors.blue};
-  --color-text: ${colors.white};
-  --color-text-light: ${colors.yellow};
-  --color-heading: ${colors.red};
-  --color-heading-black: ${colors.red};
-  --color-accent: ${colors.black};
-}
 
 ::-moz-selection,
 ::-ms-selection,
 ::-o-selection,
 ::-webkit-selection,
 ::selection {
-  background: ${colors.darkBlack};
+  background: ${Theme.global.background};
 }
 
 /* HTML elements */
@@ -48,9 +31,9 @@ html {
 body {
   font-family: ${fonts.sans};
   font-size: ${fontSizes[4]};
-  color: var(--color-text);
-  background-color: ${colors.black};
-  /* letter-spacing: 0.025em; */
+  color: ${Theme.global.text};
+  background: ${Theme.global.background};
+  letter-spacing: 0.025em;
 }
 
 footer {
@@ -58,7 +41,7 @@ footer {
 }
 
 hr {
-  background: var(--color-accent);
+  background: ${Theme.global.background};
   height: 1px;
   border: 0;
 }
@@ -84,13 +67,13 @@ h4,
 h5,
 h6 {
   font-weight: ${fontWeights.bold};
-  color: var(--color-heading);
+  color: ${Theme.global.heading};
 }
 
 h1 {
   font-weight: ${fontWeights.black};
   font-size: ${fontSizes[8]};
-  color: var(--color-heading-black);
+  color: ${Theme.global.heading};
 }
 
 h2 {
@@ -167,11 +150,11 @@ li > ul {
 }
 
 blockquote {
-  color: var(--color-text-light);
+  color: ${Theme.global.text_light};
   margin-left: calc(-1 * ${spaces[6]});
   margin-right: ${spaces[7]};
   padding: ${spaces[0]} ${spaces[0]} ${spaces[0]} ${spaces[6]};
-  border-left: ${spaces[1]} solid var(--color-primary);
+  border-left: ${spaces[1]} solid ${Theme.global.primary_light};
   font-size: ${fontSizes[2]};
   font-style: italic;
   margin-bottom: ${spaces[7]};
@@ -194,23 +177,23 @@ table {
 }
 
 table thead tr th {
-  border-bottom: 1px solid var(--color-accent);
+  border-bottom: 1px solid ${Theme.global.background};
 }
 
 /* Link */
 
 a {
-  color: var(--color-primary);
+  color: ${Theme.global.primary_light};
 }
 
 a:hover,
 a:focus {
   text-decoration: none;
-  color: ${colors.yellow}
+  color: ${Theme.global.text_light};
 }
 
 a.anchor {
-  fill: ${colors.white};
+  fill: ${Theme.global.text};
 }
 
 a.anchor > svg {
@@ -249,7 +232,7 @@ a.anchor > svg {
 
 .post-list-item h2 {
   font-size: ${fontSizes[4]};
-  color: var(--color-text-light);
+  color: ${Theme.global.text_light};
   margin-bottom: ${spaces[2]};
   margin-top: ${spaces[0]};
 }

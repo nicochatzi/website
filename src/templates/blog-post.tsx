@@ -16,7 +16,7 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostBySlugQuery>> = ({
     <Layout
       location={location}
       title={site?.siteMetadata?.title || `Title`}
-      headerVariant={HeaderVariant.BLUE}
+      headerVariant={HeaderVariant.BLOG}
     >
       <Seo
         title={post?.frontmatter?.title || `Post`}

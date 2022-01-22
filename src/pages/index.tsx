@@ -16,7 +16,7 @@ const Index: React.FC<PageProps<IndexPageQuery>> = ({ data, location }) => {
     <Layout
       location={location}
       title={site?.title}
-      headerVariant={HeaderVariant.RED}
+      headerVariant={HeaderVariant.MAIN}
       solidHeader
     >
       <Seo title="home" description={site?.description || 'htz'} />

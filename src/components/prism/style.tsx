@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import Theme from '../../theme';
 
-const { colors, fonts, fontSizes } = Theme;
+const { fonts, fontSizes } = Theme;
 
 export default styled.pre`
   font-family: ${fonts.code};
-  background-color: ${colors.darkBlack};
+  background-color: ${Theme.global.background_deep};
   border-radius: 1rem;
   border-width: 10rem;
   font-size: ${fontSizes[3]};
@@ -37,20 +37,20 @@ export default styled.pre`
   .token.prolog,
   .token.doctype,
   .token.cdata {
-    color: ${colors.grey};
+    color: ${Theme.global.background_light};
   }
 
   .token.boolean,
   .token.number {
-    color: ${colors.pink};
+    color: ${Theme.global.heading_light};
   }
 
   .token.keyword {
-    color: ${colors.blue};
+    color: ${Theme.global.primary_light};
   }
 
   .token.constant {
-    color: ${colors.blue};
+    color: ${Theme.global.primary_light};
   }
 
   .token.function,
@@ -58,13 +58,13 @@ export default styled.pre`
   .token.property,
   .token.tag,
   .token.symbol {
-    color: ${colors.green};
+    color: ${Theme.global.valid};
   }
 
   .token.function-definition.function > keyword,
   .token.deleted,
   .token.operator {
-    color: ${colors.red};
+    color: ${Theme.global.heading};
   }
 
   .token.regex,
@@ -80,7 +80,7 @@ export default styled.pre`
   .token.url,
   .language-css .token.string,
   .style .token.string {
-    color: ${colors.yellow};
+    color: ${Theme.global.text_light};
   }
 
   .token.lifetime-annotation.symbol,
@@ -89,7 +89,7 @@ export default styled.pre`
   .token.type-definition.class-name,
   .token.primitives,
   .token.class-name {
-    color: ${colors.deepBlue};
+    color: ${Theme.global.primary};
   }
 
   .token.important,
@@ -106,24 +106,24 @@ export default styled.pre`
 
   /* Rust overrides */
   .token.closure-punctuation.punctuation {
-    color: ${colors.red};
+    color: ${Theme.global.heading};
   }
 
   .token.literals {
-    color: ${colors.blue};
+    color: ${Theme.global.primary_light};
   }
   .token.braces {
-    color: ${colors.white};
+    color: ${Theme.global.text};
   }
 
   .token.punctuation,
   .token.braces,
   .token.namespace.punctuation {
-    color: ${colors.lightGrey};
+    color: ${Theme.global.background_light};
   }
 
   .token.module-declaration,
   .token.decl-keyword {
-    color: ${colors.red};
+    color: ${Theme.global.heading};
   }
 `;

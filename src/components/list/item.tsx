@@ -3,14 +3,7 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 import Theme from '../../theme';
 
-const { colors, fonts, fontSizes, lineHeights } = Theme;
-
-const symbols = {
-  root: '.',
-  trunk: '│',
-  branch: '├──',
-  leaf: '└──',
-};
+const { fonts, fontSizes, lineHeights } = Theme;
 
 export interface TreeListItemProps {
   isRoot?: boolean;
@@ -25,21 +18,11 @@ interface TreeListItemExtendedProps extends TreeListItemProps {
   isTyping: boolean;
 }
 
-const getBulletContent = (props: TreeListItemExtendedProps): string => {
-  let prefix = props.isRoot
-    ? symbols.root
-    : props.isLast
-    ? symbols.leaf
-    : props.isTyping
-    ? symbols.leaf
-    : symbols.branch;
-
-  for (let i = 0; i < props.depth; i++) {
-    prefix = `${props.withTrunk ? symbols.trunk : ' '}   ${prefix}`;
-  }
-
-  return prefix;
-};
+const getBulletContent = (props: TreeListItemExtendedProps): string =>
+  [...Array(props.depth)].reduce(
+    (prefix) => `${props.withTrunk ? '│' : ' '}   ${prefix}`,
+    props.isRoot ? '.' : props.isLast ? '└──' : props.isTyping ? '└──' : '├──'
+  );
 
 const ItemStyle = styled.li<TreeListItemExtendedProps>`
   margin: 0.5rem;
@@ -47,7 +30,7 @@ const ItemStyle = styled.li<TreeListItemExtendedProps>`
   ::before {
     font-family: ${fonts.code};
     margin-left: -0.5rem;
-    color: ${colors.brown};
+    color: ${Theme.global.highlight};
     font-size: ${fontSizes[7]};
     line-height: 0;
     white-space: pre;
@@ -55,7 +38,7 @@ const ItemStyle = styled.li<TreeListItemExtendedProps>`
   }
 
   a {
-    color: ${colors.yellow};
+    color: ${Theme.global.sub};
     text-decoration: none;
     font-family: ${fonts.code};
     font-size: ${fontSizes[6]};
@@ -65,21 +48,15 @@ const ItemStyle = styled.li<TreeListItemExtendedProps>`
   a:hover,
   a:focus {
     text-decoration: none;
-    color: ${colors.blue};
+    color: ${Theme.global.primary_light};
   }
 `;
 
-interface TreeListCallback {
-  onReady: () => void;
-}
-
-const TreeListItem: React.FC<TreeListItemProps & TreeListCallback> = ({
-  children,
-  url,
-  text,
-  onReady,
-  ...props
-}) => {
+const TreeListItem: React.FC<
+  TreeListItemProps & {
+    onReady: () => void;
+  }
+> = ({ children, url, text, onReady, ...props }) => {
   const index = useRef(0);
   const [visibleText, setVisibleText] = useState<string>('');
   const [isTyping, setIsTyping] = useState<boolean>(true);
@@ -94,13 +71,13 @@ const TreeListItem: React.FC<TreeListItemProps & TreeListCallback> = ({
         setIsTyping(false);
         onReady();
       }
-    }, 50);
+    }, 30);
 
     return () => clearTimeout(timeout);
   }, [visibleText]);
 
   return (
-    <ItemStyle isTyping={isTyping} {...props}>
+    <ItemStyle isTyping={isTyping} text={text} {...props}>
       {url ? (
         <Link to={url} itemProp="url">
           {visibleText}

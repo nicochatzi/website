@@ -3,9 +3,11 @@ import { withPrefix } from 'gatsby';
 import { GlobalStyle } from '../theme';
 import Header from './header';
 import { HeaderVariant } from '.';
+import { ThemeProvider } from 'styled-components';
+import { useTheme } from '../hooks/useTheme';
 
 interface LayoutProps {
-  title: string | null | undefined;
+  title?: string | null;
   headerVariant: HeaderVariant;
   solidHeader?: boolean;
   location: Location;
@@ -18,20 +20,25 @@ const Layout: React.FC<LayoutProps> = ({
   headerVariant,
   solidHeader,
 }) => {
-  const isRootPath = location.pathname === withPrefix('/');
+  const [theme, toggleTheme] = useTheme();
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <div className="global-wrapper" data-is-root-path={isRootPath}>
+      <div
+        className="global-wrapper"
+        data-is-root-path={location.pathname === withPrefix('/')}
+      >
         <Header
           variant={headerVariant}
           title={title ?? 'Title'}
           isSolid={solidHeader}
+          toggleTheme={toggleTheme}
+          theme={theme}
         />
         <main>{children}</main>
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 
