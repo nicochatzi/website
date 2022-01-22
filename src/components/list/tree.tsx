@@ -21,24 +21,23 @@ const TreeList: React.FC<TreeListProps> = ({ items }) => {
     },
     ...items,
   ];
-  const index = useRef(0);
-  const [visibleLeafs, setVisibleLeafs] = useState<TreeListItemProps[]>([]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (index.current < leafs.length) {
-        setVisibleLeafs(leafs.slice(0, index.current + 1));
-        index.current += 1;
-      }
-    }, 300);
-
-    return () => clearTimeout(timeout);
-  }, [visibleLeafs]);
+  const index = useRef(1);
+  const [visibleLeafs, setVisibleLeafs] = useState<TreeListItemProps[]>(
+    leafs.slice(0, index.current)
+  );
 
   return (
     <StyledList>
       {visibleLeafs.map((leafProps) => (
-        <TreeListItem {...leafProps} />
+        <TreeListItem
+          {...leafProps}
+          onReady={() => {
+            if (index.current < leafs.length) {
+              setVisibleLeafs(leafs.slice(0, index.current + 1));
+              index.current += 1;
+            }
+          }}
+        />
       ))}
     </StyledList>
   );

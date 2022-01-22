@@ -63,10 +63,15 @@ const ItemStyle = styled.li<TreeListItemProps>`
   }
 `;
 
-const TreeListItem: React.FC<TreeListItemProps> = ({
+interface TreeListCallback {
+  onReady: () => void;
+}
+
+const TreeListItem: React.FC<TreeListItemProps & TreeListCallback> = ({
   children,
   url,
   text,
+  onReady,
   ...props
 }) => {
   const index = useRef(0);
@@ -78,8 +83,10 @@ const TreeListItem: React.FC<TreeListItemProps> = ({
         const cursor = index.current < text.length - 1 ? '|' : '';
         setVisibleText(text.slice(0, index.current + 1) + cursor);
         index.current += 1;
+      } else {
+        onReady();
       }
-    }, 50);
+    }, 25);
 
     return () => clearTimeout(timeout);
   }, [visibleText]);
