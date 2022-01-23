@@ -11,6 +11,17 @@ export const setCurrentTheme = (theme: ThemeDef) =>
 export const isDarkThemeLoaded = (): boolean =>
   getCurrentTheme()?.background === darkTheme.background;
 
+export interface CodeThemeDef {
+  comment: string;
+  literals: string;
+  keyword: string;
+  class: string;
+  constant: string;
+  operator: string;
+  string: string;
+  braces: string;
+}
+
 export interface ThemeDef {
   background: string;
   background_deep: string;
@@ -24,6 +35,7 @@ export interface ThemeDef {
   heading_light: string;
   sub: string;
   valid: string;
+  code: CodeThemeDef;
 }
 
 export const monokai = {
@@ -54,6 +66,16 @@ export const darkTheme: ThemeDef = {
   heading_light: monokai.pink,
   sub: monokai.orange,
   valid: monokai.green,
+  code: {
+    comment: monokai.grey,
+    literals: monokai.blue,
+    keyword: monokai.blue,
+    class: monokai.deepBlue,
+    constant: monokai.blue,
+    operator: monokai.red,
+    string: monokai.yellow,
+    braces: monokai.grey,
+  },
 };
 
 export const github = {
@@ -85,4 +107,14 @@ export const lightTheme: ThemeDef = {
   heading_light: github.orange,
   sub: github.blue,
   valid: github.green,
+  code: {
+    comment: github.softWhite,
+    literals: github.purple,
+    keyword: github.red,
+    class: github.deepPurple,
+    constant: github.orange,
+    operator: github.purple,
+    string: github.orange,
+    braces: github.grey,
+  },
 };

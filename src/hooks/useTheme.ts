@@ -3,7 +3,7 @@ import Theme, { ThemeDef } from '../theme';
 import { getCurrentTheme, setCurrentTheme } from '../theme/themes';
 
 export const useTheme = (): [ThemeDef, () => ThemeDef] => {
-  const [theme, setTheme] = useState<ThemeDef>(Theme.dark);
+  const [theme, setTheme] = useState(getCurrentTheme() ?? Theme.dark);
 
   const set = (theme: ThemeDef): ThemeDef => {
     setCurrentTheme(theme);

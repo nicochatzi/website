@@ -96,5 +96,15 @@ export default {
     heading_light: (props: any) => props.theme.heading_light,
     sub: (props: any) => props.theme.sub,
     valid: (props: any) => props.theme.valid,
+    code: {
+      comment: (props: any) => props.theme.code.comment,
+      literals: (props: any) => props.theme.code.literals,
+      keyword: (props: any) => props.theme.code.keyword,
+      class: (props: any) => props.theme.code.class,
+      constant: (props: any) => props.theme.code.constant,
+      operator: (props: any) => props.theme.code.operator,
+      string: (props: any) => props.theme.code.string,
+      braces: (props: any) => props.theme.code.braces,
+    },
   },
 };

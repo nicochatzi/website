@@ -37,7 +37,7 @@ export default styled.pre`
   .token.prolog,
   .token.doctype,
   .token.cdata {
-    color: ${Theme.global.background_light};
+    color: ${Theme.global.code.comment};
   }
 
   .token.boolean,
@@ -46,11 +46,11 @@ export default styled.pre`
   }
 
   .token.keyword {
-    color: ${Theme.global.primary_light};
+    color: ${Theme.global.code.keyword};
   }
 
   .token.constant {
-    color: ${Theme.global.primary_light};
+    color: ${Theme.global.code.keyword};
   }
 
   .token.function,
@@ -64,7 +64,7 @@ export default styled.pre`
   .token.function-definition.function > keyword,
   .token.deleted,
   .token.operator {
-    color: ${Theme.global.heading};
+    color: ${Theme.global.code.operator};
   }
 
   .token.regex,
@@ -80,7 +80,7 @@ export default styled.pre`
   .token.url,
   .language-css .token.string,
   .style .token.string {
-    color: ${Theme.global.text_light};
+    color: ${Theme.global.code.string};
   }
 
   .token.lifetime-annotation.symbol,
@@ -89,7 +89,7 @@ export default styled.pre`
   .token.type-definition.class-name,
   .token.primitives,
   .token.class-name {
-    color: ${Theme.global.primary};
+    color: ${Theme.global.code.class};
   }
 
   .token.important,
@@ -106,24 +106,21 @@ export default styled.pre`
 
   /* Rust overrides */
   .token.closure-punctuation.punctuation {
-    color: ${Theme.global.heading};
+    color: ${Theme.global.code.operator};
   }
 
   .token.literals {
-    color: ${Theme.global.primary_light};
-  }
-  .token.braces {
-    color: ${Theme.global.text};
+    color: ${Theme.global.code.literals};
   }
 
-  .token.punctuation,
   .token.braces,
+  .token.punctuation,
   .token.namespace.punctuation {
-    color: ${Theme.global.background_light};
+    color: ${Theme.global.code.braces};
   }
 
   .token.module-declaration,
   .token.decl-keyword {
-    color: ${Theme.global.heading};
+    color: ${Theme.global.code.operator};
   }
 `;
