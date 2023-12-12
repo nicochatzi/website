@@ -20,7 +20,7 @@ body,
 code[class*="language-"],
 pre[class*="language-"] {
   color: #d6deeb;
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-family: "JetBrainsMono", monospace;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -55,6 +55,7 @@ code[class*="language-"] ::selection {
 }
 
 @media print {
+
   code[class*="language-"],
   pre[class*="language-"] {
     text-shadow: none;
@@ -67,12 +68,12 @@ pre[class*="language-"] {
   overflow: auto;
 }
 
-:not(pre) > code[class*="language-"],
+:not(pre)>code[class*="language-"],
 pre[class*="language-"] {
   @apply text-gray-50 border bg-gray-900 border-gray-700;
 }
 
-:not(pre) > code[class*="language-"] {
+:not(pre)>code[class*="language-"] {
   padding: 0.1em;
   border-radius: 0.3em;
   white-space: normal;
@@ -81,12 +82,12 @@ pre[class*="language-"] {
 .token.comment,
 .token.prolog,
 .token.cdata {
-  color: rgb(99, 119, 119);
+  color: theme(colors.gray.300);
   font-style: italic;
 }
 
 .token.punctuation {
-  color: rgb(199, 146, 234);
+  color: theme(colors.cyan);
 }
 
 .namespace {
@@ -94,34 +95,34 @@ pre[class*="language-"] {
 }
 
 .token.deleted {
-  color: rgba(239, 83, 80, 0.56);
+  color: theme(colors.red.DEFAULT);
   font-style: italic;
 }
 
 .token.symbol,
 .token.property {
-  color: rgb(128, 203, 196);
+  color: theme(colors.red.DEFAULT);
 }
 
 .token.tag,
 .token.operator,
 .token.keyword {
-  color: rgb(127, 219, 202);
+  color: theme(colors.purple.DEFAULT);
 }
 
 .token.boolean {
-  color: rgb(255, 88, 116);
+  color: theme(colors.red.pale);
 }
 
 .token.number {
-  color: rgb(247, 140, 108);
+  color: theme(colors.red.pale);
 }
 
 .token.constant,
 .token.function,
 .token.builtin,
 .token.char {
-  color: rgb(130, 170, 255);
+  color: theme(colors.blue.light);
 }
 
 .token.selector,

@@ -48,7 +48,7 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
                 >
                   Previous
                 </p>
-                <Link href={`/posts/${previous?.slug}`} className="font-bold">
+                <Link href={`/blog/${previous?.slug}`} className="font-bold">
                   {previous?.title}
                 </Link>
               </div>
@@ -64,7 +64,7 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
                 >
                   Next
                 </p>
-                <Link href={`/posts/${next?.slug}`} className="font-bold">
+                <Link href={`/blog/${next?.slug}`} className="font-bold">
                   {next?.title}
                 </Link>
               </div>

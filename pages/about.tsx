@@ -6,7 +6,7 @@ const About: NextPage = () => {
   return (
     <>
       <Page
-        title="About"
+        title="about"
         description="This is a brief description about the about page."
       >
         <Prose>

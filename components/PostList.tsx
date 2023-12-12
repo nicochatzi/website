@@ -18,44 +18,52 @@ export const PostList: React.FC<PostListProps> = ({ posts }) => {
         "dark:divide-gray-700"
       )}
     >
-      {posts.map((post, index) => {
-        return (
-          <li className="py-8" key={index}>
-            <article>
+      {posts.map((post, index) => (
+        <li className="py-6" key={index}>
+          <article className="flex justify-between items-center py-0" >
+            <div>
+              <h2 className={cx(
+                "font-bold text-xl",
+                "text-purple hover:text-red-pale",
+                "dark:text-teal dark:hover:text-yellow"
+              )} >
+                <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+              </h2>
+
               <time
                 className={cx(
                   "block mb-2",
                   "text-gray-500",
-                  "dark:text-gray-400"
+                  "dark:text-gray-500"
                 )}
               >
-                {formatDate(post.date)}
+                {"∟ "}{formatDate(post.date)}
               </time>
-              <h2 className="font-bold text-xl">
-                <Link href={`/posts/${post.slug}`}>{post.title}</Link>
-              </h2>
-              {post.description ? (
-                <div className="mt-3">
-                  <Prose>
-                    <p>{post.description}</p>
-                  </Prose>
-                </div>
-              ) : null}
-              {post.tags ? (
-                <ul className="mt-4 flex flex-wrap space-x-2">
-                  {post.tags.map((tag, index) => {
-                    return (
-                      <li key={index}>
-                        <Tag href={`/posts/tagged/${slugify(tag)}`}>{tag}</Tag>
-                      </li>
-                    );
-                  })}
-                </ul>
-              ) : null}
-            </article>
-          </li>
-        );
-      })}
+            </div>
+
+            {post.description ? (
+              <div className="mt-1">
+                <Prose>
+                  <p>{post.description}</p>
+                </Prose>
+              </div>
+            ) : null}
+
+            {post.tags ? (
+              <div className="mb-8 flex gap-2">
+                {post.tags.map((tag) => {
+                  return (
+                    <div>
+                      <Tag href={`/blog/tagged/${slugify(tag)}`}>{tag}</Tag>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : null}
+
+          </article>
+        </li>
+      ))}
     </ul>
   );
 };

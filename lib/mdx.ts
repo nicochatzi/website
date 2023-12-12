@@ -22,11 +22,9 @@ export const getMdx = (fileName: string) => {
   };
 };
 
-export const getAllMdx = () => {
-  const items = fs.readdirSync(postsPath).map((item) => getMdx(item));
-  return items.sort(
+export const getAllMdx = () =>
+  fs.readdirSync(postsPath).map((item) => getMdx(item)).sort(
     (a, b) =>
       new Date(b.frontMatter.date).getTime() -
       new Date(a.frontMatter.date).getTime()
   );
-};
