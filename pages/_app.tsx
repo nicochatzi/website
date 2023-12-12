@@ -2,8 +2,6 @@ import "@/styles/globals.css";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { cx } from "@/lib/utils";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -16,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <main id="main">
           <Component {...pageProps} />
         </main>
-        <Footer />
+        <footer className="py-16" />
       </div>
     </ThemeProvider >
   );

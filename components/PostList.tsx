@@ -13,13 +13,13 @@ export const PostList: React.FC<PostListProps> = ({ posts }) => {
   return (
     <ul
       className={cx(
-        "divide-y -my-8",
+        "my-0",
         "divide-gray-200",
-        "dark:divide-gray-700"
+        "dark:divide-gray-800"
       )}
     >
       {posts.map((post, index) => (
-        <li className="py-6" key={index}>
+        <li className="py-4" key={index}>
           <article className="flex justify-between items-center py-0" >
             <div>
               <h2 className={cx(
@@ -32,7 +32,7 @@ export const PostList: React.FC<PostListProps> = ({ posts }) => {
 
               <time
                 className={cx(
-                  "block mb-2",
+                  "block mb-4",
                   "text-gray-500",
                   "dark:text-gray-500"
                 )}

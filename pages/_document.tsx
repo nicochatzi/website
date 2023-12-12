@@ -16,7 +16,7 @@ class MyDocument extends Document {
           className={cx(
             "",
             "bg-gray-50",
-            "dark:bg-gray-900"
+            "dark:bg-gray-925"
           )}
         >
           <Main />

@@ -1,5 +1,4 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors");
 
 module.exports = {
   darkMode: "class",
@@ -46,7 +45,8 @@ module.exports = {
         '700': '#404040',
         '800': '#3d3d3d',
         '900': '#282c34',
-        '950': '#0c0c0c',
+        '925': '#181819',
+        '950': '#0a0a0f',
       },
     },
     extend: {

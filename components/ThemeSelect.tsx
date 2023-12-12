@@ -3,102 +3,57 @@ import { useTheme } from "next-themes";
 import { Sun, Moon } from "react-feather";
 import { cx } from "@/lib/utils";
 
-const THEME_MAP: { [key: string]: { icon: React.ReactNode } } = {
-  light: {
-    icon: <Sun width=".9em" />,
-  },
-  dark: {
-    icon: <Moon width=".9em" />,
-  },
+const THEME_MAP: { [key: string]: React.ReactNode } = {
+  light: <Sun width=".9em" />,
+  dark: <Moon width=".9em" />,
 };
 
 export const ThemeSelect = () => {
   const [mounted, setMounted] = useState(false);
-  const { theme: activeTheme, themes, setTheme } = useTheme();
+  const { theme: activeTheme, setTheme } = useTheme();
 
   // When mounted on client, now we can show the UI
   useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    setTheme(e.target.value);
-
-  const handleThemeChange = (theme: string) => {
-    setTheme(theme);
-  };
-  //
-  // return (
-  //   <div className="relative inline-block">
-  //     <label htmlFor="theme-menu" className="sr-only">
-  //       Toggle theme
-  //     </label>
-  //     <span
-  //       aria-hidden={true}
-  //       className={cx(
-  //         "absolute top-1/2 -translate-y-1/2 left-2 pointer-events-none",
-  //         "opacity-50"
-  //       )}
-  //     >
-  //       {THEME_MAP[activeTheme!].icon}
-  //     </span>
-  //     <span
-  //       aria-hidden={true}
-  //       className="absolute top-1/2 -translate-y-1/2 right-2 pointer-events-none"
-  //     >
-  //       <Code width=".9em" className="rotate-90 opacity-50" />
-  //     </span>
-  //     <select
-  //       id="theme-menu"
-  //       className={cx(
-  //         "appearance-none rounded-md sm:w-full pl-8 pr-12 border",
-  //         "bg-gray-200 border-gray-200",
-  //         "dark:bg-gray-800 dark:border-gray-800"
-  //       )}
-  //       onChange={handleChange}
-  //       value={activeTheme}
-  //     >
-  //       {themes.map((theme) => {
-  //         return (
-  //           <option key={theme} value={theme}>
-  //             {THEME_MAP[theme].label}
-  //           </option>
-  //         );
-  //       })}
-  //     </select>
-  //   </div>
-  // );
-
   const themeSwitcherStyle = {
     display: 'flex',
-    borderRadius: '9999px', // Creates pill shape
+    borderRadius: '9999px',
     boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
   };
 
-  const themeOptionStyle = (theme) => ({
+  const themeOptionStyle = {
     flex: 1,
-    padding: '10px 20px',
+    padding: '1px 10px',
     cursor: 'pointer',
     transition: 'background-color 0.3s',
-    borderRadius: '9999px', // Maintain pill shape
-  });
+    borderRadius: '9999px',
+  };
 
   return (
-    <div style={themeSwitcherStyle}>
+    <div style={themeSwitcherStyle} className={cx(
+      "bg-gray-200",
+      "dark:bg-gray-900"
+    )}>
       {Object.keys(THEME_MAP).map((theme) => (
         <button
           key={theme}
-          style={themeOptionStyle(theme)}
-          onClick={() => handleThemeChange(theme)}
+          style={themeOptionStyle}
+          onClick={() => setTheme(activeTheme === "light" ? 'dark' : 'light')}
           className={cx(
-            "flex-1 py-2 px-4 transition-colors duration-300 focus:outline-none", // Common styles
+            "flex-0 py-0 px-0 transition-colors duration-300 focus:outline-none",
             {
-              "bg-gray-300 dark:bg-gray-800": activeTheme !== theme, // Non-active theme style
-              "bg-blue-500 text-white dark:bg-blue-600": activeTheme === theme, // Active theme style
+              "bg-gray-50 text-gray-900": activeTheme === theme,
+              "text-gray-300 hover:text-gray-950": activeTheme !== theme,
+            },
+            {
+              "dark:bg-gray-500 dark:text-gray-950": activeTheme === theme,
+              "dark:text-gray-500 dark:hover:text-gray-50": activeTheme !== theme,
             }
           )}
         >
-          {THEME_MAP[theme].icon}
+          {THEME_MAP[theme]}
         </button>
       ))}
     </div>
