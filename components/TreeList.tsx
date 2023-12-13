@@ -3,33 +3,28 @@ import Link from "next/link";
 import styled from 'styled-components';
 import { cx } from '@/lib/utils';
 
-export interface TreeListItemProps {
-  isRoot?: boolean;
-  isLast?: boolean;
-  withTrunk?: boolean;
-  depth: number;
-  url?: string;
+export interface TreeListInfo {
+  url: string;
   text: string;
-  children?: React.ReactNode;
 }
 
-interface TreeListItemExtendedProps extends TreeListItemProps {
+interface TreeListItemProps {
+  info: TreeListInfo;
+  isLast: boolean;
+}
+
+interface ListItemProps {
   isTyping: boolean;
+  isLast: boolean;
 }
 
-const getBulletContent = (props: TreeListItemExtendedProps): string =>
-  [...Array(props.depth)].reduce(
-    (prefix) => `${props.withTrunk ? '│' : ' '}   ${prefix}`,
-    props.isRoot ? '.' : props.isLast ? '└──' : props.isTyping ? '└──' : '├──'
-  );
-
-const ListItem = styled.li<TreeListItemExtendedProps>`
+const ListItem = styled.li<ListItemProps>`
   ::before {
-    content: '${getBulletContent} ';
+    content: '${props => (props.isLast || props.isTyping) ? '└──' : '├──'} ';
   }
 `;
 
-export const TreeListItem: React.FC<TreeListItemProps & { onReady: () => void; }> = ({ children, url, text, onReady, ...props }) => {
+export const TreeListItem: React.FC<TreeListItemProps & { onReady: () => void; }> = ({ info: { url, text }, onReady, isLast }) => {
   const index = useRef(0);
   const [visibleText, setVisibleText] = useState<string>('');
   const [isTyping, setIsTyping] = useState<boolean>(true);
@@ -50,11 +45,14 @@ export const TreeListItem: React.FC<TreeListItemProps & { onReady: () => void; }
   }, [visibleText]);
 
   return (
-    <ListItem isTyping={isTyping} text={text} {...props} className={cx(
-      "text-4xl my-6",
-      "text-purple hover:text-red-pale",
-      "dark:text-teal-deep dark:hover:text-gray-200"
-    )}>
+    <ListItem
+      isTyping={isTyping}
+      isLast={isLast!}
+      className={cx(
+        "text-4xl my-6",
+        "text-purple hover:text-red-pale",
+        "dark:text-teal-deep dark:hover:text-gray-200"
+      )}>
       {url ? (
         <Link href={url} itemProp="url">
           {visibleText}
@@ -66,18 +64,24 @@ export const TreeListItem: React.FC<TreeListItemProps & { onReady: () => void; }
   );
 };
 
-export const TreeList: React.FC<{ items: TreeListItemProps[] }> = ({ items }) => {
+export interface TreeListProps {
+  items: TreeListInfo[];
+}
+
+export const TreeList: React.FC<TreeListProps> = ({ items }) => {
   const index = useRef(1);
-  const leafs = [{ isRoot: true, text: '.', depth: 0 }, ...items];
-  const [visibleLeafs, setVisibleLeafs] = useState<TreeListItemProps[]>(
+  const leafs = [{ url: '', text: '.' }, ...items];
+  const [visibleLeafs, setVisibleLeafs] = useState<TreeListInfo[]>(
     leafs.slice(0, index.current)
   );
 
   return (
     <ul>
-      {visibleLeafs.map((leafProps) => (
+      {visibleLeafs.map((props, i) => (
         <TreeListItem
-          {...leafProps}
+          key={i}
+          info={props}
+          isLast={i === visibleLeafs.length - 1}
           onReady={() => {
             if (index.current < leafs.length) {
               setVisibleLeafs(leafs.slice(0, index.current + 1));

@@ -7,21 +7,12 @@ const Home: NextPage = () => {
     <>
       <Page
         title="htz"
-        description={""}
       >
         <TreeList
           items={[
-            {
-              url: '/blog',
-              text: 'blog/',
-              depth: 0,
-            },
-            {
-              url: '/about',
-              text: 'about.md',
-              depth: 0,
-              isLast: true,
-            },
+            { url: '/blog', text: 'blog/' },
+            { url: '/feed.xml', text: 'rss.xml' },
+            { url: '/about', text: 'about.md' },
           ]}
         />
       </Page >
