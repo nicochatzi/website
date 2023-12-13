@@ -101,7 +101,7 @@ pre[class*="language-"] {
 
 .token.symbol,
 .token.property {
-  color: theme(colors.red.DEFAULT);
+  color: theme(colors.blue.DEFAULT);
 }
 
 .token.tag,
@@ -154,7 +154,7 @@ pre[class*="language-"] {
 .token.regex,
 .token.important,
 .token.variable {
-  color: rgb(214, 222, 235);
+  color: theme(colors.gray.50);
 }
 
 .token.important,

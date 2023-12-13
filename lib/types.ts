@@ -17,6 +17,7 @@ export type MDXFrontMatter = {
   slug: string;
   title: string;
   description?: string;
+  subtitle?: string;
   date: string;
   tags?: Array<string>;
   published?: boolean;

@@ -46,7 +46,7 @@ export const Page: React.FC<PageProps> = ({
         </h1>
         {date ? (
           <time className={cx("block mb-0 py-2", "text-gray-500", "dark:text-gray-400")}>
-            {formatDate(date)}
+            {"∟ "}{formatDate(date)}
           </time>
         ) : null}
         {description ? (

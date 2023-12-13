@@ -16,8 +16,14 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro nobis consectetur
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro nobis consectetur debitis? In animi nobis soluta at esse et nihil, non aut dolorem, deserunt odio quasi sunt veritatis, nisi quam?
 
 ```rust
+/// demo func
+fn demo(name: &str) {
+    println!("Hello, World!, {name}");
+}
+
 pub fn main() -> ! {
-    // print
-    println!("Hello, World!", 5);
+    let (x, name) = (100_f32, "nico");
+    demo(name);
+    loop {}
 }
 ```

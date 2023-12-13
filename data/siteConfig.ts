@@ -7,8 +7,9 @@ const siteConfig: SiteConfig = {
   siteDescription: "htz.dev",
   siteThumbnail: "/og-image.png",
   nav: [
-    { label: "blog", href: "/" },
-    { label: "about", href: "/about" },
+    { label: "~/", href: "/" },
+    { label: "./blog/", href: "/blog" },
+    { label: "./about.md", href: "/about" },
   ],
   social: {
     github: "https://github.com/nicochatzi",

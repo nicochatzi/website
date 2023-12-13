@@ -1,0 +1,22 @@
+name: deploy
+on: push
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: github-pages
+    env:
+      GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 20.x
+        cache: 'npm'
+    - run: npm i
+    - run: npm run build
+    - name: deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./.out
+        cname: htz.dev

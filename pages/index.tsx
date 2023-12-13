@@ -1,32 +1,32 @@
-import type { GetStaticProps, NextPage } from "next";
-import { getAllMdx } from "@/lib/mdx";
-import { MDXFrontMatter } from "@/lib/types";
+import type { NextPage } from "next";
 import { Page } from "@/components/Page";
-import { PostList } from "@/components/PostList";
+import { TreeList } from "@/components/TreeList";
 
-interface HomeProps {
-  posts: Array<MDXFrontMatter>;
-}
-
-const Home: NextPage<HomeProps> = ({ posts }) => {
+const Home: NextPage = () => {
   return (
     <>
       <Page
         title="htz"
         description={""}
       >
-        <PostList posts={posts} />
+        <TreeList
+          items={[
+            {
+              url: '/blog',
+              text: 'blog/',
+              depth: 0,
+            },
+            {
+              url: '/about',
+              text: 'about.md',
+              depth: 0,
+              isLast: true,
+            },
+          ]}
+        />
       </Page >
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {
-      posts: getAllMdx().filter(post => post["frontMatter"].published).map((post) => post["frontMatter"]),
-    },
-  };
 };
 
 export default Home;
