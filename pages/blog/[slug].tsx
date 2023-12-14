@@ -4,13 +4,16 @@ import Link from "next/link";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import rehypePrism from "rehype-prism-plus";
-import { getAllMdx, getMdx } from "@/lib/mdx";
+import { getAllMdx } from "@/lib/mdx";
 import { MDXFrontMatter } from "@/lib/types";
 import { Page } from "@/components/Page";
 import { components } from "@/components/MDX";
 import { Prose } from "@/components/Prose";
-import { cx } from "@/lib/utils";
+import { cx, slugify } from "@/lib/utils";
 import remarkGfm from "remark-gfm";
+import { formatDate } from "@/lib/formatDate";
+import { Tags } from "@/components/Tag";
+import Socials from "@/components/Socials";
 interface ContextProps extends ParsedUrlQuery {
   slug: string;
 }
@@ -22,10 +25,46 @@ interface PostProps {
   next: MDXFrontMatter | null;
 }
 
+const FollowPost: React.FC<{ post: MDXFrontMatter, direction: "left" | "right" }> = ({ post, direction }) => {
+  return (
+    <div className={direction === "left" ? "col-start-1 text-left" : "col-start-2 text-right"}>
+      <p className={cx(
+        "mb-2 uppercase tracking-wider text-m",
+        "text-gray-300",
+        "dark:text-gray-500"
+      )}>
+        {direction === "left" ? "←-----" : "-----→"}
+      </p>
+      <Link href={`/blog/${post.slug}`} className={cx(
+        "font-bold",
+        "text-purple hover:text-red-pale",
+        "dark:text-teal-deep dark:hover:text-yellow"
+      )}>
+        {post.title}
+      </Link>
+      <time className={cx(
+        "block mb-4",
+        "text-gray-500",
+        "dark:text-gray-500"
+      )}>
+        {"∟ "}{formatDate(post.date)}
+      </time>
+      {post.tags ? (
+        <div className="">
+          <Tags post={post} />
+        </div>
+      ) : null}
+    </div >
+  );
+};
+
 const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
   return (
     <>
       <Page {...frontMatter}>
+        <div className="-mt-12 mb-12 flex gap-1 flex-row-reverse">
+          <Tags post={frontMatter} />
+        </div>
         <Prose>
           <MDXRemote {...mdx} components={components} />
         </Prose>
@@ -38,40 +77,15 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
             )}
           >
             {previous ? (
-              <div>
-                <p
-                  className={cx(
-                    "mb-2 uppercase tracking-wider text-sm",
-                    "text-gray-500",
-                    "dark:text-gray-400"
-                  )}
-                >
-                  Previous
-                </p>
-                <Link href={`/blog/${previous?.slug}`} className="font-bold">
-                  {previous?.title}
-                </Link>
-              </div>
+              <FollowPost post={previous!} direction={"left"} />
             ) : null}
             {next ? (
-              <div className="col-start-2 text-right">
-                <p
-                  className={cx(
-                    "mb-2 uppercase tracking-wider text-sm",
-                    "text-gray-500",
-                    "dark:text-gray-400"
-                  )}
-                >
-                  Next
-                </p>
-                <Link href={`/blog/${next?.slug}`} className="font-bold">
-                  {next?.title}
-                </Link>
-              </div>
+              <FollowPost post={next!} direction={"right"} />
             ) : null}
           </nav>
         ) : null}
       </Page>
+      <Socials />
     </>
   );
 };

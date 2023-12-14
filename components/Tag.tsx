@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MDXFrontMatter } from "@/lib/types";
 import { cx, slugify } from "@/lib/utils";
 
 interface TagProps {
@@ -21,3 +22,6 @@ export const Tag: React.FC<TagProps> = ({ href, children }) => {
     </Link>
   );
 };
+
+export const Tags: React.FC<{ post: MDXFrontMatter }> = ({ post }) =>
+  post.tags?.map((tag, i) => (<Tag key={i} href={`/blog/tagged/${slugify(tag)}`}>{tag}</Tag>));

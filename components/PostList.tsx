@@ -3,7 +3,7 @@ import { formatDate } from "@/lib/formatDate";
 import type { MDXFrontMatter } from "@/lib/types";
 import { Prose } from "@/components/Prose";
 import { cx, slugify } from "@/lib/utils";
-import { Tag } from "./Tag";
+import { Tags } from "@/components/Tag";
 
 interface PostListProps {
   posts: Array<MDXFrontMatter>;
@@ -34,7 +34,7 @@ export const PostList: React.FC<PostListProps> = ({ posts }) => {
             </div>
             {post.tags ? (
               <div className="mb-8 flex gap-1">
-                {post.tags.map((tag, i) => (<Tag key={i} href={`/blog/tagged/${slugify(tag)}`}>{tag}</Tag>))}
+                <Tags post={post} />
               </div>
             ) : null}
           </article>

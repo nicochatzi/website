@@ -49,7 +49,7 @@ export const TreeListItem: React.FC<TreeListItemProps & { onReady: () => void; }
       isTyping={isTyping}
       isLast={isLast!}
       className={cx(
-        "text-4xl my-6",
+        "text-2xl my-1",
         "text-purple hover:text-red-pale",
         "dark:text-teal-deep dark:hover:text-gray-200"
       )}>

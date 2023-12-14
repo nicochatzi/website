@@ -4,7 +4,7 @@ const siteConfig: SiteConfig = {
   avatar: "/avatar.png",
   siteUrl: "https://htz.dev",
   siteName: "htz.dev",
-  siteDescription: "htz.dev",
+  siteDescription: "",
   siteThumbnail: "/og-image.png",
   nav: [
     { label: "~/", href: "/" },
