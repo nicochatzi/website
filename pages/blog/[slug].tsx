@@ -2,18 +2,19 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Link from "next/link";
 import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote } from "next-mdx-remote";
 import rehypePrism from "rehype-prism-plus";
 import { getAllMdx } from "@/lib/mdx";
 import { MDXFrontMatter } from "@/lib/types";
 import { Page } from "@/components/Page";
-import { components } from "@/components/MDX";
+import { MDX } from "@/components/MDX";
 import { Prose } from "@/components/Prose";
 import { cx } from "@/lib/utils";
 import remarkGfm from "remark-gfm";
+import rehypeSlug from 'rehype-slug';
 import { formatDate } from "@/lib/formatDate";
 import { Tags } from "@/components/Tag";
 import Socials from "@/components/Socials";
+
 interface ContextProps extends ParsedUrlQuery {
   slug: string;
 }
@@ -73,7 +74,7 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
           )}
         />
         <Prose>
-          <MDXRemote {...mdx} components={components} />
+          <MDX mdx={mdx} />
         </Prose>
         {previous || next ? (
           <nav
@@ -116,7 +117,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const mdxContent = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
-      rehypePlugins: [rehypePrism],
+      rehypePlugins: [rehypePrism, rehypeSlug],
     },
     scope: frontMatter,
   });
