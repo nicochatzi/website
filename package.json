@@ -30,7 +30,7 @@
     "@tailwindcss/typography": "^0.5.0",
     "@types/node": "20.10.4",
     "@types/react": "18.2.45",
-    "autoprefixer": "^10.4.2",
+    "autoprefixer": "^10.4.16",
     "eslint": "8.55.0",
     "eslint-config-next": "14.0.4",
     "postcss": "^8.4.32",
