@@ -62,9 +62,16 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
   return (
     <>
       <Page {...frontMatter}>
-        <div className="-mt-12 mb-12 flex gap-1 flex-row-reverse">
+        <div className="-mt-10 mb-1 flex gap-1 flex-row-reverse">
           <Tags post={frontMatter} />
         </div>
+        <nav
+          className={cx(
+            "-mt-4 pt-12 border-t",
+            "border-gray-200",
+            "dark:border-gray-700"
+          )}
+        />
         <Prose>
           <MDXRemote {...mdx} components={components} />
         </Prose>
