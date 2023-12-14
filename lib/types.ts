@@ -7,9 +7,7 @@ export type SiteConfig = {
   nav: Array<{ label: string; href: string }>;
   social?: {
     github?: string;
-    twitter?: string;
     linkedin?: string;
-    instagram?: string;
   };
 };
 

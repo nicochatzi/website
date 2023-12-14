@@ -9,7 +9,7 @@ import { MDXFrontMatter } from "@/lib/types";
 import { Page } from "@/components/Page";
 import { components } from "@/components/MDX";
 import { Prose } from "@/components/Prose";
-import { cx, slugify } from "@/lib/utils";
+import { cx } from "@/lib/utils";
 import remarkGfm from "remark-gfm";
 import { formatDate } from "@/lib/formatDate";
 import { Tags } from "@/components/Tag";
@@ -30,8 +30,8 @@ const FollowPost: React.FC<{ post: MDXFrontMatter, direction: "left" | "right" }
     <div className={direction === "left" ? "col-start-1 text-left" : "col-start-2 text-right"}>
       <p className={cx(
         "mb-2 uppercase tracking-wider text-m",
-        "text-gray-300",
-        "dark:text-gray-500"
+        "text-gray-200",
+        "dark:text-gray-700"
       )}>
         {direction === "left" ? "←-----" : "-----→"}
       </p>
