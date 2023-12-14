@@ -14,13 +14,13 @@ interface TreeListItemProps {
 }
 
 interface ListItemProps {
-  isTyping: boolean;
-  isLast: boolean;
+  $isTyping: boolean;
+  $isLast: boolean;
 }
 
 const ListItem = styled.li<ListItemProps>`
   ::before {
-    content: '${props => (props.isLast || props.isTyping) ? '└──' : '├──'} ';
+    content: '${props => (props.$isLast || props.$isTyping) ? '└──' : '├──'} ';
   }
 `;
 
@@ -46,8 +46,8 @@ export const TreeListItem: React.FC<TreeListItemProps & { onReady: () => void; }
 
   return (
     <ListItem
-      isTyping={isTyping}
-      isLast={isLast!}
+      $isTyping={isTyping}
+      $isLast={isLast!}
       className={cx(
         "text-2xl my-1",
         "text-purple hover:text-red-pale",
