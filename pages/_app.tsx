@@ -2,12 +2,10 @@ import "@/styles/globals.css";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 import { Header } from "@/components/Header";
-import { GoogleAnalytics } from "nextjs-google-analytics";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <GoogleAnalytics trackPageViews={{ ignoreHashChange: true }} />
       <ThemeProvider
         defaultTheme="system"
         attribute="class"
