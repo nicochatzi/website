@@ -20,7 +20,7 @@
     "nextjs-google-analytics": "^2.3.3",
     "prism-react-renderer": "^2.3.0",
     "react": "18.2.0",
-    "react-children-utilities": "^2.6.3",
+    "react-children-utilities": "^2.10.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.9",
     "rehype-prism-plus": "^1.6.3",
