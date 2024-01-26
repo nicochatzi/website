@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { formatDate } from "@/lib/formatDate";
 import type { MDXFrontMatter } from "@/lib/types";
-import { Prose } from "@/components/Prose";
-import { cx, slugify } from "@/lib/utils";
+import { cx } from "@/lib/utils";
 import { Tags } from "@/components/Tag";
 
 interface PostListProps {

@@ -110,7 +110,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as ContextProps;
-  const mdxFiles = getAllMdx();
+  const mdxFiles = getAllMdx().filter((p) => p.frontMatter.published);
   const postIndex = mdxFiles.findIndex((p) => p.frontMatter.slug === slug);
   const post = mdxFiles[postIndex];
   const { frontMatter, content } = post;

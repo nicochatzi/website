@@ -8,8 +8,8 @@ const siteConfig: SiteConfig = {
   siteThumbnail: "/og-image.png",
   nav: [
     { label: "~/", href: "/" },
-    { label: "./blog/", href: "/blog" },
-    { label: "./about.md", href: "/about" },
+    { label: "~/blog/", href: "/blog" },
+    { label: "~/about.md", href: "/about" },
   ],
   social: {
     github: "https://github.com/nicochatzi",
