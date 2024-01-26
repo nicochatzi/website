@@ -3,6 +3,7 @@ import { Note } from "./Note";
 import Link from "next/link";
 import { cx } from "@/lib/utils";
 import { MDXRemote } from "next-mdx-remote";
+import ExpandingSection from './ExpandingSection';
 
 const createCustomHeader = (Tag: any) => {
   const Header = ({ id, ...rest }: any) => {
@@ -30,6 +31,7 @@ export const components = {
   h2: createCustomHeader('h2'),
   h3: createCustomHeader('h3'),
   h4: createCustomHeader('h4'),
+  ExpandingSection,
 };
 
 
