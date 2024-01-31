@@ -99,10 +99,9 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const mdxFiles = getAllMdx();
   return {
-    paths: mdxFiles.map((file) => ({
-      params: { slug: file.frontMatter.slug },
+    paths: getAllMdx().map(post => ({
+      params: { slug: post.frontMatter.slug },
     })),
     fallback: false,
   };
@@ -110,8 +109,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as ContextProps;
-  const mdxFiles = getAllMdx().filter((p) => p.frontMatter.published);
-  const postIndex = mdxFiles.findIndex((p) => p.frontMatter.slug === slug);
+  const mdxFiles = getAllMdx();
+  const postIndex = mdxFiles.findIndex(post => post.frontMatter.slug === slug);
   const post = mdxFiles[postIndex];
   const { frontMatter, content } = post;
   const mdxContent = await serialize(content, {
@@ -121,12 +120,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
     },
     scope: frontMatter,
   });
+  const getPostLink = (i: number) => {
+    return mdxFiles[i] && mdxFiles[i].frontMatter.published ?
+      mdxFiles[i].frontMatter : null;
+  }
   return {
     props: {
       frontMatter,
       mdx: mdxContent,
-      previous: mdxFiles[postIndex + 1]?.frontMatter || null,
-      next: mdxFiles[postIndex - 1]?.frontMatter || null,
+      previous: getPostLink(postIndex + 1),
+      next: getPostLink(postIndex - 1),
     },
   };
 };

@@ -27,8 +27,8 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       posts: getAllMdx()
-        .filter(post => post["frontMatter"].published)
-        .map(post => post["frontMatter"]),
+        .filter(post => post.frontMatter.published)
+        .map(post => post.frontMatter),
     },
   };
 };
