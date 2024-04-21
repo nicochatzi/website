@@ -25,4 +25,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - run: npm i
+      - run: npx next lint
       - run: npx next build
