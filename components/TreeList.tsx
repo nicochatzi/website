@@ -42,7 +42,7 @@ export const TreeListItem: React.FC<TreeListItemProps & { onReady: () => void; }
     }, 50);
 
     return () => clearTimeout(timeout);
-  }, [visibleText]);
+  }, [onReady, text, visibleText]);
 
   return (
     <ListItem
