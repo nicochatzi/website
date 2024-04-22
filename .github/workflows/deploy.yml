@@ -28,8 +28,6 @@ jobs:
           node-version: "20"
           cache: npm
       - uses: actions/configure-pages@v4
-        with:
-          static_site_generator: next
       - uses: actions/cache@v4
         with:
           path: |

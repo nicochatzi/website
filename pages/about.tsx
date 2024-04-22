@@ -20,7 +20,7 @@ const About: NextPage<MdxProps> = ({ frontMatter, mdx }) => {
     </>
   );
 };
-;
+
 export const getStaticProps: GetStaticProps = makeGetMdxStaticProps('about.mdx');
 
 export default About;
