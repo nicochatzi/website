@@ -19,6 +19,7 @@ const nextConfig = {
     mdxRs: true,
   },
   output: 'export',
+  images: { unoptimized: true }
 };
 
 export default withMDX(nextConfig);
