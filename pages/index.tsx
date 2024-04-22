@@ -10,7 +10,7 @@ const Home: NextPage = () => {
       >
         <TreeList
           items={[
-            { url: '/blog', text: 'blog/' },
+            { url: '/posts', text: 'posts/' },
             { url: '/feed.xml', text: 'rss.xml' },
             { url: '/about', text: 'about.md' },
           ]}

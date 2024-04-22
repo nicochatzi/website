@@ -1,6 +1,6 @@
 import type { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
-import { getAllMdx } from "@/lib/mdx";
+import { getAllMdxPosts } from "@/lib/mdx";
 import { slugify } from "@/lib/utils";
 import { MDXFrontMatter } from "@/lib/types";
 import { Page } from "@/components/Page";
@@ -26,7 +26,7 @@ const Posts: NextPage<PostsProps> = ({ tag, posts }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const mdxFiles = getAllMdx().map((post) => post["frontMatter"]);
+  const mdxFiles = getAllMdxPosts().map((post) => post["frontMatter"]);
   return {
     paths: Array.from(new Set(mdxFiles.map((file) => file.tags).flat())).map(
       (tag) => {
@@ -43,7 +43,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { tag } = context.params as ContextProps;
-  const mdxFiles = getAllMdx().map((post) => post["frontMatter"]);
+  const mdxFiles = getAllMdxPosts().map((post) => post["frontMatter"]);
   return {
     props: {
       tag,

@@ -1,5 +1,5 @@
 import type { GetStaticProps, NextPage } from "next";
-import { getAllMdx } from "@/lib/mdx";
+import { getAllMdxPosts } from "@/lib/mdx";
 import { MDXFrontMatter } from "@/lib/types";
 import { Page } from "@/components/Page";
 import { PostList } from "@/components/PostList";
@@ -9,11 +9,11 @@ interface HomeProps {
   posts: Array<MDXFrontMatter>;
 }
 
-const Blog: NextPage<HomeProps> = ({ posts }) => {
+const PostsPage: NextPage<HomeProps> = ({ posts }) => {
   return (
     <>
       <Page
-        title="blog"
+        title="posts"
         description={""}
       >
         <PostList posts={posts} />
@@ -26,11 +26,11 @@ const Blog: NextPage<HomeProps> = ({ posts }) => {
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      posts: getAllMdx()
+      posts: getAllMdxPosts()
         .filter(post => post.frontMatter.published)
         .map(post => post.frontMatter),
     },
   };
 };
 
-export default Blog;
+export default PostsPage;

@@ -3,7 +3,7 @@ import { ParsedUrlQuery } from "querystring";
 import Link from "next/link";
 import { serialize } from "next-mdx-remote/serialize";
 import rehypePrism from "rehype-prism-plus";
-import { getAllMdx } from "@/lib/mdx";
+import { getAllMdxPosts } from "@/lib/mdx";
 import { MDXFrontMatter } from "@/lib/types";
 import { Page } from "@/components/Page";
 import { MDX } from "@/components/MDX";
@@ -36,7 +36,7 @@ const FollowPost: React.FC<{ post: MDXFrontMatter, direction: "left" | "right" }
       )}>
         {direction === "left" ? "←-----" : "-----→"}
       </p>
-      <Link href={`/blog/${post.slug}`} className={cx(
+      <Link href={`/posts/${post.slug}`} className={cx(
         "font-bold",
         "text-purple hover:text-red-pale",
         "dark:text-teal-deep dark:hover:text-yellow"
@@ -100,7 +100,7 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: getAllMdx().map(post => ({
+    paths: getAllMdxPosts().map(post => ({
       params: { slug: post.frontMatter.slug },
     })),
     fallback: false,
@@ -109,7 +109,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as ContextProps;
-  const mdxFiles = getAllMdx();
+  const mdxFiles = getAllMdxPosts();
   const postIndex = mdxFiles.findIndex(post => post.frontMatter.slug === slug);
   const post = mdxFiles[postIndex];
   const { frontMatter, content } = post;

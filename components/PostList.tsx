@@ -20,7 +20,7 @@ export const PostList: React.FC<PostListProps> = ({ posts }) => {
                 "text-purple hover:text-red-pale",
                 "dark:text-teal-deep dark:hover:text-yellow"
               )} >
-                <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                <Link href={`/posts/${post.slug}`}>{post.title}</Link>
               </h2>
               <time className={cx(
                 "block mb-4",

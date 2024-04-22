@@ -24,4 +24,4 @@ export const Tag: React.FC<TagProps> = ({ href, children }) => {
 };
 
 export const Tags: React.FC<{ post: MDXFrontMatter }> = ({ post }) =>
-  post.tags?.map((tag, i) => (<Tag key={i} href={`/blog/tagged/${slugify(tag)}`}>{tag}</Tag>));
+  post.tags?.map((tag, i) => (<Tag key={i} href={`/posts/tagged/${slugify(tag)}`}>{tag}</Tag>));
