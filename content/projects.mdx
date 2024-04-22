@@ -1,19 +1,63 @@
 ---
-title: "about"
-published: true
+title: "projects"
 ---
 
 ----
 
 # @work
 
-## The Collective
+Some projects I've worked on that are in the public domain.
 
-## Ampify Studio
+## The Collective @ Focusrite
 
-## ROLI Dashboard
+<p align="center">
+<video autoplay playsinline loop muted width="1000">
+    <source src="/images/collective.mp4" type="video/mp4"/>
+</video>
+</p>
 
-## DREAM DSP Designer
+[The Collective](https://collective.focusrite.com/) is a brand of
+[Focusrite Group](https://focusrite.com/). It's a VST plugin
+brand and platform. We designed the plugins with [Sonible](https://www.sonible.com/),
+who built the plugins.
+
+As part of this project, I contributed to the backend and frontend
+of the platform. My primary contribution was driving the developement
+of a Rust-based library that served as a DRM for the plugin
+and the access point for the third-party software (Sonible plugins)
+to access our backend.
+
+Rust was chosen for a number of reasons:
+
+1. __Security__: a DRM library is bad actors' main target.
+2. __Strong C interoperability__.
+3. It has a __solid networking stack__ in the standard library.
+4. It has __fantastic threading__ primitives and compile-time checks.
+5. It was a chance to __introduce Rust into the company__ with a small,
+self-contained project.
+
+The plugins were shipped with the Rust library in 2022 and are still on the market.
+
+Rust in prod achieved! 🎉
+
+## Ampify Studio @ Ampify
+
+<p align="center">
+<img src="/images/ampify-studio.png"></img>
+</p>
+
+## ROLI Dashboard @ ROLI
+
+<p align="center">
+<img src="/images/roli-dashboard.gif"></img>
+</p>
+
+## DSP Designer @ DREAM
+
+<p align="center">
+<img src="/images/profile.jpg"></img>
+</p>
+
 
 DREAM makes DSP chips for audio applications.
 With that, they also make and sell reference designs
@@ -27,7 +71,7 @@ I worked on various parts of the software, including
 the topological graph sorting of the DSP nodes
 and architecture redesign.
 
-## Cathodique 2.0
+## Cathodique 2.0 @ ISEN
 
 While studying at [ISEN Lille](), myself and the other Music Tech
 students worked on an interactive video mapping experience.
@@ -54,6 +98,8 @@ It was part of...
 
 # @home
 
+At home, I mainly look for side quests to do in Rust and a little bit of Zig nowadays.
+
 ## aud
 
 <p align="center">
@@ -78,6 +124,24 @@ Currently, it blasts audio over UDP with minimal package
 validation.
 
 ## rume
+
+[rume](https://github.com/nicochatzi/rume) is a library
+for building DSP graphs for virtual instruments in Rust.
+It comes with some DSP building blocks and some gnarly
+hand-rolled graph representation and sorting code in Rust, fun :)
+
+At [Focusrite/Novation](), we used it during a hackday to build
+a synth with [tauri]() has a frontend and rume as the audio engine
+back in late 2020. Since then, it hasn't gotten much love...
+In hindsight, I think there are better approaches to solving this
+type of problem. Going all in on Rust macros can be painful for the
+library developer and consumer.
+
+The idea from [SOUL/CMajor](), it's an experimental rip-off
+using Rust macros. Realistically, it's more of a Rust exercise.
+CMajor is far better suited for what this type of graph syntax
+tries to achieve. Check the language out if you haven't yet!
+
 
 ## NixOS
 
