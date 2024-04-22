@@ -2,6 +2,9 @@ import type { NextPage } from "next";
 import { Page } from "@/components/Page";
 import { Prose } from "@/components/Prose";
 import Socials from "@/components/Socials";
+import dynamic from 'next/dynamic';
+
+const AboutContent = dynamic(() => import('../content/about.mdx'));
 
 const About: NextPage = () => {
   return (
@@ -11,18 +14,7 @@ const About: NextPage = () => {
       >
         <div className="mt-auto py-2" />
         <Prose>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sed
-            aliquam tempora nihil magni natus mollitia. Doloribus,
-            exercitationem iusto odio asperiores dolor, alias excepturi maxime
-            distinctio quod eum saepe eos!
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sed
-            aliquam tempora nihil magni natus mollitia. Doloribus,
-            exercitationem iusto odio asperiores dolor, alias excepturi maxime
-            distinctio quod eum saepe eos!
-          </p>
+          <AboutContent />
         </Prose>
         <Socials />
       </Page>
