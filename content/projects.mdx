@@ -1,0 +1,67 @@
+-------
+
+# <code>@work</code>
+
+## The Collective
+
+## Ampify Studio
+
+## ROLI Dashboard
+
+## DREAM DSP Designer
+
+## Cathodique 2.0
+
+-------
+
+# <code>@home</code>
+
+## aud
+
+<p align="center">
+<img src="/images/aud.gif"></img>
+</p>
+
+[aud](https://github.com/nicochatzi/aud) is a CLI tool to help with audio-related tasks.
+
+It started from just needing to very quickly watch
+MIDI input stream. From there I needed some filtering
+and saving of the messages. So I embedded a Lua runtime
+with script hot-reloading and runtime reload (if the script
+is borked). Now it's a "scriptable audio CLI tool"
+that can hook into audio/midi streams and do loads of things
+through hot-Lua script, e.g. send/receive data, save-to-disk, etc...
+
+The tool can also be used as a library in C. From there,
+an application can stream audio as a source to a destination
+(an <code>aud</code> client). The client can then run a terminal-based
+oscilloscope and hook into the stream with a Lua script.
+Currently, it blasts audio over UDP with minimal package
+validation.
+
+## rume
+
+## NixOS
+
+Recently, I've taken the (so far shallow) dive into NixOS.
+The idea of a declarative, reproducible and generational Linux
+OS is amazing. On top of that, the nix shells/envs are
+a godsend for development without having to spin-up
+docker containers for every project or install dependencies
+globally.
+
+You can find my NixOS configuration [somewhere](https://github.com/nicochatzi/dotfiles/tree/main/.nixfiles)
+[in my dotfiles](https://github.com/nicochatzi/dotfiles).
+For the moment I still use other OSes that use the same dotfiles
+so I have not yet fully committed to the all-in home-manager setup.
+
+I have a few machines setup now with more or less the same config, including
+a base-model M1 Macbook Air. The setup idles at around 400MB RAM so
+the Air with it's 8GB RAM and 128GB actually works beautifully.
+Especially compared to macOS/windows which idle at around 6GB.
+
+That being said, I've found the non-FHS compliance to be the main hurdle
+to using it a my daily dev driver. Particularly for compiled programs
+which use dynamic linker/loader, be ready to <code>patchelf</code>...
+
+

@@ -9,6 +9,7 @@ const siteConfig: SiteConfig = {
   nav: [
     { label: "~/", href: "/" },
     { label: "~/posts/", href: "/posts" },
+    { label: "~/projects.md", href: "/projects" },
     { label: "~/about.md", href: "/about" },
   ],
   social: {
