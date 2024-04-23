@@ -8,7 +8,7 @@ title: "projects"
 
 Here are some projects I loved working on.
 The ones in the public domain at least.
-As such, their all user-facing.
+As such, their mainly user-facing.
 
 ## The Collective @ Focusrite Group
 
@@ -19,15 +19,16 @@ As such, their all user-facing.
 </p>
 
 [The Collective](https://collective.focusrite.com/) is a brand of
-[Focusrite Group](https://focusrite.com/). It's a VST plugin
-brand and platform. We designed the plugins with [Sonible](https://www.sonible.com/),
-who built the plugins.
+[Focusrite Group](https://focusrite.com/). It's a [VST](https://en.wikipedia.org/wiki/Virtual_Studio_Technology)
+plugin brand and platform. We designed the plugins with [Sonible](https://www.sonible.com/),
+who built them with their AI-powered [smart](https://www.sonible.com/smarteq4/)
+technology.
 
-As part of this project, I contributed to the backend and frontend
-of the platform. My primary contribution was driving the developement
-of a Rust-based library that served as a DRM for the plugin
-and the access point for the third-party software (Sonible plugins)
-to access our backend.
+As part of this project, I contributed to the website and backend
+infrastructure and (my primary focus) drove the development
+of a Rust-based library. The library does DRM for the plugin
+and allows third-party software (Sonible plugins) to access our platform
+securely.
 
 Rust was chosen for a number of reasons:
 
@@ -53,14 +54,14 @@ each others tasks. Amazing learning experience with a fantastic team!
 
 [Ampify Studio](https://ampifymusic.com/ampify-studio/) is a fast
 way of making cool tracks. It's not a [DAW](https://www.loopazon.com/blog/top-13-most-popular-digital-audio-workstations/).
-More of a banger track builder. It's unique approach to the embedded sample browser
+More of a banger track builder. Its unique approach to the embedded sample browser
 and timeline view (combination of arrangement and clips)
 just make it feel like something else.
 Something more fun, fast and intuitive.
 
 There are thousands of Ampify Sound packs to pick from,
 beautifully produced and curated samples with
-realtime pitch and time shifting so you can mix-and-match
+real-time pitch and time shifting, so you can mix-and-match
 to make whatever floats your boat.
 
 It's all written in C++, though we managed to sneak a Rust library in there as well ;)
@@ -78,7 +79,8 @@ At [ROLI](https://roli.com/), I primarily worked on Dashboard. It's allows users
 to interact and configure their ROLI devices, such as the BLOCKS
 series. Still love my little [Seaboard Block](https://roli.com/products/blocks/seaboard-block-m)!
 
-The application is in [JUCE](https://juce.com/). It was amazing working there, with the JUCE team!
+The application is in [JUCE](https://juce.com/). It was amazing working there
+with some brilliant colleagues and the talented JUCE team!
 
 
 ## DSP Designer @ DREAM
@@ -102,13 +104,15 @@ I worked on various parts of the software, including
 the topological graph sorting of the DSP nodes
 and architecture redesign.
 
-I did my Master's thesis work here, writing DSP algorithms.
-Specifically various [Partitioned Convolution](https://ericbattenberg.com/school/partconvDAFx2011.pdf)
-and [FFT](https://www.youtube.com/watch?v=spUNpyF58BY) implementations in C running on their ISA.
+I did my Master's thesis work here, writing DSP algorithms for DREAM.
+Specifically, various [Partitioned Convolution](https://ericbattenberg.com/school/partconvDAFx2011.pdf)
+and [FFT](https://www.youtube.com/watch?v=spUNpyF58BY) implementations
+in C running on their ISA. Testing, benchmarking and optimizing them
+to squeeze the algorithms into the smallest time/space footprint.
 
-It's a small company but punches above its weight and
+It's a small company that punches above its weight and
 makes it work through their decades of experience
-designing DSP chips.
+designing DSP chips for the audio industry.
 
 Shout out to the sound designer (and general savant).
 Great times geeking out on synths, can't believe we
@@ -209,7 +213,7 @@ the Air with it's 8GB RAM and 128GB actually works beautifully.
 Especially compared to macOS/windows which idle at around 6GB.
 
 That being said, I've found the non-FHS compliance to be the main hurdle
-to using it a my daily dev driver. Particularly for compiled programs
+to using it as my daily dev driver. Particularly for compiled programs
 which use dynamic linker/loader, be ready to <code>patchelf</code>...
 
 
