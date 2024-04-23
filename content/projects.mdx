@@ -180,14 +180,14 @@ for building DSP graphs for virtual instruments in Rust.
 It comes with some DSP building blocks and some gnarly
 hand-rolled graph representation and sorting code in Rust, fun :)
 
-At [Focusrite/Novation](), we used it during a hackday to build
-a synth with [tauri]() has a frontend and rume as the audio engine
+At [Focusrite/Novation](https://novationmusic.com/), we used it during a hackday to build
+a synth with [tauri](https://tauri.app/) has a frontend and rume as the audio engine
 back in late 2020. Since then, it hasn't gotten much love...
 In hindsight, I think there are better approaches to solving this
 type of problem. Going all in on Rust macros can be painful for the
 library developer and consumer.
 
-The idea from [SOUL/CMajor](), it's an experimental rip-off
+The idea from [SOUL/CMajor](https://cmajor.dev/), it's an experimental rip-off
 using Rust macros. Realistically, it's more of a Rust exercise.
 CMajor is far better suited for what this type of graph syntax
 tries to achieve. Check the language out if you haven't yet!
