@@ -10,7 +10,7 @@ const THEME_MAP: { [key: string]: React.ReactNode } = {
 
 export const ThemeSelect = () => {
   const [mounted, setMounted] = useState(false);
-  const { theme: activeTheme, setTheme } = useTheme();
+  const { resolvedTheme: activeTheme, setTheme } = useTheme();
 
   // When mounted on client, now we can show the UI
   useEffect(() => setMounted(true), []);
