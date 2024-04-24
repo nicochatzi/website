@@ -39,10 +39,10 @@ export const TreeListItem: React.FC<TreeListItemProps & { onReady: () => void; }
         setIsTyping(false);
         onReady();
       }
-    }, 50);
-
+    }, 30);
     return () => clearTimeout(timeout);
-  }, [onReady, text, visibleText]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text, visibleText]);
 
   return (
     <ListItem
