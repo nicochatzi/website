@@ -51,7 +51,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["JetBrains Mono", ...defaultTheme.fontFamily.mono],
+        sans: ['var(--font-jetbrains)', ...defaultTheme.fontFamily.mono],
+        jetbrains: ['var(--font-jetbrains)']
       },
     },
   },
