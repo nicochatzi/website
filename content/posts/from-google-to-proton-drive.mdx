@@ -1,0 +1,217 @@
+---
+title: "from google drive to proton drive with rclone"
+description: "reliably migrate to secure storage service"
+date: "2024-05-29"
+tags: ['linux', 'cloud', 'rclone']
+published: true
+---
+
+Recently, I made the switch from [Google Workspace](https://workspace.google.com/)
+to __Proton__ [Mail](https://proton.me/mail) / [Drive](https://proton.me/drive)
+and [1Password](https://1password.com/) to [Proton Pass](https://proton.me/pass).
+Migrating email and passwords was easy, even transferring my custom-domain email
+address was [straightforward](https://proton.me/support/custom-domain-ovh).
+
+However, reliably moving over __10 GB__ of arbitrary large files from Google Drive
+to Proton Drive was more challenging, particularly when the transfer fails half way
+and you need to restart from the point of failure.
+
+#### TL;DR
+
+__Use [rclone](https://rclone.org/)__: [rclone mount](#rclone-mount)
+both drives, [rclone copy](#rclone-copy)
+from Google Drive to Proton Drive mount points and [rclone check](#validation)
+to validate content transfer.
+
+## manual transfer
+
+The first option that might come to mind would be to manually download everything,
+then upload it all. If the source drive contains less than a few GB, and with a
+strong and reliable internet connection, this might be the easiest way.
+
+However, at the time of transferring, the internet connection I used was not
+the most reliable. Of the 100k+ files to transfer, there was about a 5% error
+rate (before I stopped the operation). With this quantity of files, it is
+painful to need to diff and re-upload manually. Though the Proton Drive
+web-UI provides good information.
+
+## <code>rclone</code>
+
+[rclone](https://rclone.org/) is a CLI utility that mounts cloud drives on your local machine.
+It's a fantastic alternative to the cloud vendor's web-based interfaces. Many vendors
+provide desktop application that have similar functionality to <code>rclone</code>,
+but <code>rclone</code> works with 70+ storage products <code>=> only one install</code>
+and is CLI-based <code>=> small footprint</code>, perfect.
+
+<code>rclone</code> uses [fuse](https://www.kernel.org/doc/html/latest/filesystems/fuse.html)
+(Filesystem in Userspace). This allows users to run file system code in user space
+where FUSE provides a "bridge" to the actual kernel file system interface. Basically it
+allows users to create virtual file systems.
+
+For information about setting up a <code>rclone</code> drives with a few common storage
+providers:
+
+- [Google Drive](https://rclone.org/drive/)
+- [Proton Drive](https://rclone.org/protondrive/)
+- [Amazon S3](https://rclone.org/s3/#configuration)
+
+Once configured through the rclone CLI, a drive can be mounted
+using <code>rclone mount</code>. Options vary depending on your
+storage provider, bandwidth, preferences...
+
+### <code>rclone mount</code>
+
+```bash
+rclone mount proton: /path/to/mounted/proton/drive \
+    --vfs-cache-mode full \
+    --vfs-cache-max-size 500G \
+    --vfs-cache-max-age 336h \
+    --bwlimit-file 16M \
+    --backup-dir=/path/to/backup/dir
+```
+
+Note that the rest of this post with assume Google Drive
+is mounted in a directory called <code>gdrive</code> and
+Proton Drive at <code>proton</code>.
+
+<code>rclone </code> is neat because you how more fine-grained
+control and can set things up where and when you want, with
+all the sources you need. For example, I have three mounted
+"cloud drives" that are launched at start-up with systemd services.
+
+The systemd service might look like this:
+
+```text
+[Unit]
+Description=Mount Proton Drive using rclone
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStartPre=/bin/mkdir -p /path/to/mounted/proton/drive
+ExecStart=/usr/bin/rclone mount proton: /path/to/mounted/proton/drive \
+          --vfs-cache-mode full \
+          --vfs-cache-max-size 500G \
+          --vfs-cache-max-age 336h \
+          --bwlimit-file 16M
+Restart=always
+RestartSec=10s
+Environment="PATH=/usr/bin:/bin"
+
+[Install]
+WantedBy=default.target
+```
+
+For any [NixOS](https://nixos.org/) users, here's my systemd service code:
+
+```nix
+{ pkgs, ... }:
+let mountdir = "/path/to/mounted/proton/drive";
+in {
+  environment = {
+    systemPackages = [ pkgs.rclone ];
+    etc."fuse.conf".text = ''
+      user_allow_other
+    '';
+  };
+
+  systemd.user.services.rclone-mount = {
+    description = "Mount Proton Drive using rclone";
+    after = [ "network-online.target" ];
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${mountdir}";
+      ExecStart = ''
+        ${pkgs.rclone}/bin/rclone mount proton: ${mountdir} \
+          --vfs-cache-mode full \
+          --vfs-cache-max-size 500G \
+          --vfs-cache-max-age 336h \
+          --bwlimit-file 16M
+      '';
+      Restart = "always";
+      RestartSec = "10s";
+      Environment = [ "PATH=${pkgs.fuse}/bin:/run/wrappers/bin/:$PATH" ];
+    };
+  };
+}
+```
+
+### <code>cp/rsync</code>
+
+Once the cloud drives are mounted, there are a few ways of transferring from
+one drive to another.
+
+First that came to my mind was a good old <code>cp -r</code>. This eventualy
+ate up tons of memory and didn't provide much information during the transfer.
+For this amount of data to transfer, information like ETA, transfer rate and
+logging are very useful. Also, it runs the copy serially and without
+fragmentation which is slow.
+
+Second, is using [rsync](https://en.wikipedia.org/wiki/Rsync). This is very
+similar to <code>rclone</code>. However, it's mostly focused at synchronising
+between local copies or a local and remote copy. Not necessarily between
+two remote targets. With this quantity of files, <code>rsync</code>
+halted then failed upon restart after a few hours. Unlike <code>cp</code>,
+<code>rsync</code> will fragment and is a bit better suited for this task.
+
+Note that if any bulk transfer fails, when re-running these commands it
+is important to add flags to ignore existing files:
+
+```bash
+cp -r -n <src> <dest>
+rsync -a -v --progress --ignore-existing <src> <dest>
+```
+
+### <code>rclone copy</code>
+
+The most reliable and informative method I found is [rclone copy](https://rclone.org/commands/rclone_copy/).
+It was made for this exact task.
+
+With both drives mounted, I ran the operation with two terminals,
+one to run the data transfer and the other to monitor the logs.
+
+```bash
+# run the copy operation from "gdrive" to "proton"
+rclone copy gdrive: proton: \
+    --transfers=4 \
+    --checkers=8 \
+    --tpslimit=10 \
+    --tpslimit-burst=10 \
+    --drive-chunk-size=64M \
+    --verbose \
+    --progress \
+    --ignore-existing \
+    --log-file=/path/to/rclone-transfer.log
+
+# monitor the copy operation's log
+tail -fn10 /path/to/rclone-transfer.log
+```
+
+## validation
+
+After the transfer is complete, it's important to validate
+the transfer was successful. We can check the logs
+and use [rclone check](https://rclone.org/commands/rclone_check/).
+
+The <code>rclone check</code> command is explicitly made for this task,
+as the docs say it: "checks the files in the source and destination match."
+
+Here, I wanted the __destination__ to exactly match the __source__. Specifically,
+I needed to purge sub-directories left over from previous failed transferred
+Using the <code>--one-way</code> flag, <code>rclone</code> checked the destination
+exactly matched the source, __deleting all the other files in the destination__.
+
+```bash
+# manually parse rclone copy logs
+cat /path/to/rclone-transfer.log | grep ERROR
+
+# run rclone check
+rclone check gdrive: proton: --one-way --log-file=/path/to/rclone-check.log
+
+# manually parse rclone check logs
+cat /path/to/rclone-check.log | grep ERROR
+```
+
+<code>rclone</code> rocks.
