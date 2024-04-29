@@ -15,7 +15,7 @@
     "@sindresorhus/slugify": "^2.2.1",
     "clsx": "^2.1.0",
     "date-fns": "^3.6.0",
-    "next": "14.2.2",
+    "next": "14.2.3",
     "next-mdx-remote": "^4.4.1",
     "next-remote-watch": "^2.0.0",
     "next-themes": "^0.3.0",
