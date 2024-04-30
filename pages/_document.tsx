@@ -12,7 +12,14 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head >
-          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://plausible.io; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'self';" />
+          <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self';
+            script-src 'self' 'unsafe-inline' https://plausible.io;
+            style-src 'self' 'unsafe-inline';
+            img-src 'self';
+            connect-src 'self' https://plausible.io;
+            font-src 'self';
+          "/>
         </Head >
         <body
           className={cx(
