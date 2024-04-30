@@ -143,14 +143,14 @@ in {
 Once the cloud drives are mounted, there are a few ways of transferring from
 one drive to another.
 
-First that came to my mind was a good old <code>cp -r</code>. This eventualy
+First that came to my mind was a good old <code>cp -r</code>. This eventually
 ate up tons of memory and didn't provide much information during the transfer.
 For this amount of data to transfer, information like ETA, transfer rate and
 logging are very useful. Also, it runs the copy serially and without
 fragmentation which is slow.
 
 Second, is using [rsync](https://en.wikipedia.org/wiki/Rsync). This is very
-similar to <code>rclone</code>. However, it's mostly focused at synchronising
+similar to <code>rclone</code>. However, it's mostly focused at synchronizing
 between local copies or a local and remote copy. Not necessarily between
 two remote targets. With this quantity of files, <code>rsync</code>
 halted then failed upon restart after a few hours. Unlike <code>cp</code>,
@@ -191,12 +191,13 @@ tail -fn10 /path/to/rclone-transfer.log
 
 ## validation
 
-After the transfer is complete, it's important to validate
-the transfer was successful. We can check the logs
-and use [rclone check](https://rclone.org/commands/rclone_check/).
+After the transfer is complete, <code>rclone</code> will run validation checks.
+It also runs retry attempts for errors it found along the way.
 
-The <code>rclone check</code> command is explicitly made for this task,
-as the docs say it: "checks the files in the source and destination match."
+We can then check the logs and run another round of validation
+with [rclone check](https://rclone.org/commands/rclone_check/), which
+is explicitly made for this. As the docs say it:
+"checks the files in the source and destination match."
 
 Here, I wanted the __destination__ to exactly match the __source__. Specifically,
 I needed to purge sub-directories left over from previous failed transferred
