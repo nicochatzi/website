@@ -11,7 +11,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head >
+          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://plausible.io; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'self';" />
+        </Head >
         <body
           className={cx(
             "",
