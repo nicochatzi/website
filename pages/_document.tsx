@@ -13,12 +13,12 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head />
         <meta http-equiv="Content-Security-Policy" content="
-          default-src 'self';
-          script-src 'self' 'unsafe-inline' https://plausible.io https://s3.amazonaws.com https://nicochatzi.github.io https://youtube.com 'unsafe-eval';
-          style-src 'self' 'unsafe-inline' https://s3.amazonaws.com https://nicochatzi.github.io https://youtube.com ;
-          img-src 'self' https://s3.amazonaws.com https://nicochatzi.github.io https://youtube.com;
-          connect-src 'self' https://plausible.io https://s3.amazonaws.com https://nicochatzi.github.io https://youtube.com;
-          font-src 'self' https://s3.amazonaws.com https://nicochatzi.github.io https://youtube.com;
+          default-src 'self' https://youtube.com;
+          script-src 'self' 'unsafe-inline' https://plausible.io https://s3.amazonaws.com https://nicochatzi.github.io 'unsafe-eval';
+          style-src 'self' 'unsafe-inline' https://s3.amazonaws.com https://nicochatzi.github.io;
+          img-src 'self' https://s3.amazonaws.com https://nicochatzi.github.io;
+          connect-src 'self' https://plausible.io https://s3.amazonaws.com https://nicochatzi.github.io;
+          font-src 'self' https://s3.amazonaws.com https://nicochatzi.github.io;
         "/>
         <body
           className={cx(
