@@ -11,16 +11,15 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head >
-          <meta http-equiv="Content-Security-Policy" content="
-            default-src 'self';
-            script-src 'self' 'unsafe-inline' https://plausible.io;
-            style-src 'self' 'unsafe-inline';
-            img-src 'self';
-            connect-src 'self' https://plausible.io;
-            font-src 'self';
-          "/>
-        </Head >
+        <Head />
+        <meta http-equiv="Content-Security-Policy" content="
+          default-src 'self';
+          script-src 'self' 'unsafe-inline' https://plausible.io https://s3.amazonaws.com https://nicochatzi.github.io https://youtube.com 'unsafe-eval';
+          style-src 'self' 'unsafe-inline' https://s3.amazonaws.com https://nicochatzi.github.io https://youtube.com ;
+          img-src 'self' https://s3.amazonaws.com https://nicochatzi.github.io https://youtube.com;
+          connect-src 'self' https://plausible.io https://s3.amazonaws.com https://nicochatzi.github.io https://youtube.com;
+          font-src 'self' https://s3.amazonaws.com https://nicochatzi.github.io https://youtube.com;
+        "/>
         <body
           className={cx(
             "",
