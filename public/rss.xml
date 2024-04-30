@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[htz.dev | posts]]></title>
+        <description><![CDATA[news, notes and posts about code]]></description>
+        <link>https://htz.dev</link>
+        <image>
+            <url>https://htz.dev/images/aud.gif</url>
+            <title>htz.dev | posts</title>
+            <link>https://htz.dev</link>
+        </image>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Tue, 30 Apr 2024 15:26:57 GMT</lastBuildDate>
+        <atom:link href="https://htz.dev/rss.xml" rel="self" type="application/rss+xml"/>
+        <pubDate>Tue, 30 Apr 2024 15:26:57 GMT</pubDate>
+        <copyright><![CDATA[All rights reserved 2024, nico]]></copyright>
+        <item>
+            <title><![CDATA[from google drive to proton drive with rclone]]></title>
+            <description><![CDATA[reliably migrate to secure storage service]]></description>
+            <link>https://htz.dev/posts/from-google-to-proton-drive</link>
+            <guid isPermaLink="true">https://htz.dev/posts/from-google-to-proton-drive</guid>
+            <pubDate>Wed, 29 May 2024 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[vim cheats]]></title>
+            <link>https://htz.dev/posts/vim-cheats</link>
+            <guid isPermaLink="true">https://htz.dev/posts/vim-cheats</guid>
+            <pubDate>Wed, 13 Dec 2023 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[embedded rust resources]]></title>
+            <link>https://htz.dev/posts/rust-embedded-resources</link>
+            <guid isPermaLink="true">https://htz.dev/posts/rust-embedded-resources</guid>
+            <pubDate>Tue, 10 Oct 2023 00:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

@@ -13,6 +13,7 @@ const Home: NextPage = () => {
             { url: '/posts', text: 'posts/' },
             { url: '/projects', text: 'projects.md' },
             { url: '/about', text: 'about.md' },
+            { url: '/rss.xml', text: 'rss.xml' },
           ]}
         />
       </Page >

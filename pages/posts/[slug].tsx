@@ -14,6 +14,7 @@ import rehypeSlug from 'rehype-slug';
 import { formatDate } from "@/lib/formatDate";
 import { Tags } from "@/components/Tag";
 import Socials from "@/components/Socials";
+import generateRssFeed from "@/lib/generateRssFeed";
 
 interface ContextProps extends ParsedUrlQuery {
   slug: string;
@@ -108,6 +109,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
+  await generateRssFeed();
+
   const { slug } = context.params as ContextProps;
   const mdxFiles = getAllMdxPosts();
   const postIndex = mdxFiles.findIndex(post => post.frontMatter.slug === slug);
