@@ -1,0 +1,119 @@
+---
+title: "backing up cloud data on NixOS"
+description: "use rclone to backup cloud storage data"
+date: "2024-05-30"
+tags: ['linux', 'cloud', 'rclone']
+published: false
+---
+
+I have data scattered across a handful of cloud servers:
+
+- [Proton Drive]()
+- [Google Drive]()
+- [Amazon S3]()
+- [GitHub]()
+
+What if someone losses my stuff? Let's back it up.
+
+## the machine
+
+I started to experiment with this backup system while I was away from home.
+To test it out, I leveraged <code>nix</code> and NixOS, as [described here](#testing).
+
+Once home, I used a [Raspberry Pi 3](), and used __exactly__ the
+same headless NixOS configuration. The code is run in a nix shell
+with all the required dependencies specified upfront. So moving
+from the test environment to the Pi worked like a charm, I love NixOS.
+
+The Pi has a 64GB SD card, which would already cover my needs.
+Just to be safe, there's a secondary backup on an SSD. Essentially,
+all the steps described in the rest of this post are done
+twice. Each with a different target directory, one on the SD card
+and one for the SSD.
+
+The NixOS [config is (probably) here](). Just like
+all my other machines, it has my [dotfiles]().
+Which is where all the code used in this post resides.
+
+## storages
+
+The cloud storages are divided into two types of sources:
+
+1. <code>code</code>: GitHub
+2. <code>data</code>: Google / Proton / S3
+
+### code
+
+To synchronize all my GitHub repos, the machine needed
+[SSH keys]() to access private repos. After that was setup,
+a simple script does the trick, it:
+
+1. lists all repos for the current user
+2. clones all the repos it doesn't find locally
+3. fetches and pulls (or hard-resets) existing repos
+
+The script is run daily and generates a single log file per run.
+A single run goes through all repos and is only run once a day.
+
+The script is actually a little Rust CLI with additional
+flags so that the user:
+
+- can set a destination directory
+- can disable cloning new repos
+- can disable hard-resets or try to pull changes
+
+Since this is in my [dotfiles](), all my machines have access to the tool.
+So for my other dev machines I can use the tool to keep all my repos
+in sync if there are no conflicts.
+
+### data
+
+As mentioned in [this post](), [rclone]() is perfect for
+working with cloud storages. To create local hard-copies
+that are in sync with the remote servers' content,
+use [rclone sync]().
+
+#### archiving deleted data
+
+If files were deleted, it is most likely that I no longer
+needed them. But it could also be an error, user or otherwise.
+So this system should keep an archive of deleted files.
+
+## notifications
+
+I don't want to actively monitor this system, but I
+want occasional notifications to:
+
+1. check that it's still running
+2. know if there is an irrecoverable error
+3. know when free disk space is low
+
+For this, the system uploads log files to an [S3 bucket]()
+that triggers a [lambda]() which send an email via [SES]().
+That way, I:
+
+- get email notifications which are accessible on all my devices
+- can view the logs without having to remotely connect to my backup machine
+
+The log files are generated from the script and placed into a
+locally rclone-configured mount point. So when running the script,
+I can just point it to a local directory to place the logs.
+
+For the lambda, it's pretty straightforward. It's part of my
+"personal backend", [code here]() (or somewhere in [that repo]()).
+Just trigger for a given event, send an email with the content
+and name of the log.
+
+## testing
+
+Before running this on my Pi at home, I tested it out in a Docker container
+locally. The container, [code here](), just starts from a bare-bones NixOS image.
+I'm using it just to have a fresh file-system. The heavy lifting is done
+with the [flake.nix](). The flake provides all the version-pinned
+dependencies.
+
+This is great because I know __exactly__ what's required for the application
+and I don't need to install anything else (or docker/podman even) on the Pi which already
+runs on NixOS. Plus, the <code>flake.lock</code> and [rust-toolchain.toml]()
+ensure all versions are pinned.
+
