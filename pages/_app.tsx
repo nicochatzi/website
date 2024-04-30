@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
 import { Header } from "@/components/Header";
 import localFont from 'next/font/local';
+import PlausibleProvider from "next-plausible";
 
 const jetbrains = localFont({
   src: [
@@ -33,18 +34,20 @@ const jetbrains = localFont({
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <ThemeProvider
-        defaultTheme="system"
-        attribute="class"
-      >
-        <div className={`${jetbrains.variable} font-sans flex flex-col max-w-3xl mx-auto min-h-full px-4`}>
-          <Header />
-          <main id="main">
-            <Component {...pageProps} />
-          </main>
-          <footer className="py-16" />
-        </div>
-      </ThemeProvider >
+      <PlausibleProvider domain="htz.dev">
+        <ThemeProvider
+          defaultTheme="system"
+          attribute="class"
+        >
+          <div className={`${jetbrains.variable} font-sans flex flex-col max-w-3xl mx-auto min-h-full px-4`}>
+            <Header />
+            <main id="main">
+              <Component {...pageProps} />
+            </main>
+            <footer className="py-16" />
+          </div>
+        </ThemeProvider >
+      </PlausibleProvider>
     </>
   );
 }
