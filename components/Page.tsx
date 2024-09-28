@@ -1,4 +1,4 @@
-import Head from "next/head";
+import { Metadata } from "next";
 import { onlyText } from "react-children-utilities";
 import { formatDate } from "@/lib/formatDate";
 import siteConfig from "@/data/siteConfig";
@@ -12,34 +12,33 @@ interface PageProps {
   thumbnail?: string;
   children?: React.ReactNode;
 }
+export const generateMetadata = ({ params }: { params: PageProps }): Metadata => {
+  const metaTitle = onlyText(params.title);
+  const metaDescription = params.description
+    ? onlyText(params.description)
+    : siteConfig.siteDescription;
+  const metaThumbnail = params.thumbnail ? params.thumbnail : siteConfig.siteThumbnail;
+  const customTitle = `${metaTitle} - ${siteConfig.siteName}`;
+
+  return {
+    title: customTitle,
+    description: metaDescription,
+    openGraph: {
+      title: metaTitle,
+      description: metaDescription,
+      images: [`${siteConfig.siteUrl}${metaThumbnail}`],
+    },
+  };
+};
 
 export const Page: React.FC<PageProps> = ({
   date,
   title,
   description,
-  thumbnail,
   children,
 }) => {
-  const metaTitle = onlyText(title);
-  const metaDescription = description
-    ? onlyText(description)
-    : siteConfig.siteDescription;
-  const metaThumbnail = thumbnail ? thumbnail : siteConfig.siteThumbnail;
-  // fixed https://github.com/vercel/next.js/discussions/38256
-  const customTitle = `${metaTitle} - ${siteConfig.siteName}`;
   return (
     <>
-      <Head>
-        <title>{customTitle}</title>
-        <meta name="og:url" content={siteConfig.siteUrl} />
-        <meta property="og:title" content={metaTitle} />
-        <meta name="description" content={metaDescription} />
-        <meta name="og:description" content={metaDescription} />
-        <meta
-          property="og:image"
-          content={`${siteConfig.siteUrl}${metaThumbnail}`}
-        />
-      </Head>
       <header className={cx("mb-10 pb-4", "border-red-pale", "dark:border-yellow")}>
         <h1 className={cx("font-bold text-6xl", "text-red-pale", "dark:text-yellow")}>
           {title}
@@ -60,4 +59,4 @@ export const Page: React.FC<PageProps> = ({
       {children}
     </>
   );
-};
+}
