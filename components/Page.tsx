@@ -12,12 +12,18 @@ interface PageProps {
   thumbnail?: string;
   children?: React.ReactNode;
 }
-export const generateMetadata = ({ params }: { params: PageProps }): Metadata => {
+export const generateMetadata = ({
+  params,
+}: {
+  params: PageProps;
+}): Metadata => {
   const metaTitle = onlyText(params.title);
   const metaDescription = params.description
     ? onlyText(params.description)
     : siteConfig.siteDescription;
-  const metaThumbnail = params.thumbnail ? params.thumbnail : siteConfig.siteThumbnail;
+  const metaThumbnail = params.thumbnail
+    ? params.thumbnail
+    : siteConfig.siteThumbnail;
   const customTitle = `${metaTitle} - ${siteConfig.siteName}`;
 
   return {
@@ -39,19 +45,38 @@ export const Page: React.FC<PageProps> = ({
 }) => {
   return (
     <>
-      <header className={cx("mb-10 pb-4", "border-red-pale", "dark:border-yellow")}>
-        <h1 className={cx("font-bold text-6xl", "text-red-pale", "dark:text-yellow")}>
+      <header
+        className={cx("mb-10 pb-4", "border-red-pale", "dark:border-yellow")}
+      >
+        <h1
+          className={cx(
+            "font-bold text-6xl",
+            "text-red-pale",
+            "dark:text-yellow",
+          )}
+        >
           {title}
         </h1>
         {date ? (
-          <time className={cx("block mb-0 py-2", "text-gray-500", "dark:text-gray-400")}>
-            {"∟ "}{formatDate(date)}
+          <time
+            className={cx(
+              "block mb-0 py-2",
+              "text-gray-500",
+              "dark:text-gray-400",
+            )}
+          >
+            {"∟ "}
+            {formatDate(date)}
           </time>
         ) : null}
         {description ? (
           <div className="mt-4">
             <Prose>
-              {typeof description === "string" ? (<p>{description}</p>) : (description)}
+              {typeof description === "string" ? (
+                <p>{description}</p>
+              ) : (
+                description
+              )}
             </Prose>
           </div>
         ) : null}
@@ -59,4 +84,4 @@ export const Page: React.FC<PageProps> = ({
       {children}
     </>
   );
-}
+};

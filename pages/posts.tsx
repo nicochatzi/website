@@ -12,12 +12,9 @@ interface HomeProps {
 const PostsPage: NextPage<HomeProps> = ({ posts }) => {
   return (
     <>
-      <Page
-        title="posts"
-        description={""}
-      >
+      <Page title="posts" description={""}>
         <PostList posts={posts} />
-      </Page >
+      </Page>
       <Socials />
     </>
   );
@@ -27,8 +24,8 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       posts: getAllMdxPosts()
-        .filter(post => post.frontMatter.published)
-        .map(post => post.frontMatter),
+        .filter((post) => post.frontMatter.published)
+        .map((post) => post.frontMatter),
     },
   };
 };

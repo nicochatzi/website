@@ -10,7 +10,7 @@ import { Prose } from "@/components/Prose";
 import { cx } from "@/lib/utils";
 import rehypePrism from "rehype-prism-plus";
 import remarkGfm from "remark-gfm";
-import rehypeSlug from 'rehype-slug';
+import rehypeSlug from "rehype-slug";
 import { formatDate } from "@/lib/formatDate";
 import { Tags } from "@/components/Tag";
 import Socials from "@/components/Socials";
@@ -27,36 +27,47 @@ interface PostProps {
   next: MDXFrontMatter | null;
 }
 
-const FollowPost: React.FC<{ post: MDXFrontMatter, direction: "left" | "right" }> = ({ post, direction }) => {
+const FollowPost: React.FC<{
+  post: MDXFrontMatter;
+  direction: "left" | "right";
+}> = ({ post, direction }) => {
   return (
-    <div className={direction === "left" ? "col-start-1 text-left" : "col-start-2 text-right"}>
-      <p className={cx(
-        "mb-2 uppercase tracking-wider text-m",
-        "text-gray-200",
-        "dark:text-gray-700"
-      )}>
+    <div
+      className={
+        direction === "left"
+          ? "col-start-1 text-left"
+          : "col-start-2 text-right"
+      }
+    >
+      <p
+        className={cx(
+          "mb-2 uppercase tracking-wider text-m",
+          "text-gray-200",
+          "dark:text-gray-700",
+        )}
+      >
         {direction === "left" ? "←-----" : "-----→"}
       </p>
-      <Link href={`/posts/${post.slug}`} className={cx(
-        "font-bold",
-        "text-purple hover:text-red-pale",
-        "dark:text-teal-deep dark:hover:text-yellow"
-      )}>
+      <Link
+        href={`/posts/${post.slug}`}
+        className={cx(
+          "font-bold",
+          "text-purple hover:text-red-pale",
+          "dark:text-teal-deep dark:hover:text-yellow",
+        )}
+      >
         {post.title}
       </Link>
-      <time className={cx(
-        "block mb-4",
-        "text-gray-500",
-        "dark:text-gray-500"
-      )}>
-        {"∟ "}{formatDate(post.date)}
+      <time className={cx("block mb-4", "text-gray-500", "dark:text-gray-500")}>
+        {"∟ "}
+        {formatDate(post.date)}
       </time>
       {post.tags ? (
         <div className="">
           <Tags post={post} />
         </div>
       ) : null}
-    </div >
+    </div>
   );
 };
 
@@ -71,7 +82,7 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
           className={cx(
             "-mt-4 pt-12 border-t",
             "border-gray-200",
-            "dark:border-gray-700"
+            "dark:border-gray-700",
           )}
         />
         <Prose>
@@ -82,15 +93,13 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
             className={cx(
               "mt-8 pt-8 grid grid-cols-2 gap-8 border-t",
               "border-gray-200",
-              "dark:border-gray-700"
+              "dark:border-gray-700",
             )}
           >
             {previous ? (
               <FollowPost post={previous!} direction={"left"} />
             ) : null}
-            {next ? (
-              <FollowPost post={next!} direction={"right"} />
-            ) : null}
+            {next ? <FollowPost post={next!} direction={"right"} /> : null}
           </nav>
         ) : null}
       </Page>
@@ -101,7 +110,7 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: getAllMdxPosts().map(post => ({
+    paths: getAllMdxPosts().map((post) => ({
       params: { slug: post.frontMatter.slug },
     })),
     fallback: false,
@@ -113,7 +122,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const { slug } = context.params as ContextProps;
   const mdxFiles = getAllMdxPosts();
-  const postIndex = mdxFiles.findIndex(post => post.frontMatter.slug === slug);
+  const postIndex = mdxFiles.findIndex(
+    (post) => post.frontMatter.slug === slug,
+  );
   const post = mdxFiles[postIndex];
   const { frontMatter, content } = post;
   const mdxContent = await serialize(content, {
@@ -124,9 +135,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
     scope: frontMatter,
   });
   const getPostLink = (i: number) => {
-    return mdxFiles[i] && mdxFiles[i].frontMatter.published ?
-      mdxFiles[i].frontMatter : null;
-  }
+    return mdxFiles[i] && mdxFiles[i].frontMatter.published
+      ? mdxFiles[i].frontMatter
+      : null;
+  };
   return {
     props: {
       frontMatter,

@@ -35,7 +35,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
             tag: slugify(tag!),
           },
         };
-      }
+      },
     ),
     fallback: false,
   };

@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import styled from 'styled-components';
-import { cx } from '@/lib/utils';
+import styled from "styled-components";
+import { cx } from "@/lib/utils";
 
 export interface TreeListInfo {
   url: string;
@@ -20,19 +20,21 @@ interface ListItemProps {
 
 const ListItem = styled.li<ListItemProps>`
   ::before {
-    content: '${props => (props.$isLast || props.$isTyping) ? '└──' : '├──'} ';
+    content: '${(props) => (props.$isLast || props.$isTyping ? "└──" : "├──")} ';
   }
 `;
 
-export const TreeListItem: React.FC<TreeListItemProps & { onReady: () => void; }> = ({ info: { url, text }, onReady, isLast }) => {
+export const TreeListItem: React.FC<
+  TreeListItemProps & { onReady: () => void }
+> = ({ info: { url, text }, onReady, isLast }) => {
   const index = useRef(0);
-  const [visibleText, setVisibleText] = useState<string>('');
+  const [visibleText, setVisibleText] = useState<string>("");
   const [isTyping, setIsTyping] = useState<boolean>(true);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (index.current < text?.length) {
-        const cursor = index.current < text.length - 1 ? '|' : '';
+        const cursor = index.current < text.length - 1 ? "|" : "";
         setVisibleText(text.slice(0, index.current + 1) + cursor);
         index.current += 1;
       } else {
@@ -41,7 +43,7 @@ export const TreeListItem: React.FC<TreeListItemProps & { onReady: () => void; }
       }
     }, 30);
     return () => clearTimeout(timeout);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, visibleText]);
 
   return (
@@ -51,8 +53,9 @@ export const TreeListItem: React.FC<TreeListItemProps & { onReady: () => void; }
       className={cx(
         "text-2xl my-1",
         "text-purple hover:text-red-pale",
-        "dark:text-teal-deep dark:hover:text-gray-200"
-      )}>
+        "dark:text-teal-deep dark:hover:text-gray-200",
+      )}
+    >
       {url ? (
         <Link href={url} itemProp="url">
           {visibleText}
@@ -70,9 +73,9 @@ export interface TreeListProps {
 
 export const TreeList: React.FC<TreeListProps> = ({ items }) => {
   const index = useRef(1);
-  const leafs = [{ url: '', text: '.' }, ...items];
+  const leafs = [{ url: "", text: "." }, ...items];
   const [visibleLeafs, setVisibleLeafs] = useState<TreeListInfo[]>(
-    leafs.slice(0, index.current)
+    leafs.slice(0, index.current),
   );
 
   return (

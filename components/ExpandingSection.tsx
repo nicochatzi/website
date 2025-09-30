@@ -1,11 +1,14 @@
-import React, { useState, ReactNode } from 'react';
+import React, { useState, ReactNode } from "react";
 
 interface ExpandingSectionProps {
   title: string;
   children: ReactNode;
 }
 
-const ExpandingSection: React.FC<ExpandingSectionProps> = ({ title, children }) => {
+const ExpandingSection: React.FC<ExpandingSectionProps> = ({
+  title,
+  children,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -17,7 +20,7 @@ const ExpandingSection: React.FC<ExpandingSectionProps> = ({ title, children }) 
         {title}
       </button>
       <div
-        className={`absolute right-0 top-0 w-72 transition-all overflow-hidden ${isOpen ? 'max-h-screen' : 'max-h-0'}`}
+        className={`absolute right-0 top-0 w-72 transition-all overflow-hidden ${isOpen ? "max-h-screen" : "max-h-0"}`}
       >
         <div className="border-l border-gray-300 p-4 bg-white dark:bg-gray-800 shadow-lg">
           {isOpen && children}
@@ -28,4 +31,3 @@ const ExpandingSection: React.FC<ExpandingSectionProps> = ({ title, children }) 
 };
 
 export default ExpandingSection;
-

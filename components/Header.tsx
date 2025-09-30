@@ -19,7 +19,7 @@ export const Header: React.FC = () => {
                   aria-current={isActive ? "page" : undefined}
                   className={cx(
                     "text-gray-400 hover:text-gray-950",
-                    "dark:text-gray-400 dark:hover:text-gray-200"
+                    "dark:text-gray-400 dark:hover:text-gray-200",
                   )}
                 >
                   {item.label}

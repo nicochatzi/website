@@ -12,7 +12,7 @@ export const Note: React.FC<NoteProps> = ({ emoji, children }) => {
       className={cx(
         "p-4 flex gap-4 border rounded-md",
         "bg-gray-100",
-        "dark:bg-gray-800 dark:border-gray-700"
+        "dark:bg-gray-800 dark:border-gray-700",
       )}
     >
       {emoji ? <span>{emoji}</span> : null}

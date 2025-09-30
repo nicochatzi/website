@@ -8,9 +8,7 @@ import { MDX } from "@/components/MDX";
 const Project: NextPage<MdxProps> = ({ frontMatter, mdx }) => {
   return (
     <>
-      <Page
-        {...frontMatter}
-      >
+      <Page {...frontMatter}>
         <div className="mt-auto py-2" />
         <Prose>
           <MDX mdx={mdx} />
@@ -21,6 +19,7 @@ const Project: NextPage<MdxProps> = ({ frontMatter, mdx }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = makeGetMdxStaticProps('projects.mdx');
+export const getStaticProps: GetStaticProps =
+  makeGetMdxStaticProps("projects.mdx");
 
 export default Project;

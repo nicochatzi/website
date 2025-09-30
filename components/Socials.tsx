@@ -12,13 +12,13 @@ const SOCIAL_ICONS: { [key: string]: React.ReactNode } = {
 const Socials: React.FC = () => (
   <div className="mt-auto py-12">
     {siteConfig.social ? (
-      <ul className="flex justify-center space-x-4" >
+      <ul className="flex justify-center space-x-4">
         {Object.entries(siteConfig.social).map(([key, href]) => {
           return (
             <li key={key}>
               <a
                 href={href}
-                style={{ boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)' }}
+                style={{ boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)" }}
                 className={cx(
                   "w-8 h-8 grid place-items-center rounded-md",
                   "bg-gray-200 text-gray-900 hover:bg-gray-800 hover:text-gray-100",
@@ -37,4 +37,3 @@ const Socials: React.FC = () => (
 );
 
 export default Socials;
-
