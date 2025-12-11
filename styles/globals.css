@@ -1,6 +1,36 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-purple: #a280e5;
+  --color-purple-pale: #947fb8;
+  --color-blue: #7e9cd8;
+  --color-blue-light: #7eb4c9;
+  --color-red: #ff5d62;
+  --color-red-pale: #d27e9a;
+  --color-yellow: #e6c384;
+  --color-orange: #de935f;
+  --color-orange-pale: #cda46c;
+  --color-cyan: #7eb4c9;
+  --color-teal: #66ffdd;
+  --color-teal-deep: #40a592;
+  --color-green: #5faf94;
+  --color-offwhite: #dcd7ba;
+  --color-gray-50: #f3f4f6;
+  --color-gray-100: #ece7ea;
+  --color-gray-200: #dcd7ba;
+  --color-gray-300: #9ca3af;
+  --color-gray-400: #657b83;
+  --color-gray-500: #666666;
+  --color-gray-600: #54546d;
+  --color-gray-700: #404040;
+  --color-gray-800: #3d3d3d;
+  --color-gray-900: #282c34;
+  --color-gray-925: #181819;
+  --color-gray-950: #0a0a0f;
+  
+  --font-family-sans: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-family-jetbrains: var(--font-jetbrains);
+}
 
 html,
 body,
@@ -82,12 +112,12 @@ pre[class*="language-"] {
 .token.comment,
 .token.prolog,
 .token.cdata {
-  color: theme(colors.gray.300);
+  color: var(--color-gray-300);
   font-style: italic;
 }
 
 .token.punctuation {
-  color: theme(colors.cyan);
+  color: var(--color-cyan);
 }
 
 .namespace {
@@ -95,34 +125,34 @@ pre[class*="language-"] {
 }
 
 .token.deleted {
-  color: theme(colors.red.DEFAULT);
+  color: var(--color-red);
   font-style: italic;
 }
 
 .token.symbol,
 .token.property {
-  color: theme(colors.blue.DEFAULT);
+  color: var(--color-blue);
 }
 
 .token.tag,
 .token.operator,
 .token.keyword {
-  color: theme(colors.purple.DEFAULT);
+  color: var(--color-purple);
 }
 
 .token.boolean {
-  color: theme(colors.red.pale);
+  color: var(--color-red-pale);
 }
 
 .token.number {
-  color: theme(colors.red.pale);
+  color: var(--color-red-pale);
 }
 
 .token.constant,
 .token.function,
 .token.builtin,
 .token.char {
-  color: theme(colors.blue.light);
+  color: var(--color-blue-light);
 }
 
 .token.selector,
@@ -154,7 +184,7 @@ pre[class*="language-"] {
 .token.regex,
 .token.important,
 .token.variable {
-  color: theme(colors.gray.50);
+  color: var(--color-gray-50);
 }
 
 .token.important,

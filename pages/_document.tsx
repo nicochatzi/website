@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head />
         <meta
-          http-equiv="Content-Security-Policy"
+          httpEquiv="Content-Security-Policy"
           content="
           default-src 'self';
           script-src 'self' 'unsafe-inline' https://plausible.io https://s3.amazonaws.com https://nicochatzi.github.io 'unsafe-eval';
