@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { cx } from "@/lib/utils";
 
@@ -44,12 +45,12 @@ export const TreeListItem: React.FC<
     }, 30);
     return () => clearTimeout(timeout);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text, visibleText]);
+  }, [text, onReady]);
 
   return (
     <ListItem
       $isTyping={isTyping}
-      $isLast={isLast!}
+      $isLast={isLast}
       className={cx(
         "text-2xl my-1",
         "text-purple hover:text-red-pale",
@@ -61,7 +62,7 @@ export const TreeListItem: React.FC<
           {visibleText}
         </Link>
       ) : (
-        <>{visibleText}</>
+        visibleText
       )}
     </ListItem>
   );
@@ -82,7 +83,7 @@ export const TreeList: React.FC<TreeListProps> = ({ items }) => {
     <ul>
       {visibleLeafs.map((props, i) => (
         <TreeListItem
-          key={i}
+          key={`${props.url}-${props.text}`}
           info={props}
           isLast={i === visibleLeafs.length - 1}
           onReady={() => {

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { Sun, Moon } from "react-feather";
+import { useEffect, useState } from "react";
+import { Moon, Sun } from "react-feather";
 import { cx } from "@/lib/utils";
 
 const THEME_MAP: { [key: string]: React.ReactNode } = {
@@ -28,6 +28,7 @@ export const ThemeSelect = () => {
     >
       {Object.keys(THEME_MAP).map((theme) => (
         <button
+          type="button"
           key={theme}
           style={{
             flex: 1,

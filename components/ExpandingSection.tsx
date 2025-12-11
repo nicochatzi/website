@@ -1,4 +1,5 @@
-import React, { useState, ReactNode } from "react";
+import type React from "react";
+import { type ReactNode, useState } from "react";
 
 interface ExpandingSectionProps {
   title: string;
@@ -14,6 +15,7 @@ const ExpandingSection: React.FC<ExpandingSectionProps> = ({
   return (
     <div className="relative">
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="text-left w-full text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
       >

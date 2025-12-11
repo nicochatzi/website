@@ -1,13 +1,14 @@
-import fs from "fs";
-import path from "path";
+import assert from "node:assert";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
-import type { MDXFrontMatter } from "@/lib/types";
-import assert from "assert";
+import type { GetStaticProps } from "next";
+import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import rehypePrism from "rehype-prism-plus";
-import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
-import { GetStaticProps } from "next";
+import remarkGfm from "remark-gfm";
+import type { MDXFrontMatter } from "@/lib/types";
 
 const root = process.cwd();
 export const contentPath = path.join(root, "content");
@@ -51,11 +52,11 @@ export const getAllMdxPosts = () => {
 
 export interface MdxProps {
   frontMatter: MDXFrontMatter;
-  mdx: any;
+  mdx: MDXRemoteSerializeResult;
 }
 
 export const makeGetMdxStaticProps = (fileName: string): GetStaticProps => {
-  return async (context) => {
+  return async (_context) => {
     const { frontMatter, content } = getMdxContent(fileName);
     const mdxContent = await serialize(content, {
       mdxOptions: {

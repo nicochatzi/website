@@ -1,9 +1,9 @@
 import type { GetStaticProps, NextPage } from "next";
-import { getAllMdxPosts } from "@/lib/mdx";
-import { MDXFrontMatter } from "@/lib/types";
 import { Page } from "@/components/Page";
 import { PostList } from "@/components/PostList";
 import Socials from "@/components/Socials";
+import { getAllMdxPosts } from "@/lib/mdx";
+import type { MDXFrontMatter } from "@/lib/types";
 
 interface HomeProps {
   posts: Array<MDXFrontMatter>;

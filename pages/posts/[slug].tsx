@@ -1,20 +1,21 @@
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { ParsedUrlQuery } from "querystring";
+import type { ParsedUrlQuery } from "node:querystring";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
+import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import { getAllMdxPosts } from "@/lib/mdx";
-import { MDXFrontMatter } from "@/lib/types";
-import { Page } from "@/components/Page";
-import { MDX } from "@/components/MDX";
-import { Prose } from "@/components/Prose";
-import { cx } from "@/lib/utils";
 import rehypePrism from "rehype-prism-plus";
-import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
-import { formatDate } from "@/lib/formatDate";
-import { Tags } from "@/components/Tag";
+import remarkGfm from "remark-gfm";
+import { MDX } from "@/components/MDX";
+import { Page } from "@/components/Page";
+import { Prose } from "@/components/Prose";
 import Socials from "@/components/Socials";
+import { Tags } from "@/components/Tag";
+import { formatDate } from "@/lib/formatDate";
 import generateRssFeed from "@/lib/generateRssFeed";
+import { getAllMdxPosts } from "@/lib/mdx";
+import type { MDXFrontMatter } from "@/lib/types";
+import { cx } from "@/lib/utils";
 
 interface ContextProps extends ParsedUrlQuery {
   slug: string;
@@ -22,7 +23,7 @@ interface ContextProps extends ParsedUrlQuery {
 
 interface PostProps {
   frontMatter: MDXFrontMatter;
-  mdx: any;
+  mdx: MDXRemoteSerializeResult;
   previous: MDXFrontMatter | null;
   next: MDXFrontMatter | null;
 }
@@ -97,9 +98,9 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
             )}
           >
             {previous ? (
-              <FollowPost post={previous!} direction={"left"} />
+              <FollowPost post={previous} direction={"left"} />
             ) : null}
-            {next ? <FollowPost post={next!} direction={"right"} /> : null}
+            {next ? <FollowPost post={next} direction={"right"} /> : null}
           </nav>
         ) : null}
       </Page>
@@ -135,9 +136,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     scope: frontMatter,
   });
   const getPostLink = (i: number) => {
-    return mdxFiles[i] && mdxFiles[i].frontMatter.published
-      ? mdxFiles[i].frontMatter
-      : null;
+    return mdxFiles[i]?.frontMatter.published ? mdxFiles[i].frontMatter : null;
   };
   return {
     props: {

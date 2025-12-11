@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import RSS from "rss";
 import { getAllMdxPosts } from "./mdx";
 
@@ -18,7 +18,7 @@ export default async function generateRssFeed() {
 
   getAllMdxPosts()
     .filter((post) => post.frontMatter.published)
-    .map((post) => {
+    .forEach((post) => {
       feed.item({
         title: post.frontMatter.title,
         description: post.frontMatter.description || "",

@@ -1,8 +1,8 @@
 import Link from "next/link";
+import { Tags } from "@/components/Tag";
 import { formatDate } from "@/lib/formatDate";
 import type { MDXFrontMatter } from "@/lib/types";
 import { cx } from "@/lib/utils";
-import { Tags } from "@/components/Tag";
 
 interface PostListProps {
   posts: Array<MDXFrontMatter>;
@@ -11,8 +11,8 @@ interface PostListProps {
 export const PostList: React.FC<PostListProps> = ({ posts }) => {
   return (
     <ul>
-      {posts.map((post, index) => (
-        <li className="py-4" key={index}>
+      {posts.map((post) => (
+        <li className="py-4" key={post.slug}>
           <article className="flex justify-between items-center py-0">
             <div>
               <h2

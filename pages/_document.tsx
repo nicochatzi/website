@@ -1,5 +1,10 @@
-import { Html, Head, Main, NextScript } from "next/document";
-import Document, { DocumentContext } from "next/document";
+import Document, {
+  type DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from "next/document";
 import { cx } from "@/lib/utils";
 
 export default class MyDocument extends Document {

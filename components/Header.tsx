@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import siteConfig from "@/data/siteConfig";
-import Link from "next/link";
 import { cx } from "@/lib/utils";
 import { ThemeSelect } from "./ThemeSelect";
 
@@ -10,10 +10,10 @@ export const Header: React.FC = () => {
     <header className="py-12 flex justify-between items-end">
       <nav>
         <ul className="flex space-x-8">
-          {siteConfig.nav.map((item, index) => {
+          {siteConfig.nav.map((item) => {
             const isActive = item.href === pathname;
             return (
-              <li key={index}>
+              <li key={item.href}>
                 <Link
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}

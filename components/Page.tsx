@@ -1,8 +1,8 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { onlyText } from "react-children-utilities";
-import { formatDate } from "@/lib/formatDate";
-import siteConfig from "@/data/siteConfig";
 import { Prose } from "@/components/Prose";
+import siteConfig from "@/data/siteConfig";
+import { formatDate } from "@/lib/formatDate";
 import { cx } from "@/lib/utils";
 
 interface PageProps {
