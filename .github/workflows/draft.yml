@@ -25,5 +25,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - run: yarn install --frozen-lockfile
-      - run: yarn next lint
+      - run: yarn lint
       - run: yarn next build
