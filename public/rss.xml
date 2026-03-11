@@ -9,9 +9,9 @@
             <link>https://htz.dev</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 11 Mar 2026 14:49:27 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 11 Mar 2026 14:50:54 GMT</lastBuildDate>
         <atom:link href="https://htz.dev/rss.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 11 Mar 2026 14:49:27 GMT</pubDate>
+        <pubDate>Wed, 11 Mar 2026 14:50:54 GMT</pubDate>
         <copyright><![CDATA[All rights reserved 2026, nico]]></copyright>
         <item>
             <title><![CDATA[from google drive to proton drive with rclone]]></title>
