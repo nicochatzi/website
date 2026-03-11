@@ -5,6 +5,7 @@ import Document, {
   Main,
   NextScript,
 } from "next/document";
+import { jetbrains } from "@/lib/fonts";
 import { cx } from "@/lib/utils";
 
 export default class MyDocument extends Document {
@@ -15,7 +16,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" className={jetbrains.variable}>
         <Head />
         <meta
           httpEquiv="Content-Security-Policy"
@@ -29,7 +30,7 @@ export default class MyDocument extends Document {
           frame-src 'self' https://www.youtube.com https://youtube.com;
         "
         />
-        <body className={cx("", "bg-gray-50", "dark:bg-gray-925")}>
+        <body className={cx("bg-gray-50", "dark:bg-gray-925")}>
           <Main />
           <NextScript />
         </body>

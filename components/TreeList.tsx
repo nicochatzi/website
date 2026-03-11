@@ -1,70 +1,79 @@
 import Link from "next/link";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import { cx } from "@/lib/utils";
 
 export interface TreeListInfo {
   url: string;
   text: string;
+  isDir?: boolean;
 }
 
 interface TreeListItemProps {
   info: TreeListInfo;
   isLast: boolean;
+  onReady: () => void;
 }
 
-interface ListItemProps {
-  $isTyping: boolean;
-  $isLast: boolean;
-}
+const TYPING_SPEED_MS = 25;
 
-const ListItem = styled.li<ListItemProps>`
-  ::before {
-    content: '${(props) => (props.$isLast || props.$isTyping ? "└──" : "├──")} ';
-  }
-`;
+// U+251C ├, U+2514 └, U+2500 ─ — explicit box-drawing chars for correct monospace rendering
+const PREFIX_MID = "\u251C\u2500\u2500 ";
+const PREFIX_END = "\u2514\u2500\u2500 ";
 
-export const TreeListItem: React.FC<
-  TreeListItemProps & { onReady: () => void }
-> = ({ info: { url, text }, onReady, isLast }) => {
-  const index = useRef(0);
-  const [visibleText, setVisibleText] = useState<string>("");
-  const [isTyping, setIsTyping] = useState<boolean>(true);
+export const TreeListItem: React.FC<TreeListItemProps> = ({
+  info: { url, text, isDir },
+  onReady,
+  isLast,
+}) => {
+  const charIndex = useRef(0);
+  const onReadyRef = useRef(onReady);
+  onReadyRef.current = onReady;
+
+  const [visibleText, setVisibleText] = useState("");
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (index.current < text?.length) {
-        const cursor = index.current < text.length - 1 ? "|" : "";
-        setVisibleText(text.slice(0, index.current + 1) + cursor);
-        index.current += 1;
+    charIndex.current = 0;
+    setVisibleText("");
+    setDone(false);
+
+    let timer: ReturnType<typeof setTimeout>;
+    const tick = () => {
+      if (charIndex.current < text.length) {
+        const i = charIndex.current;
+        const showCursor = i < text.length - 1;
+        setVisibleText(text.slice(0, i + 1) + (showCursor ? "\u2587" : ""));
+        charIndex.current += 1;
+        timer = setTimeout(tick, TYPING_SPEED_MS);
       } else {
-        setIsTyping(false);
-        onReady();
+        setDone(true);
+        onReadyRef.current();
       }
-    }, 30);
-    return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text, onReady]);
+    };
+    timer = setTimeout(tick, TYPING_SPEED_MS);
+    return () => clearTimeout(timer);
+  }, [text]);
+
+  const content = (
+    <span className="flex items-baseline leading-snug select-none text-2xl text-purple hover:text-red-pale dark:text-teal-deep dark:hover:text-yellow transition-colors">
+      <span className="whitespace-pre">{isLast ? PREFIX_END : PREFIX_MID}</span>
+      <span>
+        {visibleText}
+        {done && isDir && <span className="opacity-60">/</span>}
+      </span>
+    </span>
+  );
 
   return (
-    <ListItem
-      $isTyping={isTyping}
-      $isLast={isLast}
-      className={cx(
-        "text-2xl my-1",
-        "text-purple hover:text-red-pale",
-        "dark:text-teal-deep dark:hover:text-gray-200",
-      )}
-    >
+    <li>
       {url ? (
-        <Link href={url} itemProp="url">
-          {visibleText}
+        <Link href={url} itemProp="url" className="block">
+          {content}
         </Link>
       ) : (
-        visibleText
+        content
       )}
-    </ListItem>
+    </li>
   );
 };
 
@@ -73,27 +82,25 @@ export interface TreeListProps {
 }
 
 export const TreeList: React.FC<TreeListProps> = ({ items }) => {
-  const index = useRef(1);
-  const leafs = [{ url: "", text: "." }, ...items];
-  const [visibleLeafs, setVisibleLeafs] = useState<TreeListInfo[]>(
-    leafs.slice(0, index.current),
-  );
+  const [visibleCount, setVisibleCount] = useState(1);
+  const visibleItems = items.slice(0, visibleCount);
+  const showNext = () => setVisibleCount((c) => Math.min(c + 1, items.length));
 
   return (
-    <ul>
-      {visibleLeafs.map((props, i) => (
-        <TreeListItem
-          key={`${props.url}-${props.text}`}
-          info={props}
-          isLast={i === visibleLeafs.length - 1}
-          onReady={() => {
-            if (index.current < leafs.length) {
-              setVisibleLeafs(leafs.slice(0, index.current + 1));
-              index.current += 1;
-            }
-          }}
-        />
-      ))}
-    </ul>
+    <div>
+      <div className="text-2xl text-purple dark:text-teal-deep leading-snug">
+        .
+      </div>
+      <ul>
+        {visibleItems.map((item, i) => (
+          <TreeListItem
+            key={item.text}
+            info={item}
+            isLast={i === visibleItems.length - 1}
+            onReady={showNext}
+          />
+        ))}
+      </ul>
+    </div>
   );
 };

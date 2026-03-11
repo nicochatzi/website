@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@variant dark (&:is(.dark *));
 
 @theme {
   --color-purple: #a280e5;
@@ -28,14 +31,42 @@
   --color-gray-925: #181819;
   --color-gray-950: #0a0a0f;
   
-  --font-family-sans: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --font-family-jetbrains: var(--font-jetbrains);
+  --font-sans: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 html,
 body,
 #__next {
   height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-teal-deep) 35%, transparent);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-600);
+  border-radius: 0;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-gray-700);
 }
 
 /**

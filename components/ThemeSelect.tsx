@@ -34,7 +34,7 @@ export const ThemeSelect = () => {
             flex: 1,
             padding: "1px 8px",
             cursor: "pointer",
-            transition: "all 0.2s",
+            transition: "all 0.4s",
             borderRadius: "9999px",
             transform: activeTheme === theme ? "scale(1.2)" : "none",
           }}

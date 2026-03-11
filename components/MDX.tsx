@@ -7,11 +7,13 @@ import { cx } from "@/lib/utils";
 import ExpandingSection from "./ExpandingSection";
 import { Note } from "./Note";
 
-const createCustomHeader = (Tag: keyof JSX.IntrinsicElements) => {
+type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+
+const createCustomHeader = (Tag: HeadingTag) => {
   const Header = ({
     id,
     ...rest
-  }: React.HTMLAttributes<HTMLElement> & { id?: string }) => {
+  }: React.HTMLAttributes<HTMLHeadingElement> & { id?: string }) => {
     if (id) {
       return (
         <Link href={`#${id}`}>
@@ -29,7 +31,7 @@ const createCustomHeader = (Tag: keyof JSX.IntrinsicElements) => {
     }
     return <Tag {...rest} />;
   };
-  Header.displayName = `CustomHeader(${Tag.displayName || Tag.name || "Tag"})`;
+  Header.displayName = `CustomHeader(${Tag})`;
   return Header;
 };
 

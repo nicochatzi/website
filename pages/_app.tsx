@@ -1,35 +1,9 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import localFont from "next/font/local";
 import PlausibleProvider from "next-plausible";
 import { ThemeProvider } from "next-themes";
 import { Header } from "@/components/Header";
-
-const jetbrains = localFont({
-  src: [
-    {
-      path: "../public/fonts/JetBrainsMono/JetBrainsMono-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/JetBrainsMono/JetBrainsMono-Italic.woff2",
-      weight: "400",
-      style: "italic",
-    },
-    {
-      path: "../public/fonts/JetBrainsMono/JetBrainsMono-Bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/JetBrainsMono/JetBrainsMono-BoldItalic.woff2",
-      weight: "700",
-      style: "italic",
-    },
-  ],
-  variable: "--font-jetbrains",
-});
+import { jetbrains } from "@/lib/fonts";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
