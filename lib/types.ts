@@ -4,7 +4,6 @@ export type SiteConfig = {
   siteName: string;
   siteDescription: string;
   siteThumbnail: string;
-  nav: Array<{ label: string; href: string }>;
   social?: {
     github?: string;
     linkedin?: string;

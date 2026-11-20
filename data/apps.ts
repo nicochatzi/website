@@ -4,3 +4,8 @@ export const apps = [
   { slug: "pond", title: "pond" },
   { slug: "moons", title: "moons" },
 ] as const;
+
+export const appLinks = apps.map(({ slug }) => ({
+  url: `/apps/${slug}`,
+  text: `${slug}.wasm`,
+}));

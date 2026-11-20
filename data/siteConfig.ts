@@ -6,13 +6,6 @@ const siteConfig: SiteConfig = {
   siteName: "htz",
   siteDescription: "",
   siteThumbnail: "/og-image.png",
-  nav: [
-    { label: "~/", href: "/" },
-    { label: "~/apps/", href: "/apps" },
-    { label: "~/posts/", href: "/posts" },
-    { label: "~/projects.md", href: "/projects" },
-    { label: "~/about.md", href: "/about" },
-  ],
   social: {
     github: "https://github.com/nicochatzi",
     linkedin: "https://www.linkedin.com/in/nicolas-chatzigianis/",
