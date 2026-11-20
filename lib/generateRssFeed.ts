@@ -1,5 +1,7 @@
 import fs from "node:fs";
 import RSS from "rss";
+import { apps } from "@/data/apps";
+import siteConfig from "@/data/siteConfig";
 import type { getPublishedPosts } from "./mdx";
 
 const feedPath = "./public/rss.xml";
@@ -7,10 +9,10 @@ const lastBuildDate = /<lastBuildDate>([^<]*)<\/lastBuildDate>/;
 type PublishedPosts = ReturnType<typeof getPublishedPosts>;
 
 function renderFeed(posts: PublishedPosts, updated: Date) {
-  const site_url = "https://htz.dev";
+  const site_url = siteConfig.siteUrl;
   const feedOptions = {
-    title: "htz.dev | posts",
-    description: "news, notes and posts about code",
+    title: "htz.dev | posts and apps",
+    description: "posts about code and interactive apps",
     site_url: site_url,
     feed_url: `${site_url}/rss.xml`,
     image_url: `${site_url}/images/aud.gif`,
@@ -20,14 +22,23 @@ function renderFeed(posts: PublishedPosts, updated: Date) {
 
   const feed = new RSS(feedOptions);
 
-  posts.forEach((post) => {
-    feed.item({
-      title: post.frontMatter.title,
-      description: post.frontMatter.description || "",
-      url: `${site_url}/posts/${post.frontMatter.slug}`,
-      date: post.frontMatter.date,
-    });
-  });
+  const items = [
+    ...posts.map(({ frontMatter }) => ({
+      title: frontMatter.title,
+      description: frontMatter.description || "",
+      url: `${site_url}/posts/${frontMatter.slug}`,
+      date: frontMatter.date,
+    })),
+    ...apps.map((app) => ({
+      title: app.title,
+      description: app.description,
+      url: `${site_url}/apps/${app.slug}`,
+      date: app.publishedAt,
+      categories: ["apps"],
+    })),
+  ];
+  items.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+  for (const item of items) feed.item(item);
 
   // rss always inserts the current clock time here, even with pubDate set.
   return feed

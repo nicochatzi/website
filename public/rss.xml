@@ -1,18 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title><![CDATA[htz.dev | posts]]></title>
-        <description><![CDATA[news, notes and posts about code]]></description>
+        <title><![CDATA[htz.dev | posts and apps]]></title>
+        <description><![CDATA[posts about code and interactive apps]]></description>
         <link>https://htz.dev</link>
         <image>
             <url>https://htz.dev/images/aud.gif</url>
-            <title>htz.dev | posts</title>
+            <title>htz.dev | posts and apps</title>
             <link>https://htz.dev</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 11 Mar 2026 14:50:54 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 20 Nov 2026 13:18:37 GMT</lastBuildDate>
         <atom:link href="https://htz.dev/rss.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 11 Mar 2026 14:50:54 GMT</pubDate>
+        <pubDate>Fri, 20 Nov 2026 13:18:37 GMT</pubDate>
         <copyright><![CDATA[All rights reserved 2026, nico]]></copyright>
+        <item>
+            <title><![CDATA[moons]]></title>
+            <description><![CDATA[Shape a Lydian chord with the moving shadows of three orbiting moons.]]></description>
+            <link>https://htz.dev/apps/moons</link>
+            <guid isPermaLink="true">https://htz.dev/apps/moons</guid>
+            <category><![CDATA[apps]]></category>
+            <pubDate>Fri, 20 Nov 2026 12:57:08 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[pond]]></title>
+            <description><![CDATA[Drop stones and drag wakes across a pond with three tuned pickups.]]></description>
+            <link>https://htz.dev/apps/pond</link>
+            <guid isPermaLink="true">https://htz.dev/apps/pond</guid>
+            <category><![CDATA[apps]]></category>
+            <pubDate>Fri, 20 Nov 2026 11:36:53 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[flock]]></title>
+            <description><![CDATA[Steer a flock of birds through a sample to shape a granular instrument.]]></description>
+            <link>https://htz.dev/apps/flock</link>
+            <guid isPermaLink="true">https://htz.dev/apps/flock</guid>
+            <category><![CDATA[apps]]></category>
+            <pubDate>Fri, 20 Nov 2026 11:00:59 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[lissa]]></title>
+            <description><![CDATA[Draw a 3D Lissajous curve and hear the oscillators behind it.]]></description>
+            <link>https://htz.dev/apps/lissa</link>
+            <guid isPermaLink="true">https://htz.dev/apps/lissa</guid>
+            <category><![CDATA[apps]]></category>
+            <pubDate>Fri, 20 Nov 2026 10:37:30 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[from google drive to proton drive with rclone]]></title>
             <description><![CDATA[reliably migrate to secure storage service]]></description>

@@ -19,6 +19,10 @@ Run `pnpm lint` and `pnpm build` to check the site and export it to `out/`.
 Run `pnpm start` to preview the export at `http://127.0.0.1:3000`.
 Use `pnpm audit` and `pnpm audit signatures` to repeat the CI security checks.
 
+Register each new app in `data/apps.ts` with its title, slug, description, and
+`publishedAt` timestamp (ISO 8601 with a timezone). The site build includes it
+in `/rss.xml` alongside published posts. Keep the timestamp when editing an app.
+
 After editing `wasm/lissa.zig`, run `pnpm build:lissa` with Zig 0.17.1
 to refresh the module in `public/apps/`. The site build uses that compiled module.
 
