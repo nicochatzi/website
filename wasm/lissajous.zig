@@ -1,15 +1,12 @@
 const std = @import("std");
 
-var points: [1024][2]f32 = undefined;
+var points: [1024][3]f32 = undefined;
 
-// One closed period, excluding the repeated endpoint so the audio loops cleanly.
-export fn trace(x_cycles: u32, y_cycles: u32, phase: f32) [*]const [2]f32 {
+// A fixed scope timebase. Fractional cycles need not end where they began.
+export fn trace(x_hz: f32, y_hz: f32, phase: f32, z_hz: f32) [*]const [3]f32 {
     for (&points, 0..) |*point, i| {
-        const t = 2.0 * std.math.pi * @as(f32, @floatFromInt(i)) / points.len;
-        point.* = .{
-            @sin(t * @as(f32, @floatFromInt(x_cycles))),
-            @sin(t * @as(f32, @floatFromInt(y_cycles)) + phase),
-        };
+        const t = (2.0 * std.math.pi / 55.0) * @as(f32, @floatFromInt(i)) / (points.len - 1);
+        point.* = .{ @sin(t * x_hz), @sin(t * y_hz + phase), @cos(t * z_hz) };
     }
     return &points;
 }
