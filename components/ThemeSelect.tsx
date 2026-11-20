@@ -1,9 +1,6 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "react-feather";
-import { cx } from "@/lib/utils";
-
-const icons = { light: Sun, dark: Moon };
 
 export const ThemeSelect = () => {
   const [mounted, setMounted] = useState(false);
@@ -12,24 +9,21 @@ export const ThemeSelect = () => {
 
   if (!mounted) return null;
 
+  const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
+  const Icon = nextTheme === "light" ? Sun : Moon;
+  const label = `Use ${nextTheme} theme`;
+
   return (
-    <div className="inline-flex rounded-full bg-gray-200 p-0.5 dark:bg-gray-900">
-      {Object.entries(icons).map(([theme, Icon]) => (
-        <button
-          type="button"
-          key={theme}
-          aria-label={`Use ${theme} theme`}
-          aria-pressed={resolvedTheme === theme}
-          onClick={() => setTheme(theme)}
-          className={cx(
-            "grid h-7 w-9 cursor-pointer place-items-center rounded-full",
-            "text-gray-700 hover:text-gray-950 dark:text-gray-300 dark:hover:text-gray-50",
-            "aria-pressed:bg-gray-50 aria-pressed:text-gray-950 dark:aria-pressed:bg-gray-700 dark:aria-pressed:text-gray-50",
-          )}
-        >
-          <Icon size={16} aria-hidden="true" />
-        </button>
-      ))}
-    </div>
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      onClick={() => setTheme(nextTheme)}
+      className="inline-flex size-11 cursor-pointer items-center justify-center gap-0.5 text-sm leading-none text-muted hover:text-link focus-visible:text-link focus-visible:outline-2 focus-visible:outline-link"
+    >
+      <span aria-hidden="true">[</span>
+      <Icon size={16} aria-hidden="true" />
+      <span aria-hidden="true">]</span>
+    </button>
   );
 };
