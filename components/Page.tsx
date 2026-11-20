@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { onlyText } from "react-children-utilities";
 import { Prose } from "@/components/Prose";
 import siteConfig from "@/data/siteConfig";
@@ -17,10 +18,15 @@ export const Page: React.FC<PageProps> = ({
   description,
   children,
 }) => {
+  const { pathname } = useRouter();
+  const tabTitle =
+    pathname === "/"
+      ? siteConfig.siteName
+      : `${siteConfig.siteName} · ${onlyText(title)}`;
   return (
     <>
       <Head>
-        <title>{`${onlyText(title)} · ${siteConfig.siteName}`}</title>
+        <title>{tabTitle}</title>
       </Head>
       <header className="mb-6 sm:mb-10">
         <h1 className="text-[clamp(2.25rem,calc(1.5rem+4.5vw),3.75rem)] leading-[1.1] font-bold wrap-anywhere text-heading">
