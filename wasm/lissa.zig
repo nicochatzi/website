@@ -1,3 +1,5 @@
+//! The frequency and phase relationships behind the trace: https://mathworld.wolfram.com/LissajousCurve.html
+
 const std = @import("std");
 
 const Point = [3]f32;
@@ -39,6 +41,7 @@ export fn point_count() usize {
     return points.len;
 }
 
+// Perlin’s quintic fade between targets: https://mrl.cs.nyu.edu/~perlin/noise/
 const Axis = struct {
     from: f32,
     to: f32,

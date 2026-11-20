@@ -1,3 +1,5 @@
+//! Reynolds’ steering rules for a flock: https://www.red3d.com/cwr/papers/1987/boids.html
+
 const Vec2 = @Vector(2, f32);
 
 const Bird = extern struct {
@@ -162,6 +164,7 @@ const rates = [_]f32{ 0.75, 1, 1.125, 1.25, 1.5 };
 const Grain = extern struct { bird: f32, rate: f32, duration: f32, offset: f32, pan: f32, level: f32, spacing: f32 };
 var grain: Grain = undefined;
 
+// Scheduling grains from sampled sound: https://www.sfu.ca/~truax/gran.html
 export fn next_grain(size: f32, density: f32, sample_seconds: f32) *const Grain {
     const id: usize = @intFromFloat(random() * birds.len);
     const bird = birds[id];

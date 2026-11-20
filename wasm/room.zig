@@ -1,3 +1,5 @@
+//! Feedback delay networks for reverberation: https://www.dsprelated.com/freebooks/pasp/FDN_Reverberation.html
+
 const std = @import("std");
 const Dynamics = @import("dynamics.zig").Dynamics;
 

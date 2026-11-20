@@ -1,3 +1,5 @@
+//! Peak detection, gain curves and smoothing: https://aes.org/publications/elibrary/elibrary-page/?id=16354
+
 const std = @import("std");
 
 pub const ceiling = 0.22;

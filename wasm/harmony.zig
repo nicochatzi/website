@@ -1,3 +1,5 @@
+//! Common tones and parsimonious voice leading: https://mtosmt.org/issues/mto.98.4.2/mto.98.4.2.cohn.html
+
 const std = @import("std");
 
 const intervals = [_][3]u8{

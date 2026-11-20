@@ -1,3 +1,5 @@
+//! Branch reinforcement inspired by Physarum transport networks: https://doi.org/10.1016/j.jtbi.2006.07.015
+
 const std = @import("std");
 
 const cols = 24;
@@ -119,6 +121,7 @@ export fn remove_food(id: usize) void {
     routing = 0;
 }
 
+// Dijkstra’s shortest paths: https://doi.org/10.1007/BF01386390
 fn route() void {
     cost = @splat(std.math.inf(f32));
     cost[root] = 0;

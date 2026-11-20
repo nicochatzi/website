@@ -1,3 +1,5 @@
+//! Modal synthesis for the plate voice: https://www.cs.ubc.ca/labs/lci/papers/docs2001/van-foleyautomatic.pdf
+
 const std = @import("std");
 const tau = 2 * std.math.pi;
 const table_size = 2048;
@@ -105,6 +107,7 @@ fn bowedPlate(frames: usize) void {
     }
 }
 
+// Building a formant from periodic windowed sinusoids: https://msp.ucsd.edu/~msp/Publications/icmc01-paf.dir/
 fn formant(phase_in: f32, harmonic: f32) f32 {
     const p = wrap(phase_in);
     const window = 0.5 - 0.5 * sine(p + 0.25);

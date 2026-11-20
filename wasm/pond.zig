@@ -1,3 +1,5 @@
+//! Finite differences for the wave equation and reflecting boundaries: https://hplgit.github.io/fdm-book/doc/pub/wave/html/slides_wave-solarized.html
+
 const columns = 160;
 const rows = 100;
 const Field = [rows][columns]f32;
@@ -249,6 +251,7 @@ export fn pulse_buffer() [*]const f32 {
     return &mallet;
 }
 
+// Contact pulses for impact sounds: https://www.cs.ubc.ca/labs/lci/papers/docs2001/van-foleyautomatic.pdf
 export fn excite(hz: f32, sample_rate: f32, crest: f32) usize {
     const force = @min(1, std.math.pow(f32, crest, 0.4) * 1.55);
     const length: usize = @intFromFloat(@min(mallet.len, @max(3, @round(sample_rate * (0.58 - 0.43 * force) / hz))));

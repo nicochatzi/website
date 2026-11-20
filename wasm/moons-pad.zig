@@ -1,3 +1,5 @@
+//! Oscillator waveforms and filter voicing in the Jupiter-6: https://synthfool.com/docs/Roland/Roland_Jupiter6/Roland_Jupiter_6_Owners_Manual.pdf
+
 const std = @import("std");
 
 const table_len = 512;

@@ -1,3 +1,5 @@
+//! Umbra and penumbra geometry: https://eclipse.gsfc.nasa.gov/SEhelp/SEgeometry.html
+
 const std = @import("std");
 
 const band_count = 12;
