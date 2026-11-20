@@ -67,6 +67,7 @@ shared effects. The hall in `wasm/room.zig` sends the first reflections to
 opposite sides, then diffuses the tail through eight slowly moving delay lines.
 Its low-mid decay target is 4.8 seconds. The dry signal and hall return feed
 the same stereo-linked 2∶1 compressor and 2 ms lookahead limiter in
-`wasm/dynamics.zig`. The limiter caps sample peaks at −13 dBFS.
+`wasm/dynamics.zig`. The shared output adds 6 dB after the limiter, bringing
+the final sample peak ceiling to about −7 dBFS.
 Rebuild the worklet’s Zig module with `pnpm build:room` and check the
 reverb decay and dynamics with `pnpm test:room`.

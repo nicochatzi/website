@@ -25,13 +25,15 @@ const trimDb = {
 export class InstrumentOutput {
   readonly context = new AudioContext();
   readonly input = this.context.createGain();
-  private master = this.context.createGain();
-  readonly gain = this.master.gain;
+  private fader = this.context.createGain();
+  readonly gain = this.fader.gain;
   private closing = false;
 
   constructor(instrument: keyof typeof trimDb) {
     this.input.gain.value = 10 ** (trimDb[instrument] / 20);
-    this.master.connect(this.context.destination);
+    const output = this.context.createGain();
+    output.gain.value = 10 ** (6 / 20);
+    this.fader.connect(output).connect(this.context.destination);
     if (this.context.audioWorklet) {
       this.attachRoom().catch((error) => {
         if (this.closing) return;
@@ -49,7 +51,7 @@ export class InstrumentOutput {
       { length: 2049 },
       (_, i) => 0.22 * Math.tanh((i / 1024 - 1) / 0.22),
     );
-    this.input.connect(ceiling).connect(this.master);
+    this.input.connect(ceiling).connect(this.fader);
   }
 
   private async attachRoom() {
@@ -64,7 +66,7 @@ export class InstrumentOutput {
       outputChannelCount: [2],
       processorOptions: { module },
     });
-    this.input.connect(room).connect(this.master);
+    this.input.connect(room).connect(this.fader);
   }
 
   close() {
