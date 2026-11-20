@@ -2,28 +2,26 @@ import type { PointerEvent } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Activity, RotateCw, Volume2, VolumeX } from "react-feather";
 import { tuning, useScopeMotion } from "./motion";
-import { camera, curveLayers, floorGrid } from "./projection";
-import { loadScope, ScopeAudio } from "./signal";
+import { curveLayers, floorGrid } from "./projection";
+import { loadScope, type Scope, ScopeAudio } from "./signal";
 
-type Trace = Awaited<ReturnType<typeof loadScope>>;
-
-export function Lissajous() {
-  const { position, controls, alive, steer, toggleAlive } = useScopeMotion();
+export function Lissa() {
+  const [scope, setScope] = useState<Scope>();
+  const { position, controls, alive, steer, toggleAlive } =
+    useScopeMotion(scope);
   const settings = useMemo(() => tuning(position), [position]);
   const degrees = Math.round(position.y * 180);
-  const [trace, setTrace] = useState<Trace>();
   const [error, setError] = useState("");
   const [playing, setPlaying] = useState(false);
   const audio = useRef<ScopeAudio | null>(null);
   const [orbit, setOrbit] = useState(false);
   const [view, setView] = useState({ yaw: 0.52, tilt: 0.32 });
   const drag = useRef<{ id: number; x: number; y: number } | null>(null);
-  const project = useMemo(() => camera(view), [view]);
-  const grid = useMemo(() => floorGrid(project), [project]);
-  const layers = useMemo(
-    () => trace && curveLayers(trace(settings), project),
-    [trace, settings, project],
-  );
+  const { grid, layers } = useMemo(() => {
+    if (!scope) return {};
+    const grid = floorGrid(scope.grid(view.yaw, view.tilt));
+    return { grid, layers: curveLayers(scope.trace(settings)) };
+  }, [scope, settings, view]);
 
   function rotate(horizontal: number, vertical: number) {
     setView(({ yaw, tilt }) => ({
@@ -41,8 +39,8 @@ export function Lissajous() {
   useEffect(() => {
     const controller = new AbortController();
     loadScope(controller.signal).then(
-      (makeTrace) => {
-        if (!controller.signal.aborted) setTrace(() => makeTrace);
+      (loaded) => {
+        if (!controller.signal.aborted) setScope(loaded);
       },
       () => {
         if (!controller.signal.aborted)
@@ -232,7 +230,7 @@ export function Lissajous() {
               type="button"
               aria-label="Alive mode"
               aria-pressed={alive}
-              disabled={!trace}
+              disabled={!scope}
               onClick={toggleAlive}
               className="inline-flex min-h-9 items-center gap-2 rounded border border-muted/40 px-2 text-link sm:px-3 hover:border-link aria-pressed:border-link disabled:opacity-50"
             >
@@ -247,7 +245,7 @@ export function Lissajous() {
               type="button"
               aria-label="Sound"
               aria-pressed={playing}
-              disabled={!trace}
+              disabled={!scope}
               onClick={toggleSound}
               className="inline-flex min-h-9 items-center gap-2 rounded border border-muted/40 px-2 text-link sm:px-3 hover:border-link disabled:opacity-50"
             >

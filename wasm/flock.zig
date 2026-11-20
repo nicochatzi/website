@@ -138,3 +138,45 @@ export fn step(cohesion: f32, target_x: f32, target_y: f32) void {
         };
     }
 }
+
+const Wings = [6]Vec2;
+var outlines: [birds.len]Wings = undefined;
+
+export fn wings(seconds: f32) [*]const Wings {
+    for (&outlines, birds, 0..) |*outline, bird, id| {
+        const x = bird.x * 400;
+        const y = bird.y * 400;
+        const speed = magnitude(bird.velocity());
+        const dx = if (speed == 0) 1 else bird.vx / speed;
+        const dy = if (speed == 0) 0 else bird.vy / speed;
+        const wing = 3.4 + 2 * @sin(seconds * 7.5 + @as(f32, @floatFromInt(id)) * 1.7) + @as(f32, @floatFromInt(id % 3)) * 0.9;
+        const offsets = [6]Vec2{ .{ -2.9, -wing }, .{ 1, -wing * 0.62 }, .{ 2.4, 0 }, .{ 1, wing * 0.62 }, .{ -2.9, wing }, .{ -0.6, 0 } };
+        for (outline, offsets) |*point, offset| {
+            point.* = .{ x + dx * offset[0] - dy * offset[1], y + dy * offset[0] + dx * offset[1] };
+        }
+    }
+    return &outlines;
+}
+
+const rates = [_]f32{ 0.75, 1, 1.125, 1.25, 1.5 };
+const Grain = extern struct { bird: f32, rate: f32, duration: f32, offset: f32, pan: f32, level: f32, spacing: f32 };
+var grain: Grain = undefined;
+
+export fn next_grain(size: f32, density: f32, sample_seconds: f32) *const Grain {
+    const id: usize = @intFromFloat(random() * birds.len);
+    const bird = birds[id];
+    const x = bird.x / field_width;
+    const band: usize = @intFromFloat(@max(0, @min(4, (1 - bird.y) * 5)));
+    const rate = rates[band];
+    const duration = @min(sample_seconds / rate, size * (0.65 + 0.85 * bird.crowd));
+    grain = .{
+        .bird = @floatFromInt(id),
+        .rate = rate,
+        .duration = duration,
+        .offset = x * @max(0, sample_seconds - duration * rate),
+        .pan = (2 * x - 1) * 0.85,
+        .level = 0.8 / @sqrt(@max(1, density * duration)),
+        .spacing = (0.88 + 0.24 * random()) / density,
+    };
+    return &grain;
+}

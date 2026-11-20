@@ -1,7 +1,8 @@
 import type { PointerEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { AppSelect } from "@/components/AppSelect";
 import { samples } from "./samples";
-import { drawFlock, loadFlock } from "./simulation";
+import { loadFlock } from "./simulation";
 import { FlockVoice } from "./voice";
 
 type Simulation = Awaited<ReturnType<typeof loadFlock>>;
@@ -67,7 +68,7 @@ export function Flock() {
 
   useEffect(() => {
     if (!sim) return;
-    const glints = new Float64Array(sim.birds.length / 5);
+    const glints = new Float64Array(sim.count);
     let previous = performance.now(),
       remainder = 0,
       frame = 0;
@@ -82,13 +83,13 @@ export function Flock() {
       }
       if (running)
         voice.current?.play(
-          sim.birds,
+          sim,
           grain / 1000,
           grainsPerSecond,
           glints,
           now / 1000,
         );
-      setPaths(drawFlock(sim.birds, now / 1000, glints));
+      setPaths(sim.paths(now / 1000, glints));
       if (running) frame = requestAnimationFrame(draw);
     }
     draw(previous);
@@ -261,10 +262,13 @@ export function Flock() {
             />
           </label>
           <div className="col-span-full flex flex-wrap items-center gap-2">
-            <label className="flex items-center gap-2 text-muted max-sm:basis-full">
+            <label
+              htmlFor="flock-sample"
+              className="flex items-center gap-2 text-muted max-sm:basis-full"
+            >
               sample
-              <select
-                className="min-h-9 rounded border border-muted/40 bg-transparent px-2 text-link"
+              <AppSelect
+                id="flock-sample"
                 value={sample.id}
                 onChange={(event) => {
                   const next = samples[event.target.selectedIndex];
@@ -278,7 +282,7 @@ export function Flock() {
                     {option.label}
                   </option>
                 ))}
-              </select>
+              </AppSelect>
             </label>
             <button
               type="button"

@@ -1,4 +1,5 @@
-const intervals = [0.75, 1, 1.125, 1.25, 1.5];
+import type { FlockEngine } from "./simulation";
+
 const windowShape = Float32Array.from(
   { length: 65 },
   (_, i) => Math.sin((Math.PI * i) / 64) ** 2,
@@ -40,7 +41,7 @@ export class FlockVoice {
   }
 
   play(
-    birds: Float32Array,
+    flock: FlockEngine,
     grainSize: number,
     grainsPerSecond: number,
     glints: Float64Array,
@@ -50,24 +51,14 @@ export class FlockVoice {
     const now = this.ctx.currentTime;
     this.next = Math.max(this.next, now);
     while (this.next < now + 0.07) {
-      const id = Math.floor((Math.random() * birds.length) / 5);
-      const x = birds[id * 5] / 1.6,
-        y = birds[id * 5 + 1],
-        crowd = birds[id * 5 + 4];
-      const rate = intervals[Math.min(4, Math.floor((1 - y) * 5))];
-      const duration = Math.min(
-        this.buffer.duration / rate,
-        grainSize * (0.65 + 0.85 * crowd),
-      );
-      const offset = x * Math.max(0, this.buffer.duration - duration * rate);
+      const [id, rate, duration, offset, stereo, level, spacing] =
+        flock.nextGrain(grainSize, grainsPerSecond, this.buffer.duration);
       const source = this.ctx.createBufferSource();
       const envelope = this.ctx.createGain();
       const pan = this.ctx.createStereoPanner();
       source.buffer = this.buffer;
       source.playbackRate.value = rate;
-      pan.pan.value = (2 * x - 1) * 0.85;
-      // A Hann window on each grain softens both ends. Compensate for overlap.
-      const level = 0.8 / Math.sqrt(Math.max(1, grainsPerSecond * duration));
+      pan.pan.value = stereo;
       envelope.gain.setValueCurveAtTime(
         windowShape.map((v) => v * level),
         this.next,
@@ -82,7 +73,7 @@ export class FlockVoice {
         pan.disconnect();
       };
       glints[id] = time + (this.next - now) + duration;
-      this.next += (0.88 + 0.24 * Math.random()) / grainsPerSecond;
+      this.next += spacing;
     }
   }
 

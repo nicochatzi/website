@@ -7,27 +7,56 @@ export interface Tuning {
 
 interface ScopeExports extends WebAssembly.Exports {
   memory: WebAssembly.Memory;
+  view(yaw: number, tilt: number): number;
+  begin_motion(
+    seed: number,
+    x: number,
+    y: number,
+    z: number,
+    pitch: number,
+  ): void;
+  motion(dt: number): number;
   point_count: () => number;
   trace: (xHz: number, yHz: number, radians: number, zHz: number) => number;
 }
 
 export async function loadScope(signal: AbortSignal) {
-  const response = await fetch("/apps/lissajous.wasm", { signal });
+  const response = await fetch("/apps/lissa.wasm", { signal });
   if (!response.ok) throw new Error("Could not load the scope");
   const { instance } = await WebAssembly.instantiate(
     await response.arrayBuffer(),
   );
   const wasm = instance.exports as ScopeExports;
-  return ({ frequency, ratio, phase, depthRatio }: Tuning) => {
-    const offset = wasm.trace(
-      frequency,
-      frequency * ratio,
-      phase,
-      frequency * depthRatio,
-    );
-    return new Float32Array(wasm.memory.buffer, offset, 3 * wasm.point_count());
+  return {
+    beginMotion: wasm.begin_motion,
+    motion(dt: number) {
+      const [x, y, z, pitch] = new Float32Array(
+        wasm.memory.buffer,
+        wasm.motion(dt),
+        4,
+      );
+      return { x, y, z, pitch };
+    },
+    grid(yaw: number, tilt: number) {
+      return new Float32Array(wasm.memory.buffer, wasm.view(yaw, tilt), 36 * 3);
+    },
+    trace({ frequency, ratio, phase, depthRatio }: Tuning) {
+      const offset = wasm.trace(
+        frequency,
+        frequency * ratio,
+        phase,
+        frequency * depthRatio,
+      );
+      return new Float32Array(
+        wasm.memory.buffer,
+        offset,
+        3 * wasm.point_count(),
+      );
+    },
   };
 }
+
+export type Scope = Awaited<ReturnType<typeof loadScope>>;
 
 export class ScopeAudio {
   readonly context = new AudioContext();

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import type { Scope } from "./signal";
 
 // All controls travel from zero to one; frequency spans two octaves.
 export type Position = { x: number; y: number; z: number; pitch: number };
@@ -19,32 +20,7 @@ export function tuning({ x, y, z, pitch }: Position) {
   };
 }
 
-function wander(start: number) {
-  let from = start;
-  let to = start;
-  let elapsed = 0;
-  let duration = 0;
-  return (dt: number) => {
-    if (elapsed >= duration) {
-      elapsed -= duration;
-      from = to;
-      const sweep = Math.random() < 0.24;
-      to = sweep
-        ? from < 0.5
-          ? 0.78 + 0.22 * Math.random()
-          : 0.22 * Math.random()
-        : Math.random();
-      duration = sweep ? 0.7 + 0.7 * Math.random() : 2.8 + 4.5 * Math.random();
-    }
-    elapsed += dt;
-    const u = Math.min(1, elapsed / duration);
-    // Zero velocity and acceleration at each join, including the quick sweeps.
-    const ease = u * u * u * (10 + u * (-15 + 6 * u));
-    return from + (to - from) * ease;
-  };
-}
-
-export function useScopeMotion() {
+export function useScopeMotion(scope?: Scope) {
   const [position, setPosition] = useState(initial);
   const [manual, setManual] = useState(initial);
   const [alive, setAlive] = useState(false);
@@ -68,7 +44,7 @@ export function useScopeMotion() {
       Math.abs(goal.z - prev.z),
       Math.abs(goal.pitch - prev.pitch),
     );
-    const blend = gap < 0.00001 ? 1 : -Math.expm1(-dt / 0.055);
+    const blend = drift.current || gap < 0.00001 ? 1 : -Math.expm1(-dt / 0.055);
     current.current =
       blend === 1
         ? goal
@@ -106,16 +82,15 @@ export function useScopeMotion() {
       steer(here);
       return;
     }
-    const x = wander(here.x),
-      y = wander(here.y),
-      z = wander(here.z),
-      pitch = wander(here.pitch);
-    drift.current = (dt) => ({
-      x: x(dt),
-      y: y(dt),
-      z: z(dt),
-      pitch: pitch(dt),
-    });
+    if (!scope) return;
+    scope.beginMotion(
+      crypto.getRandomValues(new Uint32Array(1))[0],
+      here.x,
+      here.y,
+      here.z,
+      here.pitch,
+    );
+    drift.current = scope.motion;
     setAlive(true);
     wake();
   }
