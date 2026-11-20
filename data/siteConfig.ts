@@ -3,7 +3,7 @@ import type { SiteConfig } from "@/lib/types";
 const siteConfig: SiteConfig = {
   avatar: "/avatar.png",
   siteUrl: "https://htz.dev",
-  siteName: "htz.dev",
+  siteName: "htz",
   siteDescription: "",
   siteThumbnail: "/og-image.png",
   nav: [

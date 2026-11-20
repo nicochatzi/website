@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import Head from "next/head";
 import { onlyText } from "react-children-utilities";
 import { Prose } from "@/components/Prose";
 import siteConfig from "@/data/siteConfig";
@@ -11,31 +11,6 @@ interface PageProps {
   thumbnail?: string;
   children?: React.ReactNode;
 }
-export const generateMetadata = ({
-  params,
-}: {
-  params: PageProps;
-}): Metadata => {
-  const metaTitle = onlyText(params.title);
-  const metaDescription = params.description
-    ? onlyText(params.description)
-    : siteConfig.siteDescription;
-  const metaThumbnail = params.thumbnail
-    ? params.thumbnail
-    : siteConfig.siteThumbnail;
-  const customTitle = `${metaTitle} - ${siteConfig.siteName}`;
-
-  return {
-    title: customTitle,
-    description: metaDescription,
-    openGraph: {
-      title: metaTitle,
-      description: metaDescription,
-      images: [`${siteConfig.siteUrl}${metaThumbnail}`],
-    },
-  };
-};
-
 export const Page: React.FC<PageProps> = ({
   date,
   title,
@@ -44,6 +19,9 @@ export const Page: React.FC<PageProps> = ({
 }) => {
   return (
     <>
+      <Head>
+        <title>{`${onlyText(title)} · ${siteConfig.siteName}`}</title>
+      </Head>
       <header className="mb-6 sm:mb-10">
         <h1 className="text-[clamp(2.25rem,calc(1.5rem+4.5vw),3.75rem)] leading-[1.1] font-bold wrap-anywhere text-heading">
           {title}
