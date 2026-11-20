@@ -58,6 +58,12 @@ band-limited table. The light reshapes the tables before per-voice saturation
 and a gently moving four-pole low-pass filter. The waveform and filter choices
 draw on [Roland’s Jupiter-6 manual](https://synthfool.com/docs/Roland/Roland_Jupiter6/Roland_Jupiter_6_Owners_Manual.pdf).
 
+Vein routes flow from a central source to food points across a jittered mesh.
+Used branches thicken and become easier to traverse, while unused branches
+fade. Pulses split at forks and excite a damped resonator when they reach food.
+Run `pnpm build:vein` after changing the Zig engine and `pnpm test:vein` to
+check rerouting, pruning, and pulse travel times.
+
 Each instrument has a loudness trim in `lib/instrumentOutput.ts` before the
 shared effects. The hall in `wasm/room.zig` sends the first reflections to
 opposite sides, then diffuses the tail through eight slowly moving delay lines.

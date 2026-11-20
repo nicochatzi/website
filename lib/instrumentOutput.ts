@@ -16,6 +16,7 @@ function loadRoom() {
 const trimDb = {
   lissa: -6.5,
   flock: 0,
+  vein: -7,
   moons: 0,
   pond: -2,
   chladni: -2,

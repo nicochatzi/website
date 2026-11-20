@@ -34,6 +34,13 @@ export const apps = [
       "Glide between notes and watch grains of sand trace Chladni figures on a vibrating plate.",
     publishedAt: "2026-11-20T14:30:19Z",
   },
+  {
+    slug: "vein",
+    title: "vein",
+    description:
+      "Feed a branching network and hear its pulses arrive as paths grow and fade.",
+    publishedAt: "2026-11-20T15:02:35Z",
+  },
 ] as const;
 
 export const appLinks = apps.map(({ slug }) => ({

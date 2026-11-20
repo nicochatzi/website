@@ -11,11 +11,13 @@ import { Lissa } from "@/components/lissa/Lissa";
 import { Moons } from "@/components/moons/Moons";
 import { Page } from "@/components/Page";
 import { Pond } from "@/components/pond/Pond";
+import { Vein } from "@/components/vein/Vein";
 import { apps } from "@/data/apps";
 
 const instruments = {
   lissa: Lissa,
   flock: Flock,
+  vein: Vein,
   pond: Pond,
   moons: Moons,
   chladni: Chladni,
