@@ -58,8 +58,11 @@ band-limited table. The light reshapes the tables before per-voice saturation
 and a gently moving four-pole low-pass filter. The waveform and filter choices
 draw on [Roland’s Jupiter-6 manual](https://synthfool.com/docs/Roland/Roland_Jupiter6/Roland_Jupiter_6_Owners_Manual.pdf).
 
-Every instrument feeds the same stereo room in parallel with its dry signal.
-The low-mid decay is set to 1.85 seconds, and the return rolls off below 100 Hz. The Zig module in `wasm/room.zig` runs an eight-line feedback delay
-network in an AudioWorklet. The worklet uses fixed buffers and the device
-sample rate. Rebuild it with `pnpm build:room` and run its impulse-response
-checks with `pnpm test:room`.
+Each instrument has a loudness trim in `lib/instrumentOutput.ts` before the
+shared effects. The hall in `wasm/room.zig` sends the first reflections to
+opposite sides, then diffuses the tail through eight slowly moving delay lines.
+Its low-mid decay target is 4.8 seconds. The dry signal and hall return feed
+the same stereo-linked 2∶1 compressor and 2 ms lookahead limiter in
+`wasm/dynamics.zig`. The limiter caps sample peaks at −13 dBFS.
+Rebuild the worklet’s Zig module with `pnpm build:room` and check the
+reverb decay and dynamics with `pnpm test:room`.

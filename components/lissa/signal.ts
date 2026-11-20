@@ -8,7 +8,7 @@ export interface Tuning {
 
 interface ScopeExports extends WebAssembly.Exports {
   memory: WebAssembly.Memory;
-  view(yaw: number, tilt: number): number;
+  view(yaw: number, tilt: number): void;
   begin_motion(
     seed: number,
     x: number,
@@ -38,9 +38,7 @@ export async function loadScope(signal: AbortSignal) {
       );
       return { x, y, z, pitch };
     },
-    grid(yaw: number, tilt: number) {
-      return new Float32Array(wasm.memory.buffer, wasm.view(yaw, tilt), 36 * 3);
-    },
+    view: wasm.view,
     trace({ frequency, ratio, phase, depthRatio }: Tuning) {
       const offset = wasm.trace(
         frequency,

@@ -13,6 +13,14 @@ function loadRoom() {
   return compiledRoom;
 }
 
+const trimDb = {
+  lissa: -6.5,
+  flock: 0,
+  moons: 0,
+  pond: -2,
+  chladni: -2,
+};
+
 export class InstrumentOutput {
   readonly context = new AudioContext();
   readonly input = this.context.createGain();
@@ -20,13 +28,27 @@ export class InstrumentOutput {
   readonly gain = this.master.gain;
   private closing = false;
 
-  constructor() {
-    this.input.connect(this.master).connect(this.context.destination);
+  constructor(instrument: keyof typeof trimDb) {
+    this.input.gain.value = 10 ** (trimDb[instrument] / 20);
+    this.master.connect(this.context.destination);
     if (this.context.audioWorklet) {
       this.attachRoom().catch((error) => {
-        if (!this.closing) console.warn("Room reverb unavailable", error);
+        if (this.closing) return;
+        console.warn("Instrument effects unavailable", error);
+        this.attachFallback();
       });
+    } else {
+      this.attachFallback();
     }
+  }
+
+  private attachFallback() {
+    const ceiling = this.context.createWaveShaper();
+    ceiling.curve = Float32Array.from(
+      { length: 2049 },
+      (_, i) => 0.22 * Math.tanh((i / 1024 - 1) / 0.22),
+    );
+    this.input.connect(ceiling).connect(this.master);
   }
 
   private async attachRoom() {

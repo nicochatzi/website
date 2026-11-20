@@ -111,7 +111,7 @@ function loadPad() {
 }
 
 export class MoonsPad {
-  private output = new InstrumentOutput();
+  private output = new InstrumentOutput("moons");
   private node?: AudioWorkletNode;
   private closed = false;
   private light: Float32Array;
@@ -135,7 +135,7 @@ export class MoonsPad {
       processorOptions: { module, light: this.light },
     });
     this.node.connect(this.output.input);
-    this.output.gain.setTargetAtTime(0.85, ctx.currentTime, 0.15);
+    this.output.gain.setTargetAtTime(1, ctx.currentTime, 0.15);
   }
 
   shade(light: Float32Array) {

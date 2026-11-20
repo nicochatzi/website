@@ -20,6 +20,7 @@ export default function Home({
   return (
     <Page title="htz">
       <TreeList
+        speed={2}
         items={[
           { text: "apps/", children: appLinks },
           { text: "posts/", children: posts },

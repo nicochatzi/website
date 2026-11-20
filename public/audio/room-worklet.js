@@ -3,7 +3,8 @@ class RoomProcessor extends AudioWorkletProcessor {
     super();
     const { exports } = new WebAssembly.Instance(options.processorOptions.module);
     exports.init(sampleRate);
-    this.render = exports.process;
+    this.render = exports.process_mix;
+    this.tailFrames = exports.tail_frames(sampleRate);
     this.left = new Float32Array(exports.memory.buffer, exports.left_buffer(), 128);
     this.right = new Float32Array(exports.memory.buffer, exports.right_buffer(), 128);
     this.tail = 0;
@@ -13,7 +14,7 @@ class RoomProcessor extends AudioWorkletProcessor {
     const input = inputs[0];
     const output = outputs[0];
     const frames = output[0].length;
-    if (input.length) this.tail = sampleRate * 2;
+    if (input.length) this.tail = this.tailFrames;
     else if (this.tail <= 0) return true;
     else this.tail -= frames;
 

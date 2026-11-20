@@ -2,13 +2,6 @@ function xy(points: Float32Array, i: number) {
   return `${points[i].toFixed(2)} ${points[i + 1].toFixed(2)}`;
 }
 
-export function floorGrid(points: Float32Array) {
-  let path = "";
-  for (let i = 0; i < points.length; i += 6)
-    path += `M${xy(points, i)}L${xy(points, i + 3)}`;
-  return path;
-}
-
 export function curveLayers(points: Float32Array) {
   const layers = Array.from({ length: 12 }, (_, depth) => ({
     depth,

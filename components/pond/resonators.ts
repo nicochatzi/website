@@ -11,7 +11,7 @@ const modes = [
 ];
 
 export class Resonators {
-  private output = new InstrumentOutput();
+  private output = new InstrumentOutput("pond");
   readonly context = this.output.context;
   private mix = this.context.createWaveShaper();
   private banks: ReturnType<Resonators["bank"]>[];

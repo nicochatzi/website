@@ -8,15 +8,16 @@ export type TreeItem =
 const CHARACTER_MS = 28;
 const ROW_PAUSE_MS = 48;
 
-function TreeRows({ items }: { items: TreeItem[] }) {
-  let delay = 80;
+function TreeRows({ items, speed }: { items: TreeItem[]; speed: number }) {
+  const characterMs = CHARACTER_MS / speed;
+  let delay = 80 / speed;
 
   return (
     <ul>
       {items.map((item) => {
         const characters = Array.from(item.text);
         const start = delay;
-        delay += characters.length * CHARACTER_MS + ROW_PAUSE_MS;
+        delay += characters.length * characterMs + ROW_PAUSE_MS / speed;
         const style = {
           "--row-delay": `${start}ms`,
           "--next-row-delay": `${delay}ms`,
@@ -29,7 +30,7 @@ function TreeRows({ items }: { items: TreeItem[] }) {
                 key={index}
                 className="tree-character"
                 style={{
-                  animationDelay: `calc(var(--row-delay) + ${index * CHARACTER_MS}ms)`,
+                  animationDelay: `calc(var(--row-delay) + ${index * characterMs}ms)`,
                 }}
               >
                 {character}
@@ -46,7 +47,7 @@ function TreeRows({ items }: { items: TreeItem[] }) {
                 <summary className={row} aria-label={item.text}>
                   {label}
                 </summary>
-                <TreeRows items={item.children} />
+                <TreeRows items={item.children} speed={speed} />
               </details>
             </li>
           );
@@ -64,11 +65,17 @@ function TreeRows({ items }: { items: TreeItem[] }) {
   );
 }
 
-export function TreeList({ items }: { items: TreeItem[] }) {
+export function TreeList({
+  items,
+  speed = 1,
+}: {
+  items: TreeItem[];
+  speed?: number;
+}) {
   return (
     <div className="directory-tree text-2xl leading-snug text-link">
       <div aria-hidden="true">.</div>
-      <TreeRows items={items} />
+      <TreeRows items={items} speed={speed} />
     </div>
   );
 }

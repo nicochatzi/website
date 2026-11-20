@@ -17,19 +17,10 @@ const Camera = struct {
 };
 
 var camera: Camera = undefined;
-var grid: [36]Point = undefined;
 var points: [1024]Point = undefined;
 
-export fn view(yaw: f32, tilt: f32) [*]const Point {
+export fn view(yaw: f32, tilt: f32) void {
     camera = .{ .cy = @cos(yaw), .sy = @sin(yaw), .ct = @cos(tilt), .st = @sin(tilt) };
-    for (0..9) |i| {
-        const v = @as(f32, @floatFromInt(i)) / 4 - 1;
-        grid[i * 4 ..][0..4].* = .{
-            camera.project(v, -1.05, -1), camera.project(v, -1.05, 1),
-            camera.project(-1, -1.05, v), camera.project(1, -1.05, v),
-        };
-    }
-    return &grid;
 }
 
 export fn trace(x_hz: f32, y_hz: f32, phase: f32, z_hz: f32) [*]const Point {

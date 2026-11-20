@@ -18,7 +18,7 @@ function loadVoice() {
 export type VoiceControls = [number, number, number, number];
 
 export class InstrumentVoice {
-  private output = new InstrumentOutput();
+  private output: InstrumentOutput;
   private node?: AudioWorkletNode;
   private closed = false;
 
@@ -26,6 +26,7 @@ export class InstrumentVoice {
     private instrument: "chladni" | "lissa",
     private controls: VoiceControls,
   ) {
+    this.output = new InstrumentOutput(instrument);
     this.output.gain.value = 0;
   }
 
@@ -47,7 +48,7 @@ export class InstrumentVoice {
       },
     });
     this.node.connect(this.output.input);
-    this.output.gain.setTargetAtTime(0.9, ctx.currentTime, 0.06);
+    this.output.gain.setTargetAtTime(1, ctx.currentTime, 0.06);
   }
 
   tune(controls: VoiceControls) {

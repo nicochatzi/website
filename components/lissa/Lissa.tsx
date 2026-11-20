@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Activity, RotateCw, Volume2, VolumeX } from "react-feather";
 import { InstrumentVoice } from "@/lib/instrumentVoice";
 import { tuning, useScopeMotion } from "./motion";
-import { curveLayers, floorGrid } from "./projection";
+import { curveLayers } from "./projection";
 import { loadScope, type Scope, voiceControls } from "./signal";
 
 export function Lissa() {
@@ -15,13 +15,13 @@ export function Lissa() {
   const [error, setError] = useState("");
   const [playing, setPlaying] = useState(false);
   const audio = useRef<InstrumentVoice | null>(null);
-  const [orbit, setOrbit] = useState(false);
+  const [orbit, setOrbit] = useState(true);
   const [view, setView] = useState({ yaw: 0.52, tilt: 0.32 });
   const drag = useRef<{ id: number; x: number; y: number } | null>(null);
-  const { grid, layers } = useMemo(() => {
-    if (!scope) return {};
-    const grid = floorGrid(scope.grid(view.yaw, view.tilt));
-    return { grid, layers: curveLayers(scope.trace(settings)) };
+  const layers = useMemo(() => {
+    if (!scope) return;
+    scope.view(view.yaw, view.tilt);
+    return curveLayers(scope.trace(settings));
   }, [scope, settings, view]);
 
   function rotate(horizontal: number, vertical: number) {
@@ -129,13 +129,6 @@ export function Lissa() {
               move(event);
           }}
         >
-          <path
-            d={grid}
-            fill="none"
-            className="stroke-muted/25"
-            strokeWidth="0.8"
-            vectorEffect="non-scaling-stroke"
-          />
           {layers?.map(
             ({ path: d, depth }) =>
               d && (
