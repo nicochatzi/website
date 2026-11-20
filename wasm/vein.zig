@@ -31,6 +31,7 @@ var lines: [max_edges]Line = undefined;
 var sparks: [192]Spark = undefined;
 var arrivals: [foods]f32 = undefined;
 var beat: f32 = 0;
+var tempo: f32 = 51;
 var routing: f32 = 0;
 var explore: f32 = 0;
 var probe_index: usize = 0;
@@ -209,6 +210,10 @@ fn fork(u: usize, energy: f32) void {
     }
 }
 
+export fn set_tempo(bpm: f32) void {
+    tempo = std.math.clamp(bpm, 24, 180);
+}
+
 export fn tick(dt_input: f32) void {
     const dt = std.math.clamp(dt_input, 0, 0.05);
     arrivals = @splat(0);
@@ -234,10 +239,10 @@ export fn tick(dt_input: f32) void {
     for (active, 0..) |used, i| {
         if (used) grow(mesh_edges + i, edges[mesh_edges + i].a, dt);
     }
-    beat -= dt;
+    beat -= dt * tempo / 60;
     if (beat <= 0) {
         fork(root, 1);
-        beat += 1.18;
+        beat += 1;
     }
     var i = pulse_count;
     while (i > 0) {
@@ -266,6 +271,7 @@ export fn init(seed: u32) void {
     pulse_count = 0;
     edge_count = 0;
     beat = 0;
+    tempo = 51;
     explore = 0;
     routing = 0;
     probe_index = 0;
@@ -432,4 +438,29 @@ test "longer routes delay the audible arrival" {
         times[i] = number(t) / 60;
     }
     try std.testing.expect(times[1] > times[0] + 1);
+}
+
+fn ticksUntilArrival(food: usize) !usize {
+    for (1..181) |n| {
+        tick(1.0 / 60.0);
+        if (arrivals[food] > 0) return n;
+    }
+    return error.NoArrival;
+}
+
+test "changing pulse tempo preserves the fraction of the beat still to play" {
+    init(42);
+    for (0..3) |id| remove_food(id);
+    const food: usize = @intCast(add_food(positions[root].x, positions[root].y));
+    set_tempo(24);
+    _ = try ticksUntilArrival(food);
+    const slow = try ticksUntilArrival(food);
+    try std.testing.expect(slow >= 149 and slow <= 151);
+
+    for (0..75) |_| tick(1.0 / 60.0);
+    set_tempo(180);
+    const half_beat = try ticksUntilArrival(food);
+    try std.testing.expect(half_beat >= 9 and half_beat <= 11);
+    const fast = try ticksUntilArrival(food);
+    try std.testing.expect(fast >= 19 and fast <= 21);
 }

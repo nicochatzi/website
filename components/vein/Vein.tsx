@@ -18,6 +18,7 @@ export function Vein() {
   const [selected, setSelected] = useState<number | null>(null);
   const [running, setRunning] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const [tempo, setTempo] = useState(51);
   const [error, setError] = useState("");
   const { resolvedTheme } = useTheme();
 
@@ -231,6 +232,27 @@ export function Vein() {
           ))}
         </div>
         <div className="flex flex-wrap items-center gap-2 border-t border-muted/25 px-4 py-3 text-xs sm:text-sm">
+          <label className="flex w-full flex-col gap-1 text-muted sm:mr-3 sm:w-44">
+            <span className="flex justify-between gap-2">
+              pulse tempo <span className="text-link">{tempo} bpm</span>
+            </span>
+            <input
+              type="range"
+              aria-label="Pulse tempo"
+              aria-valuetext={`${tempo} beats per minute`}
+              min={24}
+              max={180}
+              step={1}
+              value={tempo}
+              disabled={!network}
+              onChange={(event) => {
+                const bpm = event.currentTarget.valueAsNumber;
+                network?.wasm.set_tempo(bpm);
+                setTempo(bpm);
+              }}
+              className="h-5 w-full accent-link"
+            />
+          </label>
           <button
             type="button"
             className={control}

@@ -2,6 +2,7 @@ interface NetworkExports extends WebAssembly.Exports {
   memory: WebAssembly.Memory;
   init(seed: number): void;
   tick(dt: number): void;
+  set_tempo(bpm: number): void;
   add_food(x: number, y: number): number;
   move_food(id: number, x: number, y: number): void;
   remove_food(id: number): void;
