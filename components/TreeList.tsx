@@ -5,18 +5,22 @@ export type TreeItem =
   | { text: string; url: string }
   | { text: string; children: TreeItem[] };
 
-const CHARACTER_MS = 35;
-const ROW_PAUSE_MS = 60;
+const CHARACTER_MS = 28;
+const ROW_PAUSE_MS = 48;
 
 function TreeRows({ items }: { items: TreeItem[] }) {
-  let delay = 100;
+  let delay = 80;
 
   return (
     <ul>
       {items.map((item) => {
         const characters = Array.from(item.text);
-        const style = { "--row-delay": `${delay}ms` } as CSSProperties;
+        const start = delay;
         delay += characters.length * CHARACTER_MS + ROW_PAUSE_MS;
+        const style = {
+          "--row-delay": `${start}ms`,
+          "--next-row-delay": `${delay}ms`,
+        } as CSSProperties;
         const label = (
           <span aria-hidden="true" className="min-w-0 wrap-anywhere">
             {characters.map((character, index) => (
