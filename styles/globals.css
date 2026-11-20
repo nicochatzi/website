@@ -56,6 +56,98 @@ body,
 }
 
 
+@media (prefers-reduced-motion: no-preference) {
+  .tree-link {
+    animation: tree-row-appear 1ms step-end backwards;
+  }
+
+  .tree-label {
+    animation-name: tree-type;
+    animation-delay: inherit;
+    animation-fill-mode: backwards;
+  }
+
+  .tree-link:focus-visible,
+  .tree-link:focus-visible .tree-label {
+    animation: none;
+  }
+}
+
+@keyframes tree-row-appear {
+  from { opacity: 0; }
+}
+
+@keyframes tree-type {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+/* A branch continues through its contents only when a sibling follows. */
+.project-tree {
+  --tree-axis: 0.35rem;
+  --tree-line: color-mix(in srgb, var(--color-muted) 65%, transparent);
+}
+
+.project-tree details:not(:last-of-type) {
+  background: linear-gradient(var(--tree-line), var(--tree-line))
+    var(--tree-axis) top / 1px 100% no-repeat;
+}
+
+.project-tree summary {
+  position: relative;
+  padding-inline-start: 2.4ch;
+  line-height: 1.5;
+  display: flex;
+  align-items: baseline;
+  gap: 0.65ch;
+  width: fit-content;
+  padding-block: 0.3rem;
+  color: var(--color-link);
+  cursor: pointer;
+}
+
+.project-tree summary::-webkit-details-marker {
+  display: none;
+}
+
+.project-tree summary::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: var(--tree-axis);
+  inset-block-start: 0;
+  width: 1.4ch;
+  height: calc(0.3rem + 0.75em);
+  border-bottom: 1px solid var(--tree-line);
+}
+
+.project-tree details:last-of-type > summary::before {
+  border-inline-start: 1px solid var(--tree-line);
+}
+
+.project-tree summary::after {
+  content: "+" / "";
+  color: var(--color-muted);
+}
+
+.project-tree details[open] > summary::after {
+  content: "−" / "";
+}
+
+.project-tree summary:hover {
+  color: var(--color-heading);
+}
+
+.project-folder:not(:last-of-type) {
+  padding-bottom: 1rem;
+}
+
+.project-folder > div > p {
+  max-width: 60ch;
+  margin-block: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
 ::selection {
   background-color: color-mix(in srgb, var(--color-teal-deep) 35%, transparent);
 }

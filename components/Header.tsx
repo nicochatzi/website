@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
                 <Link
                   href={href}
                   aria-current={current}
-                  className="inline-flex min-h-8 items-center text-muted underline-offset-4 hover:text-link aria-[current]:text-link aria-[current]:underline"
+                  className="inline-flex min-h-8 items-center text-muted hover:text-link aria-[current]:text-link aria-[current]:font-bold"
                 >
                   {label}
                 </Link>

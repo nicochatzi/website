@@ -2,15 +2,13 @@
 title: "projects"
 ---
 
-----
-
-# @work
+<ProjectFolder id="work" title="@work">
 
 Here are some projects I loved working on.
 The ones in the public domain at least.
 As such, they are mainly user-facing.
 
-## The Collective @ Focusrite Group
+<ProjectEntry id="the-collective--focusrite-group" title="The Collective @ Focusrite Group">
 
 <p align="center">
 <video autoPlay playsInline loop muted width="1000">
@@ -46,7 +44,9 @@ Rust in prod achieved! 🎉
 We worked in a small cross-functional team. Everyone shared and reviewed
 each others tasks. Amazing learning experience with a fantastic team!
 
-## Ampify Studio @ Focusrite Group
+</ProjectEntry>
+
+<ProjectEntry id="ampify-studio--focusrite-group" title="Ampify Studio @ Focusrite Group">
 
 <p align="center">
 <img src="/images/ampify-studio.png"></img>
@@ -69,7 +69,9 @@ While I was part of the project, the main feature we designed and implemented au
 
 Awesome team, fun product, good times!
 
-## ROLI Dashboard @ ROLI
+</ProjectEntry>
+
+<ProjectEntry id="roli-dashboard--roli" title="ROLI Dashboard @ ROLI">
 
 <p align="center">
 <img src="/images/roli-dashboard.gif"></img>
@@ -82,10 +84,12 @@ series. Still love my little [Seaboard Block](https://roli.com/products/blocks/s
 The application is in [JUCE](https://juce.com/). It was amazing working there
 with some brilliant colleagues and the talented JUCE team!
 
+</ProjectEntry>
 
-## DSP Designer @ DREAM
+<ProjectEntry id="dsp-designer--dream" title="DSP Designer @ DREAM">
 
 <iframe
+    loading="lazy"
     className="aspect-video w-full"
     src="https://www.youtube.com/embed/FGBkQAuQmsI"
     title="DSP designer"
@@ -118,9 +122,12 @@ Shout out to the sound designer (and general savant).
 Great times geeking out on synths, can't believe we
 got our hands on a [Schmidt](https://www.schmidt-synthesizer.com/en/)!
 
-## Cathodique 2.0 @ ISEN
+</ProjectEntry>
+
+<ProjectEntry id="cathodique-20--isen" title="Cathodique 2.0 @ ISEN">
 
 <iframe
+    loading="lazy"
     className="aspect-video w-full"
     src="https://www.youtube.com/embed/HnqodTDU2QI"
     title="Cathodique 2.0"
@@ -144,13 +151,15 @@ sequencer where each window was a step and each player controlled a
 different sound. The players could press a window to activate a
 sound when the sequencer reached a given window.
 
-----
+</ProjectEntry>
 
-# @home
+</ProjectFolder>
+
+<ProjectFolder id="home" title="@home">
 
 At home, I mainly look for side quests to do in Rust and a little bit of Zig nowadays.
 
-## aud
+<ProjectEntry id="aud" title="aud">
 
 <p align="center">
 <img src="/images/aud.gif"></img>
@@ -173,7 +182,9 @@ oscilloscope and hook into the stream with a Lua script.
 Currently, it blasts audio over UDP with minimal package
 validation.
 
-## rume
+</ProjectEntry>
+
+<ProjectEntry id="rume" title="rume">
 
 [rume](https://github.com/nicochatzi/rume) is a library
 for building DSP graphs for virtual instruments in Rust.
@@ -192,8 +203,9 @@ using Rust macros. Realistically, it's more of a Rust exercise.
 CMajor is far better suited for what this type of graph syntax
 tries to achieve. Check the language out if you haven't yet!
 
+</ProjectEntry>
 
-## NixOS
+<ProjectEntry id="nixos" title="NixOS">
 
 Recently, I've taken the (so far shallow) dive into NixOS.
 The idea of a declarative, reproducible, and generational
@@ -216,4 +228,6 @@ That being said, I've found the non-FHS compliance to be the main hurdle
 to using it as my daily dev driver. Particularly for compiled programs
 which use dynamic linker/loader, be ready to <code>patchelf</code>...
 
+</ProjectEntry>
 
+</ProjectFolder>

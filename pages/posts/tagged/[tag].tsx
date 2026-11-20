@@ -1,5 +1,6 @@
 import type { ParsedUrlQuery } from "node:querystring";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import Link from "next/link";
 import { Page } from "@/components/Page";
 import { PostList } from "@/components/PostList";
 import { getPublishedPosts } from "@/lib/mdx";
@@ -17,7 +18,10 @@ interface PostsProps {
 
 const Posts: NextPage<PostsProps> = ({ tag, posts }) => {
   return (
-    <Page title={`#${tag}`}>
+    <Page
+      title={`#${tag}`}
+      description={<Link href="/posts">← all posts</Link>}
+    >
       <PostList posts={posts} />
     </Page>
   );
