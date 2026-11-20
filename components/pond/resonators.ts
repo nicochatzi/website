@@ -1,3 +1,4 @@
+import { InstrumentOutput } from "@/lib/instrumentOutput";
 import type { PondEngine } from "./surface";
 
 const modes = [
@@ -10,8 +11,8 @@ const modes = [
 ];
 
 export class Resonators {
-  readonly context = new AudioContext();
-  private master = this.context.createGain();
+  private output = new InstrumentOutput();
+  readonly context = this.output.context;
   private mix = this.context.createWaveShaper();
   private banks: ReturnType<Resonators["bank"]>[];
   constructor(
@@ -24,7 +25,7 @@ export class Resonators {
       { length: 2049 },
       (_, i) => 0.16 * Math.tanh(1.6 * (i / 1024 - 1)),
     );
-    mix.connect(this.master).connect(this.context.destination);
+    mix.connect(this.output.input);
     this.banks = notes.map(({ hz }, i) => this.bank(hz, positions[i].x));
   }
 
@@ -95,7 +96,6 @@ export class Resonators {
   }
 
   close() {
-    this.master.gain.setTargetAtTime(0, this.context.currentTime, 0.012);
-    window.setTimeout(() => void this.context.close(), 100);
+    this.output.close();
   }
 }

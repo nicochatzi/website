@@ -41,3 +41,21 @@ In pond’s alive mode the swimmer supplies the wake. Every five to eight second
 the Zig engine picks a nearby voicing across roots and inversions. Two pickups
 keep their exact pitches as the third moves. Recent voicings are less likely to
 recur. Run `pnpm test:harmony` to check walks from every starting chord.
+
+Rebuild moons with `pnpm build:moons`. A distant, extended light source casts each moon’s shadow onto the floor. Raising a moon narrows the dark core and widens the penumbra. A linear fade across this edge controls both the light strip and its twelve harmonic bands.
+Drag a moon to move its orbit. Alt-drag vertically for height or Shift-drag horizontally for orbit width. The sliders also work with touch and keyboard. Drag the background to rotate the view. Run `pnpm test:moons` to check shadow coverage and
+the synthesis levels.
+
+The Moons stereo pad voices D Lydian across two and a half octaves. D2 and A2
+anchor the bass, F♯3 supplies the major third, and E4 and G♯4 carry the ninth
+and raised fourth. Each note has a rounded spectral ramp and a
+slightly drifting pulse made from two phase-shifted reads of the same
+band-limited table. The light reshapes the tables before per-voice saturation
+and a gently moving four-pole low-pass filter. The waveform and filter choices
+draw on [Roland’s Jupiter-6 manual](https://synthfool.com/docs/Roland/Roland_Jupiter6/Roland_Jupiter_6_Owners_Manual.pdf).
+
+Every instrument feeds the same stereo room in parallel with its dry signal.
+The low-mid decay is set to 1.85 seconds, and the return rolls off below 100 Hz. The Zig module in `wasm/room.zig` runs an eight-line feedback delay
+network in an AudioWorklet. The worklet uses fixed buffers and the device
+sample rate. Rebuild it with `pnpm build:room` and run its impulse-response
+checks with `pnpm test:room`.

@@ -1,3 +1,4 @@
+import { InstrumentOutput } from "@/lib/instrumentOutput";
 export interface Tuning {
   frequency: number;
   ratio: number;
@@ -59,8 +60,8 @@ export async function loadScope(signal: AbortSignal) {
 export type Scope = Awaited<ReturnType<typeof loadScope>>;
 
 export class ScopeAudio {
-  readonly context = new AudioContext();
-  private master = this.context.createGain();
+  private output = new InstrumentOutput();
+  readonly context = this.output.context;
   private x = this.context.createOscillator();
   private ySin = this.context.createOscillator();
   private yCos = this.context.createOscillator();
@@ -82,10 +83,9 @@ export class ScopeAudio {
     this.x.connect(left);
     this.ySin.connect(this.sinGain).connect(right);
     this.yCos.connect(this.cosGain).connect(right);
-    left.connect(this.master);
-    right.connect(this.master);
-    this.master.gain.value = 0;
-    this.master.connect(ctx.destination);
+    left.connect(this.output.input);
+    right.connect(this.output.input);
+    this.output.gain.value = 0;
     const now = ctx.currentTime;
     this.x.frequency.value = initial.frequency;
     this.ySin.frequency.value = this.yCos.frequency.value =
@@ -94,7 +94,7 @@ export class ScopeAudio {
     this.cosGain.gain.value = Math.sin(initial.phase);
     for (const oscillator of [this.x, this.ySin, this.yCos])
       oscillator.start(now);
-    this.master.gain.setTargetAtTime(0.04, now, 0.025);
+    this.output.gain.setTargetAtTime(0.04, now, 0.025);
   }
 
   tune({ frequency, ratio, phase }: Tuning) {
@@ -107,10 +107,6 @@ export class ScopeAudio {
   }
 
   close() {
-    const now = this.context.currentTime;
-    this.master.gain.setTargetAtTime(0, now, 0.015);
-    for (const oscillator of [this.x, this.ySin, this.yCos])
-      oscillator.stop(now + 0.15);
-    window.setTimeout(() => void this.context.close(), 160);
+    this.output.close();
   }
 }

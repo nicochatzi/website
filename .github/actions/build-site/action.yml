@@ -15,16 +15,21 @@ runs:
         cd "$GITHUB_WORKSPACE"
         pnpm lint:zig
         pnpm test:harmony
+        pnpm test:moons
+        pnpm test:room
         pnpm build:lissa
         pnpm build:flock
         pnpm build:pond
+        pnpm build:moons
+        pnpm build:room
     - name: Export and verify the app
       shell: bash
       run: |
         pnpm build
-        for app in lissa flock pond; do
+        for app in lissa flock pond moons; do
           test -s "out/apps/$app.html"
           cmp "public/apps/$app.wasm" "out/apps/$app.wasm"
           node -e "new WebAssembly.Module(require('node:fs').readFileSync(process.argv[1]))" "out/apps/$app.wasm"
         done
+        diff -r public/audio out/audio
         diff -r public/apps/flock-samples out/apps/flock-samples

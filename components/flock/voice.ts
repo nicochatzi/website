@@ -1,3 +1,4 @@
+import { InstrumentOutput } from "@/lib/instrumentOutput";
 import type { FlockEngine } from "./simulation";
 
 const windowShape = Float32Array.from(
@@ -6,15 +7,14 @@ const windowShape = Float32Array.from(
 );
 
 export class FlockVoice {
-  private ctx = new AudioContext();
-  private master = this.ctx.createGain();
+  private output = new InstrumentOutput();
+  private ctx = this.output.context;
   private request?: AbortController;
   private buffer?: AudioBuffer;
   private next = 0;
 
   constructor() {
-    this.master.gain.value = 0.18;
-    this.master.connect(this.ctx.destination);
+    this.output.gain.value = 0.18;
   }
 
   async load(url: string) {
@@ -64,7 +64,7 @@ export class FlockVoice {
         this.next,
         duration,
       );
-      source.connect(envelope).connect(pan).connect(this.master);
+      source.connect(envelope).connect(pan).connect(this.output.input);
       source.start(this.next, offset);
       source.stop(this.next + duration);
       source.onended = () => {
@@ -80,7 +80,6 @@ export class FlockVoice {
   close() {
     this.request?.abort();
     this.buffer = undefined;
-    this.master.gain.setTargetAtTime(0, this.ctx.currentTime, 0.012);
-    window.setTimeout(() => void this.ctx.close(), 100);
+    this.output.close();
   }
 }
