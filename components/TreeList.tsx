@@ -5,19 +5,18 @@ export type TreeItem =
   | { text: string; url: string }
   | { text: string; children: TreeItem[] };
 
-const CHARACTER_MS = 28;
-const ROW_PAUSE_MS = 48;
+const CHARACTER_MS = 14;
+const ROW_PAUSE_MS = 24;
 
-function TreeRows({ items, speed }: { items: TreeItem[]; speed: number }) {
-  const characterMs = CHARACTER_MS / speed;
-  let delay = 80 / speed;
+function TreeRows({ items }: { items: TreeItem[] }) {
+  let delay = 40;
 
   return (
     <ul>
       {items.map((item) => {
         const characters = Array.from(item.text);
         const start = delay;
-        delay += characters.length * characterMs + ROW_PAUSE_MS / speed;
+        delay += characters.length * CHARACTER_MS + ROW_PAUSE_MS;
         const style = {
           "--row-delay": `${start}ms`,
           "--next-row-delay": `${delay}ms`,
@@ -30,7 +29,7 @@ function TreeRows({ items, speed }: { items: TreeItem[]; speed: number }) {
                 key={index}
                 className="tree-character"
                 style={{
-                  animationDelay: `calc(var(--row-delay) + ${index * characterMs}ms)`,
+                  animationDelay: `calc(var(--row-delay) + ${index * CHARACTER_MS}ms)`,
                 }}
               >
                 {character}
@@ -47,7 +46,7 @@ function TreeRows({ items, speed }: { items: TreeItem[]; speed: number }) {
                 <summary className={row} aria-label={item.text}>
                   {label}
                 </summary>
-                <TreeRows items={item.children} speed={speed} />
+                <TreeRows items={item.children} />
               </details>
             </li>
           );
@@ -65,17 +64,11 @@ function TreeRows({ items, speed }: { items: TreeItem[]; speed: number }) {
   );
 }
 
-export function TreeList({
-  items,
-  speed = 1,
-}: {
-  items: TreeItem[];
-  speed?: number;
-}) {
+export function TreeList({ items }: { items: TreeItem[] }) {
   return (
     <div className="directory-tree text-2xl leading-snug text-link">
       <div aria-hidden="true">.</div>
-      <TreeRows items={items} speed={speed} />
+      <TreeRows items={items} />
     </div>
   );
 }
