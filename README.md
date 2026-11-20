@@ -21,3 +21,10 @@ Use `pnpm audit` and `pnpm audit signatures` to repeat the CI security checks.
 
 After editing `wasm/lissajous.zig`, run `pnpm build:lissajous` with Zig 0.17.1
 to refresh the module in `public/apps/`. The site build uses that compiled module.
+
+Rebuild `wasm/flock.zig` with `pnpm build:flock`. The flock uses
+[Reynolds’ Boids](https://www.red3d.com/cwr/boids/) and plays overlapping grains
+from the recordings in `public/apps/flock-samples/`. Each recording has a matching
+waveform image. Run `pnpm waveform:flock` with FFmpeg to regenerate the images
+after replacing audio. The selector labels and CC0 recording credits live in
+`components/flock/samples.ts`. Run `pnpm lint:zig` to check both Zig sources.

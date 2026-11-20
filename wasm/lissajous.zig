@@ -1,12 +1,17 @@
 const std = @import("std");
 
-var points: [1024][3]f32 = undefined;
+const Point = [3]f32;
+const sweep_seconds = 1.0 / 55.0;
+var points: [1024]Point = undefined;
 
-// A fixed scope timebase. Fractional cycles need not end where they began.
-export fn trace(x_hz: f32, y_hz: f32, phase: f32, z_hz: f32) [*]const [3]f32 {
-    for (&points, 0..) |*point, i| {
-        const t = (2.0 * std.math.pi / 55.0) * @as(f32, @floatFromInt(i)) / (points.len - 1);
-        point.* = .{ @sin(t * x_hz), @sin(t * y_hz + phase), @cos(t * z_hz) };
+export fn trace(x_hz: f32, y_hz: f32, phase: f32, z_hz: f32) [*]const Point {
+    for (&points, 0..) |*point, index| {
+        const angle = (2.0 * std.math.pi * sweep_seconds) * @as(f32, @floatFromInt(index)) / (points.len - 1);
+        point.* = .{
+            @sin(angle * x_hz),
+            @sin(angle * y_hz + phase),
+            @cos(angle * z_hz),
+        };
     }
     return &points;
 }

@@ -4,9 +4,12 @@ import type {
   InferGetStaticPropsType,
 } from "next";
 import Link from "next/link";
+import { Flock } from "@/components/flock/Flock";
 import { Lissajous } from "@/components/lissajous/Lissajous";
 import { Page } from "@/components/Page";
 import { apps } from "@/data/apps";
+
+const instruments = { lissajous: Lissajous, flock: Flock };
 
 export const getStaticPaths: GetStaticPaths = () => ({
   paths: apps.map(({ slug }) => ({ params: { slug } })),
@@ -22,15 +25,10 @@ export default function AppPage({
   title,
   slug,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const Instrument = instruments[slug];
   return (
     <Page title={title}>
-      {slug === "lissajous" ? (
-        <Lissajous />
-      ) : (
-        <div className="grid min-h-48 place-items-center rounded border border-dashed border-muted/50 px-4 text-center text-muted">
-          WebAssembly app placeholder
-        </div>
-      )}
+      <Instrument />
       <Link
         href="/apps"
         className="mt-6 inline-block text-link hover:text-heading"
