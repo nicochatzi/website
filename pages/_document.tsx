@@ -17,19 +17,23 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en" className={jetbrains.variable}>
-        <Head />
-        <meta
-          httpEquiv="Content-Security-Policy"
-          content="
+        <Head>
+          <meta
+            httpEquiv="Content-Security-Policy"
+            content="
           default-src 'self';
-          script-src 'self' 'unsafe-inline' https://plausible.io https://s3.amazonaws.com https://nicochatzi.github.io 'unsafe-eval';
-          style-src 'self' 'unsafe-inline' https://s3.amazonaws.com https://nicochatzi.github.io;
-          img-src 'self' https://s3.amazonaws.com https://nicochatzi.github.io;
-          connect-src 'self' https://plausible.io https://s3.amazonaws.com https://nicochatzi.github.io;
-          font-src 'self' https://s3.amazonaws.com https://nicochatzi.github.io;
+          base-uri 'none';
+          object-src 'none';
+          form-action 'none';
+          script-src 'self' 'unsafe-inline' https://plausible.io 'unsafe-eval';
+          style-src 'self' 'unsafe-inline';
+          img-src 'self';
+          connect-src 'self' https://plausible.io;
+          font-src 'self';
           frame-src 'self' https://www.youtube.com https://youtube.com;
         "
-        />
+          />
+        </Head>
         <body className={cx("bg-gray-50", "dark:bg-gray-925")}>
           <Main />
           <NextScript />

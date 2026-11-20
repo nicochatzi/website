@@ -2,7 +2,8 @@ import type { GetStaticProps, NextPage } from "next";
 import { Page } from "@/components/Page";
 import { PostList } from "@/components/PostList";
 import Socials from "@/components/Socials";
-import { getAllMdxPosts } from "@/lib/mdx";
+import generateRssFeed from "@/lib/generateRssFeed";
+import { getPublishedPosts } from "@/lib/mdx";
 import type { MDXFrontMatter } from "@/lib/types";
 
 interface HomeProps {
@@ -21,11 +22,11 @@ const PostsPage: NextPage<HomeProps> = ({ posts }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
+  const posts = getPublishedPosts();
+  generateRssFeed(posts);
   return {
     props: {
-      posts: getAllMdxPosts()
-        .filter((post) => post.frontMatter.published)
-        .map((post) => post.frontMatter),
+      posts: posts.map((post) => post.frontMatter),
     },
   };
 };

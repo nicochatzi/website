@@ -1,8 +1,10 @@
 import fs from "node:fs";
 import RSS from "rss";
-import { getAllMdxPosts } from "./mdx";
+import type { getPublishedPosts } from "./mdx";
 
-export default async function generateRssFeed() {
+export default function generateRssFeed(
+  posts: ReturnType<typeof getPublishedPosts>,
+) {
   const site_url = "https://htz.dev";
   const feedOptions = {
     title: "htz.dev | posts",
@@ -16,16 +18,14 @@ export default async function generateRssFeed() {
 
   const feed = new RSS(feedOptions);
 
-  getAllMdxPosts()
-    .filter((post) => post.frontMatter.published)
-    .forEach((post) => {
-      feed.item({
-        title: post.frontMatter.title,
-        description: post.frontMatter.description || "",
-        url: `${site_url}/posts/${post.frontMatter.slug}`,
-        date: post.frontMatter.date,
-      });
+  posts.forEach((post) => {
+    feed.item({
+      title: post.frontMatter.title,
+      description: post.frontMatter.description || "",
+      url: `${site_url}/posts/${post.frontMatter.slug}`,
+      date: post.frontMatter.date,
     });
+  });
 
   fs.writeFileSync("./public/rss.xml", feed.xml({ indent: true }));
 }

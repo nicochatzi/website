@@ -12,8 +12,7 @@ import { Prose } from "@/components/Prose";
 import Socials from "@/components/Socials";
 import { Tags } from "@/components/Tag";
 import { formatDate } from "@/lib/formatDate";
-import generateRssFeed from "@/lib/generateRssFeed";
-import { getAllMdxPosts } from "@/lib/mdx";
+import { getPublishedPosts } from "@/lib/mdx";
 import type { MDXFrontMatter } from "@/lib/types";
 import { cx } from "@/lib/utils";
 
@@ -111,7 +110,7 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: getAllMdxPosts().map((post) => ({
+    paths: getPublishedPosts().map((post) => ({
       params: { slug: post.frontMatter.slug },
     })),
     fallback: false,
@@ -119,13 +118,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  await generateRssFeed();
-
   const { slug } = context.params as ContextProps;
-  const mdxFiles = getAllMdxPosts();
+  const mdxFiles = getPublishedPosts();
   const postIndex = mdxFiles.findIndex(
     (post) => post.frontMatter.slug === slug,
   );
+  if (postIndex === -1) return { notFound: true };
   const post = mdxFiles[postIndex];
   const { frontMatter, content } = post;
   const mdxContent = await serialize(content, {
@@ -136,7 +134,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     scope: frontMatter,
   });
   const getPostLink = (i: number) => {
-    return mdxFiles[i]?.frontMatter.published ? mdxFiles[i].frontMatter : null;
+    return mdxFiles[i]?.frontMatter ?? null;
   };
   return {
     props: {

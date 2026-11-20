@@ -1,13 +1,14 @@
 import assert from "node:assert";
 import fs from "node:fs";
 import path from "node:path";
-import matter from "gray-matter";
 import type { GetStaticProps } from "next";
 import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import { VFile } from "vfile";
+import { matter } from "vfile-matter";
 import type { MDXFrontMatter } from "@/lib/types";
 
 const root = process.cwd();
@@ -15,13 +16,19 @@ export const contentPath = path.join(root, "content");
 export const postsPath = path.join(contentPath, "posts");
 
 const getMdx = (fullPath: string) => {
-  const { data, content } = matter(fs.readFileSync(fullPath, "utf-8"));
+  const file = new VFile(fs.readFileSync(fullPath, "utf-8"));
+  matter(file, { strip: true });
+  const metadata = file.data.matter;
+  assert(
+    metadata && typeof metadata === "object" && !Array.isArray(metadata),
+    `Invalid YAML frontmatter in ${fullPath}`,
+  );
   return {
     frontMatter: {
-      ...data,
+      ...metadata,
       slug: path.basename(fullPath).replace(".mdx", ""),
     } as MDXFrontMatter,
-    content,
+    content: String(file),
   };
 };
 
@@ -38,11 +45,13 @@ export const getMdxContent = (fileName: string) => {
   return mdx[0];
 };
 
-export const getAllMdxPosts = () => {
+export const getPublishedPosts = () => {
   return fs
     .readdirSync(postsPath)
+    .filter((file) => file.endsWith(".mdx"))
     .map((file) => path.join(postsPath, file))
     .map((file) => getMdx(file))
+    .filter((post) => post.frontMatter.published === true)
     .sort(
       (a, b) =>
         new Date(b.frontMatter.date).getTime() -
