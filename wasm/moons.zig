@@ -14,20 +14,24 @@ const center_z_limit = 80;
 const Pt = @Vector(2, f32);
 
 const Camera = struct {
-    yaw: f32 = -0.23,
-    pitch: f32 = 0.56,
+    yaw: f32 = 0.09,
+    pitch: f32 = 0.09,
+
+    fn centerY(self: Camera) f32 {
+        return 180 + 45 * @cos(self.pitch);
+    }
 
     fn project(self: Camera, x: f32, y: f32, z: f32) Pt {
         const side = x * @cos(self.yaw) - z * @sin(self.yaw);
         const forward = x * @sin(self.yaw) + z * @cos(self.yaw);
-        return .{ 320 + zoom * side, 225 + zoom * (forward * @sin(self.pitch) - y * @cos(self.pitch)) };
+        return .{ 320 + zoom * side, self.centerY() + zoom * (forward * @sin(self.pitch) - y * @cos(self.pitch)) };
     }
 };
 var camera: Camera = .{};
 
 export fn rotate(dx: f32, dy: f32) void {
-    camera.yaw = std.math.clamp(camera.yaw + dx, -0.62, 0.62);
-    camera.pitch = std.math.clamp(camera.pitch + dy, 0.38, 0.77);
+    camera.yaw = @mod(camera.yaw + dx + std.math.pi, 2 * std.math.pi) - std.math.pi;
+    camera.pitch = std.math.clamp(camera.pitch + dy, -std.math.pi / 2.0, std.math.pi / 2.0);
     zoom = framingScale();
 }
 
@@ -96,12 +100,14 @@ const Body = extern struct {
 };
 var bodies: [orbits.len]Body = undefined;
 var floor_matrix: [6]f32 = undefined;
+var projected_ray: [2]f32 = undefined;
 var exposure: [band_count]f32 = undefined;
 
 export fn move(index: usize, dx: f32, dy: f32) void {
     const o = &orbits[index];
     const side = dx / zoom;
-    const forward = dy / (zoom * @sin(camera.pitch));
+    const pitch_sin = @sin(camera.pitch);
+    const forward = (dy / zoom) * pitch_sin / @max(pitch_sin * pitch_sin, 0.04);
     o.cx = std.math.clamp(o.cx + side * @cos(camera.yaw) + forward * @sin(camera.yaw), -center_x_limit, center_x_limit);
     o.cz = std.math.clamp(o.cz - side * @sin(camera.yaw) + forward * @cos(camera.yaw), -center_z_limit, center_z_limit);
 }
@@ -157,12 +163,17 @@ fn bandLight(shadows: []const Footprint, start: f32) f32 {
 }
 
 fn framingScale() f32 {
-    const cy = @cos(camera.yaw);
+    const cy = @abs(@cos(camera.yaw));
     const sy = @abs(@sin(camera.yaw));
     const cp = @cos(camera.pitch);
     const sp = @sin(camera.pitch);
     const max_side = center_x_limit * cy + center_z_limit * sy;
-    const max_forward = (center_x_limit * sy + center_z_limit * cy) * sp;
+    const max_forward = (center_x_limit * sy + center_z_limit * cy) * @abs(sp);
+    const deck_extent = (217 * sy + 106 * cy) * @abs(sp);
+    const ray_slope = cp + sp * (sunlight.slope_x * @sin(camera.yaw) + sunlight.slope_z * @cos(camera.yaw));
+    const strip_extent = 96 * sy * @abs(sp);
+    var top = @max(deck_extent, strip_extent - 112 * ray_slope);
+    var bottom = @max(deck_extent, strip_extent + 112 * ray_slope);
     var scale: f32 = 0.93;
     for (orbits) |o| {
         const c = @cos(camera.yaw + o.tilt);
@@ -170,10 +181,11 @@ fn framingScale() f32 {
         const side_radius = std.math.hypot(o.a * c, o.b * s);
         const vertical_radius = std.math.hypot(o.a * s * sp, o.b * c * sp - o.verticalRise() * cp);
         const extent = max_forward + vertical_radius + o.radius;
-        scale = @min(scale, 315 / (max_side + side_radius + o.radius), 220 / (extent + o.height * cp));
-        if (extent > o.height * cp) scale = @min(scale, 130 / (extent - o.height * cp));
+        scale = @min(scale, 315 / (max_side + side_radius + o.radius));
+        top = @max(top, extent + o.height * cp);
+        bottom = @max(bottom, extent - o.height * cp);
     }
-    return scale;
+    return @min(scale, (camera.centerY() - 5) / top, (355 - camera.centerY()) / bottom);
 }
 
 export fn advance(seconds: f32, held: i32) void {
@@ -182,6 +194,7 @@ export fn advance(seconds: f32, held: i32) void {
     const axis_x = camera.project(1, 0, 0) - origin;
     const axis_z = camera.project(0, 0, 1) - origin;
     floor_matrix = .{ axis_x[0], axis_x[1], axis_z[0], axis_z[1], origin[0], origin[1] };
+    projected_ray = camera.project(sunlight.slope_x, -1, sunlight.slope_z) - origin;
     for (&orbits, &bodies, 0..) |*o, *body, i| {
         if (seconds > 0 and o.speed > 0 and held != @as(i32, @intCast(i))) {
             o.phase = @mod(o.phase + seconds * o.speed * (2 * std.math.pi) / o.period, 2 * std.math.pi);
@@ -225,6 +238,10 @@ export fn positions() [*]const Body {
 
 export fn floor_transform() [*]const f32 {
     return &floor_matrix;
+}
+
+export fn light_ray() [*]const f32 {
+    return &projected_ray;
 }
 
 export fn bands() [*]const f32 {
@@ -306,8 +323,8 @@ test "full control travel keeps the moon above the floor and inside the view" {
     const saved = orbits;
     defer orbits = saved;
     defer reset_view();
-    for ([_]f32{ -0.62, 0, 0.62 }) |yaw| {
-        for ([_]f32{ 0.38, 0.77 }) |pitch| {
+    for ([_]f32{ -2.7, -1.57, 0, 0.62, std.math.pi }) |yaw| {
+        for ([_]f32{ -std.math.pi / 2.0, -0.9, 0, 0.77, std.math.pi / 2.0 }) |pitch| {
             camera = .{ .yaw = yaw, .pitch = pitch };
             for (&orbits, 0..) |*o, i| {
                 set_width(i, max_width);

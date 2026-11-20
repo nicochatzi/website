@@ -10,6 +10,7 @@ interface MoonsExports extends WebAssembly.Exports {
   rotate(dx: number, dy: number): void;
   reset_view(): void;
   floor_transform(): number;
+  light_ray(): number;
   positions(): number;
   bands(): number;
 }
@@ -42,6 +43,7 @@ export async function loadMoons(signal: AbortSignal) {
     rotate: wasm.rotate,
     resetView: wasm.reset_view,
     floor: new Float32Array(buffer, wasm.floor_transform(), 6),
+    ray: new Float32Array(buffer, wasm.light_ray(), 2),
     frame(seconds: number, held: number) {
       wasm.advance(seconds, held);
       return Array.from({ length: moonCount }, (_, i) => {

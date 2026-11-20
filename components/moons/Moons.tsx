@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "react-feather";
 import { type Instrument, loadMoons, MoonsPad, type Scene } from "./instrument";
 
-import { bands, OrbitalScene } from "./OrbitalScene";
+import { OrbitalScene } from "./OrbitalScene";
 
 const arrows: Record<string, [number, number]> = {
   ArrowLeft: [-1, 0],
@@ -104,7 +104,8 @@ export function Moons() {
   }
 
   function move(index: number, dx: number, dy: number) {
-    if (index === -1) engine?.rotate(dx * 0.006, dy * 0.004);
+    if (index === -1)
+      engine?.rotate((dx / 640) * 2 * Math.PI, (dy / 360) * Math.PI);
     else engine?.move(index, dx, dy);
     draw(0);
   }
@@ -211,20 +212,6 @@ export function Moons() {
             />
           ))}
         </div>
-        <div
-          aria-hidden="true"
-          className="pointer-events-none flex justify-center bg-white/40 pb-3 dark:bg-black/15"
-        >
-          <span className="flex h-4 items-end gap-1 border-b border-muted/30">
-            {bands.map((x, i) => (
-              <span
-                key={x}
-                className="w-1.5 bg-heading"
-                style={{ height: `${100 * (engine?.light[i] ?? 0)}%` }}
-              />
-            ))}
-          </span>
-        </div>
         <div className="grid grid-cols-2 items-center gap-x-5 gap-y-3 border-t border-muted/25 px-4 py-3 text-xs sm:grid-cols-[repeat(3,minmax(0,1fr))_auto] sm:text-sm">
           {(["height", "width"] as const).map((parameter) => (
             <label key={parameter} className="flex min-w-0 flex-col gap-1">
@@ -296,7 +283,7 @@ export function Moons() {
       <p id="moons-guide" className="mt-3 text-sm text-muted">
         Turn sound on and drag a moon across the light. Alt-drag up or down to
         change orbit height. Shift-drag right to widen the orbit, or left to
-        narrow it. Drag the background to rotate the view.
+        narrow it. Drag the background to orbit above or below the plane.
       </p>
       {error && (
         <p role="alert" className="mt-2 text-sm text-heading">
