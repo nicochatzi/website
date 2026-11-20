@@ -1,9 +1,10 @@
 import type { PointerEvent } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Activity, RotateCw, Volume2, VolumeX } from "react-feather";
+import { InstrumentVoice } from "@/lib/instrumentVoice";
 import { tuning, useScopeMotion } from "./motion";
 import { curveLayers, floorGrid } from "./projection";
-import { loadScope, type Scope, ScopeAudio } from "./signal";
+import { loadScope, type Scope, voiceControls } from "./signal";
 
 export function Lissa() {
   const [scope, setScope] = useState<Scope>();
@@ -13,7 +14,7 @@ export function Lissa() {
   const degrees = Math.round(position.y * 180);
   const [error, setError] = useState("");
   const [playing, setPlaying] = useState(false);
-  const audio = useRef<ScopeAudio | null>(null);
+  const audio = useRef<InstrumentVoice | null>(null);
   const [orbit, setOrbit] = useState(false);
   const [view, setView] = useState({ yaw: 0.52, tilt: 0.32 });
   const drag = useRef<{ id: number; x: number; y: number } | null>(null);
@@ -61,16 +62,16 @@ export function Lissa() {
   }, [mute]);
 
   useEffect(() => {
-    if (playing) audio.current?.tune(settings);
+    if (playing) audio.current?.tune(voiceControls(settings));
   }, [playing, settings]);
 
   async function toggleSound() {
     if (audio.current) return mute();
-    let player: ScopeAudio | undefined;
+    let player: InstrumentVoice | undefined;
     try {
-      player = new ScopeAudio(settings);
+      player = new InstrumentVoice("lissa", voiceControls(settings));
       audio.current = player;
-      await player.context.resume();
+      await player.start();
       if (audio.current === player) {
         setError("");
         setPlaying(true);

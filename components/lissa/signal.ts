@@ -1,4 +1,4 @@
-import { InstrumentOutput } from "@/lib/instrumentOutput";
+import type { VoiceControls } from "@/lib/instrumentVoice";
 export interface Tuning {
   frequency: number;
   ratio: number;
@@ -59,54 +59,11 @@ export async function loadScope(signal: AbortSignal) {
 
 export type Scope = Awaited<ReturnType<typeof loadScope>>;
 
-export class ScopeAudio {
-  private output = new InstrumentOutput();
-  readonly context = this.output.context;
-  private x = this.context.createOscillator();
-  private ySin = this.context.createOscillator();
-  private yCos = this.context.createOscillator();
-  private sinGain = this.context.createGain();
-  private cosGain = this.context.createGain();
-
-  constructor(initial: Tuning) {
-    const ctx = this.context;
-    // Two phase-locked quadrature tones let phase glide without restarting Y.
-    this.yCos.setPeriodicWave(
-      ctx.createPeriodicWave(new Float32Array([0, 1]), new Float32Array(2), {
-        disableNormalization: true,
-      }),
-    );
-    const left = ctx.createStereoPanner();
-    const right = ctx.createStereoPanner();
-    left.pan.value = -0.4;
-    right.pan.value = 0.4;
-    this.x.connect(left);
-    this.ySin.connect(this.sinGain).connect(right);
-    this.yCos.connect(this.cosGain).connect(right);
-    left.connect(this.output.input);
-    right.connect(this.output.input);
-    this.output.gain.value = 0;
-    const now = ctx.currentTime;
-    this.x.frequency.value = initial.frequency;
-    this.ySin.frequency.value = this.yCos.frequency.value =
-      initial.frequency * initial.ratio;
-    this.sinGain.gain.value = Math.cos(initial.phase);
-    this.cosGain.gain.value = Math.sin(initial.phase);
-    for (const oscillator of [this.x, this.ySin, this.yCos])
-      oscillator.start(now);
-    this.output.gain.setTargetAtTime(0.04, now, 0.025);
-  }
-
-  tune({ frequency, ratio, phase }: Tuning) {
-    const now = this.context.currentTime;
-    this.x.frequency.setTargetAtTime(frequency, now, 0.02);
-    this.ySin.frequency.setTargetAtTime(frequency * ratio, now, 0.02);
-    this.yCos.frequency.setTargetAtTime(frequency * ratio, now, 0.02);
-    this.sinGain.gain.setTargetAtTime(Math.cos(phase), now, 0.02);
-    this.cosGain.gain.setTargetAtTime(Math.sin(phase), now, 0.02);
-  }
-
-  close() {
-    this.output.close();
-  }
+export function voiceControls({
+  frequency,
+  ratio,
+  depthRatio,
+  phase,
+}: Tuning): VoiceControls {
+  return [frequency, ratio, depthRatio, phase];
 }

@@ -27,6 +27,13 @@ export const apps = [
       "Shape a Lydian chord with the moving shadows of three orbiting moons.",
     publishedAt: "2026-11-20T12:57:08Z",
   },
+  {
+    slug: "chladni",
+    title: "chladni",
+    description:
+      "Glide between notes and watch grains of sand trace Chladni figures on a vibrating plate.",
+    publishedAt: "2026-11-20T14:30:19Z",
+  },
 ] as const;
 
 export const appLinks = apps.map(({ slug }) => ({

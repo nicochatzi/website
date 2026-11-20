@@ -5,6 +5,7 @@ import type {
 } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { Chladni } from "@/components/chladni/Chladni";
 import { Flock } from "@/components/flock/Flock";
 import { Lissa } from "@/components/lissa/Lissa";
 import { Moons } from "@/components/moons/Moons";
@@ -17,10 +18,12 @@ const instruments = {
   flock: Flock,
   pond: Pond,
   moons: Moons,
+  chladni: Chladni,
 };
 
 type App = (typeof apps)[number];
 const previousNames: Record<string, App["slug"]> = {
+  dune: "chladni",
   eclipse: "moons",
   lissajous: "lissa",
   "ripple-tank": "pond",

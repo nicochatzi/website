@@ -9,10 +9,18 @@
             <link>https://htz.dev</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 20 Nov 2026 13:18:37 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 20 Nov 2026 14:34:59 GMT</lastBuildDate>
         <atom:link href="https://htz.dev/rss.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 20 Nov 2026 13:18:37 GMT</pubDate>
+        <pubDate>Fri, 20 Nov 2026 14:34:59 GMT</pubDate>
         <copyright><![CDATA[All rights reserved 2026, nico]]></copyright>
+        <item>
+            <title><![CDATA[chladni]]></title>
+            <description><![CDATA[Glide between notes and watch grains of sand trace Chladni figures on a vibrating plate.]]></description>
+            <link>https://htz.dev/apps/chladni</link>
+            <guid isPermaLink="true">https://htz.dev/apps/chladni</guid>
+            <category><![CDATA[apps]]></category>
+            <pubDate>Fri, 20 Nov 2026 14:30:19 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[moons]]></title>
             <description><![CDATA[Shape a Lydian chord with the moving shadows of three orbiting moons.]]></description>
