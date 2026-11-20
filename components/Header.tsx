@@ -8,7 +8,7 @@ export const Header: React.FC = () => {
   return (
     <header className="relative py-7 sm:flex sm:items-center sm:justify-between sm:py-12">
       <nav aria-label="Main navigation">
-        <ul className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm min-[380px]:gap-x-5 min-[380px]:text-base sm:gap-x-8">
+        <ul className="grid grid-cols-[max-content_max-content] items-center gap-x-3 gap-y-2 text-sm min-[380px]:flex min-[380px]:flex-wrap min-[480px]:gap-x-5 min-[480px]:text-base sm:gap-x-8">
           {siteConfig.nav.map(({ label, href }) => {
             const current =
               pathname === href
@@ -17,7 +17,10 @@ export const Header: React.FC = () => {
                   ? "location"
                   : undefined;
             return (
-              <li key={href} className="first:basis-full sm:first:basis-auto">
+              <li
+                key={href}
+                className="first:col-span-full first:basis-full sm:first:basis-auto"
+              >
                 <Link
                   href={href}
                   aria-current={current}

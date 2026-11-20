@@ -5,6 +5,7 @@
     "dev": "next dev",
     "dev:watch": "nodemon --watch content --ext mdx --exec next dev",
     "build": "next build",
+    "build:lissajous": "zig build-exe wasm/lissajous.zig -target wasm32-freestanding -O ReleaseSmall -fno-entry -rdynamic --export-memory -femit-bin=public/apps/lissajous.wasm",
     "start": "serve out --listen tcp://127.0.0.1:3000 --no-clipboard",
     "lint": "biome check .",
     "lint:fix": "biome check . --fix",

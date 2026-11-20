@@ -1,0 +1,23 @@
+name: Build the static site
+description: Compile the Lissajous module and export the site for deployment
+runs:
+  using: composite
+  steps:
+    - name: Compile the WebAssembly app
+      shell: bash
+      working-directory: ${{ runner.temp }}
+      run: |
+        archive=zig-x86_64-linux-0.17.1.tar.xz
+        curl --fail --silent --show-error --location --retry 3 "https://ziglang.org/download/0.17.1/$archive" -o "$archive"
+        echo "3581863e3cbcfd0fce0efc682ce7e9e93da96668a977791d356a26d2a7e9b17a  $archive" | sha256sum --check
+        tar -xf "$archive"
+        export PATH="$PWD/${archive%.tar.xz}:$PATH"
+        cd "$GITHUB_WORKSPACE"
+        pnpm build:lissajous
+    - name: Export and verify the app
+      shell: bash
+      run: |
+        pnpm build
+        test -s out/apps/lissajous.html
+        cmp public/apps/lissajous.wasm out/apps/lissajous.wasm
+        node -e "new WebAssembly.Module(require('node:fs').readFileSync('out/apps/lissajous.wasm'))"

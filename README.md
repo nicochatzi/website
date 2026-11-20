@@ -18,3 +18,6 @@ pnpm dev
 Run `pnpm lint` and `pnpm build` to check the site and export it to `out/`.
 Run `pnpm start` to preview the export at `http://127.0.0.1:3000`.
 Use `pnpm audit` and `pnpm audit signatures` to repeat the CI security checks.
+
+After editing `wasm/lissajous.zig`, run `pnpm build:lissajous` with Zig 0.17.1
+to refresh the module in `public/apps/`. The site build uses that compiled module.

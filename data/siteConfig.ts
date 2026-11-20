@@ -8,6 +8,7 @@ const siteConfig: SiteConfig = {
   siteThumbnail: "/og-image.png",
   nav: [
     { label: "~/", href: "/" },
+    { label: "~/apps/", href: "/apps" },
     { label: "~/posts/", href: "/posts" },
     { label: "~/projects.md", href: "/projects" },
     { label: "~/about.md", href: "/about" },

@@ -31,4 +31,4 @@ jobs:
       - run: pnpm audit
       - run: pnpm audit signatures
       - run: pnpm lint
-      - run: pnpm build
+      - uses: ./.github/actions/build-site
