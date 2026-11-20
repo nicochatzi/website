@@ -39,31 +39,26 @@ const FollowPost: React.FC<{
           : "col-start-2 text-right"
       }
     >
-      <p
-        className={cx(
-          "mb-2 uppercase tracking-wider text-m",
-          "text-gray-200",
-          "dark:text-gray-700",
-        )}
-      >
+      <p className={cx("mb-2 uppercase tracking-wider text-m", "text-muted")}>
         {direction === "left" ? "←-----" : "-----→"}
       </p>
       <Link
         href={`/posts/${post.slug}`}
-        className={cx(
-          "font-bold",
-          "text-purple hover:text-red-pale",
-          "dark:text-teal-deep dark:hover:text-yellow",
-        )}
+        className="font-bold text-link hover:text-heading"
       >
         {post.title}
       </Link>
-      <time className={cx("block mb-4", "text-gray-500", "dark:text-gray-500")}>
+      <time dateTime={post.date} className="block mb-4 text-muted">
         {"∟ "}
         {formatDate(post.date)}
       </time>
       {post.tags ? (
-        <div className="">
+        <div
+          className={cx(
+            "flex flex-wrap gap-x-3",
+            direction === "right" && "justify-end",
+          )}
+        >
           <Tags post={post} />
         </div>
       ) : null}
@@ -75,16 +70,9 @@ const Post: NextPage<PostProps> = ({ frontMatter, mdx, previous, next }) => {
   return (
     <>
       <Page {...frontMatter}>
-        <div className="-mt-10 mb-1 flex gap-1 flex-row-reverse">
+        <div className="mb-8 flex flex-wrap justify-end gap-x-3 border-b border-gray-300/50 pb-2 dark:border-gray-700">
           <Tags post={frontMatter} />
         </div>
-        <nav
-          className={cx(
-            "-mt-4 pt-12 border-t",
-            "border-gray-200",
-            "dark:border-gray-700",
-          )}
-        />
         <Prose>
           <MDX mdx={mdx} />
         </Prose>

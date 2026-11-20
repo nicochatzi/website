@@ -55,7 +55,7 @@ export const TreeListItem: React.FC<TreeListItemProps> = ({
   }, [text]);
 
   const content = (
-    <span className="flex items-baseline leading-snug select-none text-2xl text-purple hover:text-red-pale dark:text-teal-deep dark:hover:text-yellow transition-colors">
+    <span className="flex items-baseline leading-snug select-none text-2xl text-link hover:text-heading transition-colors">
       <span className="whitespace-pre">{isLast ? PREFIX_END : PREFIX_MID}</span>
       <span>
         {visibleText}
@@ -88,9 +88,7 @@ export const TreeList: React.FC<TreeListProps> = ({ items }) => {
 
   return (
     <div>
-      <div className="text-2xl text-purple dark:text-teal-deep leading-snug">
-        .
-      </div>
+      <div className="text-2xl text-link leading-snug">.</div>
       <ul>
         {visibleItems.map((item, i) => (
           <TreeListItem

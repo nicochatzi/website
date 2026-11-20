@@ -3,7 +3,6 @@ import Link from "next/link";
 import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { MDXRemote } from "next-mdx-remote";
 import type React from "react";
-import { cx } from "@/lib/utils";
 import ExpandingSection from "./ExpandingSection";
 import { Note } from "./Note";
 
@@ -16,16 +15,8 @@ const createCustomHeader = (Tag: HeadingTag) => {
   }: React.HTMLAttributes<HTMLHeadingElement> & { id?: string }) => {
     if (id) {
       return (
-        <Link href={`#${id}`}>
-          <Tag
-            id={id}
-            className={cx(
-              "",
-              "text-purple hover:text-red-pale",
-              "dark:text-teal-deep dark:hover:text-yellow",
-            )}
-            {...rest}
-          />
+        <Link href={`#${id}`} className="no-underline">
+          <Tag id={id} className="text-link hover:text-heading" {...rest} />
         </Link>
       );
     }

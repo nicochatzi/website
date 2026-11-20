@@ -4,6 +4,9 @@
 @variant dark (&:is(.dark *));
 
 @theme {
+  --color-link: #68499f;
+  --color-heading: #9a4768;
+  --color-muted: #51545b;
   --color-purple: #a280e5;
   --color-purple-pale: #947fb8;
   --color-blue: #7e9cd8;
@@ -32,6 +35,12 @@
   --color-gray-950: #0a0a0f;
   
   --font-sans: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.dark {
+  --color-link: var(--color-teal-deep);
+  --color-heading: var(--color-yellow);
+  --color-muted: var(--color-gray-300);
 }
 
 html,
